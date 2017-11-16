@@ -24,10 +24,10 @@ client.on('connect', function(connection) {
         if (connection.connected) {
             var number = Math.round(Math.random() * 0xFFFFFF);
             connection.sendUTF(number.toString());
-            setTimeout(sendNumber, 1000);
+            setTimeout(sendNumber, 5000);
         }
     }
     sendNumber();
 });
  
-client.connect('ws://localhost:8080/', 'echo-protocol');
+client.connect('wss://api.hitbtc.com/api/2/ws');
