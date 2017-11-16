@@ -4,7 +4,7 @@ var express = require('express'); var app = express();
 app.get('/', function(req, res){
     res.writeHead(200, {'Content-Type': 'text/html'});
     fs.readFile('hello.html', function (err,data) {
-        res.end(data);
+        res.end(data+'test');
     });
 });
 
@@ -13,4 +13,4 @@ app.get('/hello/:name', function(req,res) {
     res.end(JSON.stringify({message: 'Hello ' + req.params.name + '!'}));
 });
 
-app.listen(8080);
+app.listen(8081);
