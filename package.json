@@ -1,0 +1,25 @@
+{
+  "name": "tuto",
+  "version": "1.0.0",
+  "description": "this is a test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atouloupis/tutojs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atouloupis/tutojs/issues"
+  },
+  "homepage": "https://github.com/atouloupis/tutojs#readme",
+  "dependencies": {
+    "json": "^9.0.6",
+    "jsonfile": "^4.0.0",
+    "stringify": "^5.1.0",
+    "websocket": "^1.0.25"
+  }
+}
