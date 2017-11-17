@@ -1,5 +1,6 @@
-var wsClient = require ('wsClient');
+#!/usr/bin/env node
+var wsClient = require ('./wsClient');
 
 message = wsClient.message;
 
-console.log("Received: '" + message.utf8Data + "'");
+console.log("Received: '" + message + "'");
