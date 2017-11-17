@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 var WebSocketClient = require('websocket').client;
-var jsonfile = require('jsonfile')
+var jsonfile = require('jsonfile');
  
-var file = 'data.json'
+var file = 'data.json';
 
 var client = new WebSocketClient();
  
@@ -21,9 +21,9 @@ client.on('connect', function(connection) {
     connection.on('message', function(message) {
         //if (message.type === 'utf8') {
             console.log("Received: '" + message.utf8Data + "'");
-			jsonfile.writeFile(file, JSON.parse(message.utf8Data),{flag: 'a'}, function (err) {
-				console.error(err)
-			})
+			// jsonfile.writeFile(file, JSON.parse(message.utf8Data),{flag: 'a'}, function (err) {
+				// console.error(err)
+			// })
  
 			return JSON.parse(message);
         //}
