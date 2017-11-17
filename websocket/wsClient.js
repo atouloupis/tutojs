@@ -17,13 +17,13 @@ client.on('connect', function(connection) {
     });
     connection.on('message', function(message) {
         //if (message.type === 'utf8') {
-            console.log("Received: '" + JSON.stringify(message) + "'");
+            console.log("Received: '" + JSON.parse(message) + "'");
 			//return JSON.stringify(message);;
         //}
     });
     function sendRequest() {
         if (connection.connected) {
-            var request = JSON.stringify('{   "method": "subscribeTicker",   "params": {     "symbol": "ETHBTC"   },   "id": 123 }');
+            var request = JSON.parse('{   "method": "subscribeTicker",   "params": {     "symbol": "ETHBTC"   },   "id": 123 }');
             connection.send(request);
         }
     }
