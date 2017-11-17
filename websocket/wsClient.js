@@ -2,7 +2,7 @@
 var WebSocketClient = require('websocket').client;
 var jsonfile = require('jsonfile');
  
-var rqstTicker = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 }; 
+var rqstTicker = {   "method": "subscribeTicker",   "params": {     "symbol": "IXTETH"   },   "id": 123 }; 
 var rqstAuth = {   "method": "login",   "params": {     "algo": "BASIC",     "pKey": "75ea4dceeb285ee86c026d62700df14f",     "sKey": "919c86f1a996fa98ba4fc74ebb1a364d"   } };
 var rqstReport = {   "method": "subscribeReports",   "params": {} }; 
 var file = 'data.json';
@@ -36,7 +36,7 @@ client.on('connect', function(connection) {
             connection.send(JSON.stringify(rqst));
         }
     }
-    //sendRequest(rqstTicker);
+    sendRequest(rqstTicker);
 	sendRequest(rqstAuth);
 	sendRequest(rqstReport);
 });
