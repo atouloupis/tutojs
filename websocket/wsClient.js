@@ -2,6 +2,7 @@
 var WebSocketClient = require('websocket').client;
 var jsonfile = require('jsonfile');
  
+var rqst = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 }; 
 var file = 'data.json';
 
 var client = new WebSocketClient();
@@ -31,10 +32,9 @@ client.on('connect', function(connection,rsqt) {
     function sendRequest(rqst) {
         if (connection.connected) {
             var request = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 };
-            connection.send(JSON.stringify(request));
+            connection.send(JSON.stringify(rqst));
         }
     }
-    sendRequest();
+    sendRequest(rqst);
 });
- var rqst = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 };
 client.connect('wss://api.hitbtc.com/api/2/ws',rqst);
