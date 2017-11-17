@@ -36,5 +36,5 @@ client.on('connect', function(connection,rsqt) {
     }
     sendRequest();
 });
- 
-client.connect('wss://api.hitbtc.com/api/2/ws',var rqst = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 });
+ var rqst = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 };
+client.connect('wss://api.hitbtc.com/api/2/ws',rqst);
