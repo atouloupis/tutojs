@@ -20,8 +20,8 @@ client.on('connect', function(connection) {
     });
     connection.on('message', function(message) {
         //if (message.type === 'utf8') {
-            console.log("Received: '" + message.utf8Data + "'");
-			jsonfile.writeFile(file, message.utf8Data, function (err) {
+            console.log("Received: '" + JSON.parse(message) + "'");
+			jsonfile.writeFile(file, JSON.parse(message), function (err) {
 				console.error(err)
 			})
  
@@ -30,8 +30,8 @@ client.on('connect', function(connection) {
     });
     function sendRequest() {
         if (connection.connected) {
-            var request = '{   "method": "subscribeTicker",   "params": {     "symbol": "ETHBTC"   },   "id": 123 }';
-            connection.send(request);
+            var request = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 };
+            connection.send(JSON.stringify(request));
         }
     }
     sendRequest();
