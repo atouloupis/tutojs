@@ -16,10 +16,10 @@ client.on('connect', function(connection) {
         console.log('echo-protocol Connection Closed');
     });
     connection.on('message', function(message) {
-        if (message.type === 'utf8') {
-            console.log("Received: '" + message + "'");
+        //if (message.type === 'utf8') {
+            console.log("Received: '" + JSON.stringify(message) + "'");
 			//return JSON.stringify(message);;
-        }
+        //}
     });
     function sendRequest() {
         if (connection.connected) {
