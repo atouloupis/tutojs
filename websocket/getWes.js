@@ -3,4 +3,4 @@ var wsClient = require ('./wsClient');
 
 message = wsClient.message;
 
-console.log("Received: '" + JSON.stringify(message) + "'");
+console.log("Received From GetWes: '" + JSON.stringify(message) + "'");
