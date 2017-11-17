@@ -25,7 +25,7 @@ client.on('connect', function(connection) {
 				// console.error(err)
 			// })
  
-			return JSON.parse(message);
+			return JSON.parse(message.utf8Data);
         //}
     });
     function sendRequest() {
