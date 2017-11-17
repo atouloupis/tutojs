@@ -31,7 +31,7 @@ client.on('connect', function(connection,rsqt) {
     function sendRequest(rqst) {
         if (connection.connected) {
             var request = {   method: "subscribeTicker",   params: {     symbol: "ETHBTC"   },   id: 123 };
-            connection.send(JSON.stringify(rqst));
+            connection.send(JSON.stringify(request));
         }
     }
     sendRequest();
