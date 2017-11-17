@@ -23,7 +23,7 @@ client.on('connect', function(connection) {
     });
     function sendRequest() {
         if (connection.connected) {
-            var request = '{   "method": "subscribeTicker",   "params": {     "symbol": "ETHBTC"   },   "id": 123 }';
+            var request = JSON.stringify('{   "method": "subscribeTicker",   "params": {     "symbol": "ETHBTC"   },   "id": 123 }');
             connection.send(request);
         }
     }
