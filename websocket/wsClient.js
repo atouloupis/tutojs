@@ -17,14 +17,14 @@ client.on('connect', function(connection) {
     });
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
-            console.log("Received: '" + message.utf8Data + "'");
+            console.log("Received: '" + message.json + "'");
+			return message.json;
         }
     });
     function sendRequest() {
         if (connection.connected) {
             var request = '{   "method": "subscribeTicker",   "params": {     "symbol": "ETHBTC"   },   "id": 123 }';
             connection.send(request);
-      //      setTimeout(sendRequest, 5000);
         }
     }
     sendRequest();
