@@ -20,8 +20,8 @@ client.on('connect', function(connection) {
     });
     connection.on('message', function(message) {
         //if (message.type === 'utf8') {
-            console.log("Received: '" + JSON.parse(message) + "'");
-			jsonfile.writeFile(file, JSON.parse(message), function (err) {
+            console.log("Received: '" + message.id + "'");
+			//jsonfile.writeFile(file, JSON.parse(message), function (err) {
 				console.error(err)
 			})
  
