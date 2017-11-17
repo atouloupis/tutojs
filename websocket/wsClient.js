@@ -22,9 +22,9 @@ client.on('connect', function(connection) {
     });
     function sendRequest() {
         if (connection.connected) {
-            var request = '{ "method": "newOrder","params": {"clientOrderId": "57d5525562c945448e3cbd559bd068c4","symbol": "ETHBTC","side": "sell","price": "0.059837","quantity": "0.015"},"id": 123}';
+            var request = '{   "method": "getCurrency",   "params": {     "currency": "ETH"   },   "id": 123 }';
             connection.send(request);
-            setTimeout(sendRequest, 5000);
+      //      setTimeout(sendRequest, 5000);
         }
     }
     sendRequest();
