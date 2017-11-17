@@ -11,7 +11,7 @@ client.on('connectFailed', function(error) {
     console.log('Connect Error: ' + error.toString());
 });
  
-client.on('connect', function(connection,rsqt) {
+client.on('connect', function(connection) {
     console.log('WebSocket Client Connected');
     connection.on('error', function(error) {
         console.log("Connection Error: " + error.toString());
@@ -37,4 +37,4 @@ client.on('connect', function(connection,rsqt) {
     }
     sendRequest(rqst);
 });
-client.connect('wss://api.hitbtc.com/api/2/ws',rqst);
+client.connect('wss://api.hitbtc.com/api/2/ws');
