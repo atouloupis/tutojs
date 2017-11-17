@@ -20,14 +20,14 @@ client.on('connect', function(connection) {
             console.log("Received: '" + message.utf8Data + "'");
         }
     });
-    function sendNumber() {
+    function sendRequest() {
         if (connection.connected) {
-            var number = Math.round(Math.random() * 0xFFFFFF);
-            connection.sendUTF(number.toString());
+            var request = '{ "method": "newOrder","params": {"clientOrderId": "57d5525562c945448e3cbd559bd068c4","symbol": "ETHBTC","side": "sell","price": "0.059837","quantity": "0.015"},"id": 123}';
+            connection.send(request);
             setTimeout(sendNumber, 5000);
         }
     }
-    sendNumber();
+    sendRequest();
 });
  
 client.connect('wss://api.hitbtc.com/api/2/ws');
