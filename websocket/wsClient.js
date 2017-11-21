@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var WebSocketClient = require('websocket').client;
 var jsonfile = require('jsonfile');
-var treatment = require('./treatmentFrame');
+//var treatment = require('./treatmentFrame');
 function splitFrame(frame)
 	{
 	console.log(frame);
@@ -27,7 +27,7 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', splitFrame(message));
+    connection.on('message', splitFrame("test"));
 
     function sendRequest(rqst) {
         if (connection.connected) {
