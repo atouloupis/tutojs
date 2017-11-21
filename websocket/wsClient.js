@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var WebSocketClient = require('websocket').client;
 var jsonfile = require('jsonfile');
+var treatment = require('splitFrame');
  
 var rqstTicker = {   "method": "subscribeTicker",   "params": {     "symbol": "IXTETH"   },   "id": 123 }; 
 var rqstAuth = {   "method": "login",   "params": {     "algo": "BASIC",     "pKey": "75ea4dceeb285ee86c026d62700df14f",     "sKey": "919c86f1a996fa98ba4fc74ebb1a364d"   } };
@@ -21,16 +22,8 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', function(message) {
-        //if (message.type === 'utf8') {
-            console.log("Received: '" + message.utf8Data + "'");
-			 jsonfile.writeFile(file, JSON.parse(message.utf8Data),{flag: 'a'}, function (err) {
-				 console.error(err)
-			 })
- 
-			return JSON.parse(message.utf8Data);
-        //}
-    });
+    connection.on('message', treatment(message.utf8Data));
+
     function sendRequest(rqst) {
         if (connection.connected) {
             connection.send(JSON.stringify(rqst));
