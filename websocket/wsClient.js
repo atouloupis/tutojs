@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var WebSocketClient = require('websocket').client;
 var jsonfile = require('jsonfile');
-var treatment1 = require('./treatmentFrame');
+var treatment1 = require('./treatmentFrame').test;
 //function test (message){console.log(message)};
 
  
