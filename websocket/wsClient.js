@@ -4,7 +4,8 @@ var jsonfile = require('jsonfile');
 //var treatment = require('./treatmentFrame');
 function splitFrame(frame)
 	{
-	console.log(frame.utf8Data);
+	
+	console.log(frame);
 }
 
  
@@ -27,7 +28,7 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', splitFrame(message));
+    connection.on('message', splitFrame(message.utf8Data));
 
     function sendRequest(rqst) {
         if (connection.connected) {
