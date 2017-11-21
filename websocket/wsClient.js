@@ -24,7 +24,7 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', test(message.utf8Data));
+    connection.on('message', function (message) { var utf8message=message.utf8Data; test(utf8message);});
 
     function sendRequest(rqst) {
         if (connection.connected) {
