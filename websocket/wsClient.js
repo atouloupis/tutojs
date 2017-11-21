@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 var WebSocketClient = require('websocket').client;
 var jsonfile = require('jsonfile');
-//var treatment = require('./treatmentFrame');
-function test (message){console.log(message)};
+var treatment = require('./treatmentFrame');
+//function test (message){console.log(message)};
 
  
 var rqstTicker = {   "method": "subscribeTicker",   "params": {     "symbol": "IXTETH"   },   "id": 123 }; 
@@ -24,7 +24,7 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', function (message) { var utf8message=message.utf8Data; test(utf8message);});
+    connection.on('message', function (message) { var utf8message=message.utf8Data; treatment.splitFrame(utf8message);});
 
     function sendRequest(rqst) {
         if (connection.connected) {
