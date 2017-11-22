@@ -4,9 +4,9 @@ module.exports.splitFrame = splitFrame;
 function splitFrame (frame){
 	var jsonFrame = JSON.parse(frame);
 
-	if (jsonFrame.method = ticker)
+	if (jsonFrame.method = "ticker")
 	{
-		console.log(JSON.stringify(jsonFrame.params));
+		console.log(JSON.stringify(jsonFrame));
 	}
 	if (jsonFrame.method = "activeOrders")
 	{
