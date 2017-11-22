@@ -2,7 +2,7 @@ module.exports.splitFrame = splitFrame;
 
 
 function splitFrame (frame){
-console.log("#"+JSON.stringify(Frame));
+console.log("#"+JSON.stringify(frame));
 	var jsonFrame = JSON.parse(frame);
 console.log("##"+JSON.stringify(jsonFrame));
 	if (jsonFrame.method = "ticker")
