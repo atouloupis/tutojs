@@ -6,14 +6,15 @@ function splitFrame (frame){
 
 	if (jsonFrame.method = "ticker")
 	{
-		console.log(JSON.stringify(jsonFrame.params));
+		//console.log(JSON.stringify(jsonFrame.params));
 	}
-	// if (jsonFrame.method = "activeOrders")
-	// {
-		// jsonFrame.params.forEach(function (orders){
-			// console.log(orders.symbol);
-		// });
-	// }
+	if (jsonFrame.method = "activeOrders")
+	{
+		var foreachframe = jsonFrame.params
+		foreachframe(function (orders){
+			console.log(orders.symbol);
+		});
+	}
 
 };
 
