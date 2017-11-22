@@ -11,6 +11,7 @@ function splitFrame (frame){
 	if (jsonFrame.method = "activeOrders")
 	{
 		var foreachframe = jsonFrame.params;
+		console.log(JSON.stringify(foreachframe));
 		foreachframe.forEach(function (orders){
 			console.log(orders.symbol);
 		});
