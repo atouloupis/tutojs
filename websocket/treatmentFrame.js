@@ -8,12 +8,12 @@ function splitFrame (frame){
 	{
 		console.log(JSON.stringify(jsonFrame));
 	}
-	if (jsonFrame.method = "activeOrders")
-	{
-		jsonFrame.params.forEach(function (orders){
-			console.log(orders.symbol);
-		});
-	}
+	// if (jsonFrame.method = "activeOrders")
+	// {
+		// jsonFrame.params.forEach(function (orders){
+			// console.log(orders.symbol);
+		// });
+	// }
 
 };
 
