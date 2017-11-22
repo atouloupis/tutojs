@@ -6,7 +6,7 @@ function splitFrame (frame){
 
 	if (jsonFrame.method = "ticker")
 	{
-		console.log(jsonFrame.params)
+		console.log(JSON.stringify(jsonFrame.params));
 	}
 	if (jsonFrame.method = "activeOrders")
 	{
