@@ -10,7 +10,8 @@ console.log(JSON.stringify(jsonFrame));
 	}
 	if (jsonFrame.method = "activeOrders")
 	{
-		var foreachframe = jsonFrame.params;
+		var foreachframe = jsonFrame.params[0];
+		console.log(JSON.stringify(foreachframe));
 		if (foreachframe =! "undefined")
 			{
 			console.log(JSON.stringify(jsonFrame));
