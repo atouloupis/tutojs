@@ -1,7 +1,9 @@
-// function splitFrame(frame)
-	// {
-	// console.log(frame);
-// }
-function test (message){console.log(message)};
+module.exports.splitFrame = splitFrame;
 
-module.exports.test = test;
+
+function splitFrame (frame){
+var method = frame.method;
+console.log(method)
+
+};
+
