@@ -14,8 +14,8 @@ console.log("#"+JSON.stringify(jsonFrame));
 		var foreachframe = jsonFrame.params;
 		if (foreachframe != "undefined")
 			{
-			console.log("##########"+JSON.stringify(jsonFrame.params));
-			for (var i=0;i++; i < jsonFrame.params.length){(function (orders){
+			console.log("##########"+JSON.stringify(foreachframe));
+			for (var i=0; i < foreachframe.length; i++){(function (orders){
 				console.log(JSON.stringify(orders.symbol));
 				})};
 			}
