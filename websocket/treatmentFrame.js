@@ -14,8 +14,8 @@ console.log("#"+JSON.stringify(jsonFrame));
 		var foreachframe = jsonFrame.params;
 		if (foreachframe != "undefined")
 			{
-			console.log("##########"+JSON.stringify(jsonFrame));
-			for (var i=0;i++; i < foreachframe.length){(function (orders){
+			console.log("##########"+JSON.stringify(jsonFrame.params));
+			for (var i=0;i++; i < jsonFrame.params.length){(function (orders){
 				console.log(JSON.stringify(orders.symbol));
 				})};
 			}
@@ -23,3 +23,11 @@ console.log("#"+JSON.stringify(jsonFrame));
 
 };
 
+  data = JSON.parse(data); // you missed that...
+  for(var i = 0; i < data.length; i++) {
+    var newPerson = new Person();
+    newPerson.firstname = data[i].firstname;
+    newPerson.lastname = data[i].lastname;
+    newPerson.age = data[i].age;
+    newPerson.save(function (err) {});
+  }
