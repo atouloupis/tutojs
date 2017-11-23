@@ -3,22 +3,21 @@ module.exports.splitFrame = splitFrame;
 
 function splitFrame (frame){
 	var jsonFrame = JSON.parse(frame);
-console.log("#"+JSON.stringify(jsonFrame));
+// console.log("#"+JSON.stringify(jsonFrame));
 	if (jsonFrame.method == "ticker")
 	{
 		//console.log(JSON.stringify(jsonFrame.params));
 	}
 	if (jsonFrame.method == "activeOrders")
 	{
-		console.log("###"+JSON.stringify(jsonFrame));
+		// console.log("###"+JSON.stringify(jsonFrame));
 		var foreachframe = jsonFrame.params;
 		if (foreachframe != "undefined")
 			{
 			console.log("##########"+JSON.stringify(foreachframe.length));
-			for (var i=0; i < foreachframe.length; i++){(function (foreachframe){
-				
-				console.log("OOOOOO"+JSON.stringify(foreachframe));
-				})};
+			for (var i=0; i < foreachframe.length; i++){
+				console.log("OOOOOO"+JSON.stringify(foreachframe.symbol));
+				}
 			}
 	}
 
