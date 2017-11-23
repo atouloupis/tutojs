@@ -23,11 +23,11 @@ console.log("#"+JSON.stringify(jsonFrame));
 
 };
 
-  data = JSON.parse(data); // you missed that...
-  for(var i = 0; i < data.length; i++) {
-    var newPerson = new Person();
-    newPerson.firstname = data[i].firstname;
-    newPerson.lastname = data[i].lastname;
-    newPerson.age = data[i].age;
-    newPerson.save(function (err) {});
-  }
+  // data = JSON.parse(data); // you missed that...
+  // for(var i = 0; i < data.length; i++) {
+    // var newPerson = new Person();
+    // newPerson.firstname = data[i].firstname;
+    // newPerson.lastname = data[i].lastname;
+    // newPerson.age = data[i].age;
+    // newPerson.save(function (err) {});
+  // }
