@@ -11,23 +11,15 @@ function splitFrame (frame){
 	if (jsonFrame.method == "activeOrders")
 	{
 		// console.log("###"+JSON.stringify(jsonFrame));
-		var foreachframe = jsonFrame.params;
-		if (foreachframe != "undefined")
+		var activeOrderParams = jsonFrame.params;
+		if (activeOrderParams != "undefined")
 			{
-			console.log("##########"+JSON.stringify(foreachframe));
-			for (var i=0; i < foreachframe.length; i++){
-				console.log("OOOOOO"+JSON.stringify(foreachframe[i].symbol));
+			console.log("##########"+JSON.stringify(activeOrderParams));
+			for (var i=0; i < activeOrderParams.length; i++){
+				updtOrders.newActiveOrder(activeOrderParams[i]);
+				console.log(JSON.stringify(activeOrderParams[i]));
 				}
 			}
 	}
 
 };
-
-  // data = JSON.parse(data); // you missed that...
-  // for(var i = 0; i < data.length; i++) {
-    // var newPerson = new Person();
-    // newPerson.firstname = data[i].firstname;
-    // newPerson.lastname = data[i].lastname;
-    // newPerson.age = data[i].age;
-    // newPerson.save(function (err) {});
-  // }
