@@ -14,9 +14,9 @@ function splitFrame (frame){
 		var foreachframe = jsonFrame.params;
 		if (foreachframe != "undefined")
 			{
-			console.log("##########"+JSON.stringify(foreachframe.length));
+			console.log("##########"+JSON.stringify(foreachframe));
 			for (var i=0; i < foreachframe.length; i++){
-				console.log("OOOOOO"+JSON.stringify(foreachframe.symbol));
+				console.log("OOOOOO"+JSON.stringify(foreachframe[i].symbol));
 				}
 			}
 	}
