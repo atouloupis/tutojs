@@ -1,5 +1,5 @@
 module.exports.splitFrame = splitFrame;
-
+var updtOrders = require ('./updateActiveOrders');
 
 function splitFrame (frame){
 	var jsonFrame = JSON.parse(frame);

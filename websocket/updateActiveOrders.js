@@ -1,9 +1,9 @@
+module.exports.newActiveOrders = newActiveOrders;
 
 
-function newActiveOrder (frame){
+function newActiveOrders (frame){
 
-var activeOrder = file.read('../data/activeOrders.json')
-
+var activeOrders = require('../data/activeOrders.json');
 console.log(JSON.stringify(activeOrder)); 
 //if (frame.clientOrderId in 
 
