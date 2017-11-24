@@ -1,5 +1,5 @@
 #!/usr/bin/env node
- 
+var index = require("./getWes.js") ;
 var rqstTicker = {   "method": "subscribeTicker",   "params": {     "symbol": "IXTETH"   },   "id": 123 }; 
 var rqstAuth = {   "method": "login",   "params": {     "algo": "BASIC",     "pKey": "75ea4dceeb285ee86c026d62700df14f",     "sKey": "919c86f1a996fa98ba4fc74ebb1a364d"   } };
 var rqstReport = {   "method": "subscribeReports",   "params": {} }; 
