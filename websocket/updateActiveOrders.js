@@ -10,10 +10,11 @@ var k = 0;
 		for (var j=0;j<activeOrders.length;j++)
 		{
 			if (frame[i].id == activeOrders[j].id)k++; 
-			console.log("Frame lenght"+frame.length+"K ="+k);
+			
 		}
 
 	}
+console.log("Frame lenght"+frame.length+"K ="+k);
 // If there is not the same id order in active orders file and in the 
 // frame active order received, we DL a new activeOrder file
 	if (k != frame.lenght) 
