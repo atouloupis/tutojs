@@ -17,7 +17,7 @@ var k = 0;
 console.log("Frame lenght"+frame.length+"K ="+k);
 // If there is not the same id order in active orders file and in the 
 // frame active order received, we DL a new activeOrder file
-	if (k != frame.lenght) 
+	if (k != frame.length) 
 		{
 			var yourscript = exec('sh ../batch_activeorder.sh',
 				(error, stdout, stderr) => {
