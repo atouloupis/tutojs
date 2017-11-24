@@ -15,10 +15,9 @@ function splitFrame (frame){
 		if (activeOrderParams != "undefined")
 			{
 			console.log("##########"+JSON.stringify(activeOrderParams));
-			for (var i=0; i < activeOrderParams.length; i++){
-				updtOrders.newActiveOrders(activeOrderParams[i]);
-				console.log(JSON.stringify(activeOrderParams[i]));
-				}
+			updtOrders.newActiveOrders(activeOrderParams);
+			// console.log(JSON.stringify(activeOrderParams[i]));
+
 			}
 	}
 
