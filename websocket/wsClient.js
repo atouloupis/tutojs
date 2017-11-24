@@ -30,7 +30,7 @@ client.on('connect', function(connection) {
             connection.send(JSON.stringify(rqst));
         }
     }
-    sendRequest(rqstTicker);
+    // sendRequest(rqstTicker);
 	sendRequest(rqstAuth);
 	sendRequest(rqstReport);
 });
