@@ -3,7 +3,7 @@ var updtOrders = require ('./updateActiveOrders');
 var checkOrder = require ('./checkOrder');
 
 function splitFrame (frame){
-	var jsonFrame = JSON.parse(frame);
+	var jsonFrame = frame;//JSON.parse(frame);
  console.log("#"+JSON.stringify(jsonFrame));
 	if (jsonFrame.method == "ticker")
 	{

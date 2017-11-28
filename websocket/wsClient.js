@@ -24,7 +24,7 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', function (message) { treatment.splitFrame(message);});
+    connection.on('message', function (message) {treatment.splitFrame(message);});
 
     function sendRequest(rqst) {
         if (connection.connected) {
