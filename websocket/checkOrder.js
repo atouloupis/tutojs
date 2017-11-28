@@ -26,5 +26,5 @@ function activeSellOrBuy (order,ticker)
 	
 function callEligibility (ticker)
 	{
-	console.log("#####"+JSON.stringify(ticker));
+	// console.log("#####"+JSON.stringify(ticker));
 	}
