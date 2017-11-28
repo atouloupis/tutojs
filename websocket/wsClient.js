@@ -34,7 +34,7 @@ client.on('connect', function(connection) {
     function sendRequest(rqst) {
         if (connection.connected) {
             connection.send(JSON.stringify(rqst));
-			console.log(message);	
+			console.log(JSON.stringify(rqst));	
         }
     }
     // sendRequest(rqstTicker);
