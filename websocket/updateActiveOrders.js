@@ -4,7 +4,7 @@ const exec = require('child_process').exec;
 function newActiveOrders (frame){
 
 var activeOrders = require('../data/activeOrders.json');
-console.log(JSON.stringify(activeOrders)); 
+// console.log(JSON.stringify(activeOrders)); 
 var k = 0;
 	for (var i=0; i < frame.length; i++){
 		for (var j=0;j<activeOrders.length;j++)
@@ -14,10 +14,10 @@ var k = 0;
 		}
 
 	}
-console.log("Frame lenght"+frame.length+"K ="+k);
+// console.log("Frame lenght"+frame.length+"K ="+k);
 // If there is not the same id order in active orders file and in the 
 // frame active order received, we DL a new activeOrder file
-	if (k != frame.length & frame.length != activeOrders.length) 
+	if (k != frame.length | frame.length != activeOrders.length) 
 		{
 			var yourscript = exec('sh ../batch_activeorder.sh',
 				(error, stdout, stderr) => {
