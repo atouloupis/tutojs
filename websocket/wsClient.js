@@ -24,16 +24,16 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', function (message) { var utf8message=message.utf8Data; treatment.splitFrame(utf8message);});
+    connection.on('message', function (message) { treatment.splitFrame(message);});
 
     function sendRequest(rqst) {
         if (connection.connected) {
             connection.send(JSON.stringify(rqst));
         }
     }
-    sendRequest(rqstTicker);
+    // sendRequest(rqstTicker);
 	sendRequest(rqstTicker1);
-	sendRequest(rqstAuth);
-	sendRequest(rqstReport);
+	// sendRequest(rqstAuth);
+	// sendRequest(rqstReport);
 });
 client.connect('wss://api.hitbtc.com/api/2/ws');
