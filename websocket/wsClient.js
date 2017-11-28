@@ -10,7 +10,7 @@ var rqstAuth = {   "method": "login",   "params": {     "algo": "BASIC",     "pK
 var rqstReport = {   "method": "subscribeReports",   "params": {} }; 
 var file = 'data.json';
 
-var client = new WebSocketClient();
+//var client = new WebSocketClient();
  
 // client.on('connectFailed', function(error) {
     // console.log('Connect Error: ' + error.toString());
@@ -65,7 +65,6 @@ websocket.onmessage = function(evt) {
 websocket.onerror = function(evt) {
   console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
 };
-}
 
 function sendMessage(message) {
 console.log("<p>> SENT: " + message + "</p>");
@@ -73,7 +72,3 @@ websocket.send(message);
 }
 
 sendMessage (rqstTicker1);
-
-
-
-                                                                      
