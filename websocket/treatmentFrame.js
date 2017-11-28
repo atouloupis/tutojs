@@ -8,7 +8,7 @@ function splitFrame (frame){
 	{
 		//console.log(JSON.stringify(jsonFrame.params));
 	}
-	if (jsonFrame.method == "activeOrders" AND jsonFrame.method == "report")
+	if (jsonFrame.method == "activeOrders" & jsonFrame.method == "report")
 	{
 		// console.log("###"+JSON.stringify(jsonFrame));
 		var activeOrderParams = jsonFrame.params;
