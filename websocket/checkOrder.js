@@ -6,12 +6,12 @@ function hasAnOrder (tickerFrame) {
 	
 	for (var j=0;j<activeOrders.length;j++)
 	{
-		console.log("##"+JSON.stringify(activeOrders[j]));
+		// console.log("##"+JSON.stringify(activeOrders[j]));
 		if (activeOrders[j].symbol == tickerFrame.params.symbol)
 			{
 			activeSellOrBuy(activeOrders[j],tickerFrame);
 			k++;
-			console.log("###"+JSON.stringify(tickerFrame));
+			// console.log("###"+JSON.stringify(tickerFrame));
 			}		
 	}
 	if (k=0) callEligibility (tickerFrame);
