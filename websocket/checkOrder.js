@@ -1,4 +1,4 @@
-module.exports.hasAnOder = hasAnOrder;
+module.exports.hasAnOrder = hasAnOrder;
 
 function hasAnOrder (tickerFrame) {
 	var activeOrders = require('../data/activeOrders.json');
