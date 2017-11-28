@@ -24,7 +24,11 @@ client.on('connect', function(connection) {
     connection.on('close', function() {
         console.log('echo-protocol Connection Closed');
     });
-    connection.on('message', function (message) { var utf8message=message.utf8Data; treatment.splitFrame(utf8message);});
+    connection.on('message', function (message) { 
+		console.log(message);
+		var utf8message=message.utf8Data; 
+		treatment.splitFrame(utf8message);
+		});
 
     function sendRequest(rqst) {
         if (connection.connected) {
