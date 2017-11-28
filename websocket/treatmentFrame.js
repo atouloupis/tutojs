@@ -8,7 +8,7 @@ function splitFrame (frame){
 	if (jsonFrame.method == "ticker")
 	{
 		//console.log(JSON.stringify(jsonFrame.params));
-		checkOder.hasAnOrder(jsonFrame);
+		checkOrder.hasAnOrder(jsonFrame);
 	}
 	if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report")
 	{
