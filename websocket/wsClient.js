@@ -82,8 +82,8 @@ var connected = false;
 
 // var io = require('socket.io-client');
 // var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],rejectUnauthorized: false});
-var io = require('socket.io')();
-// var socket = io.connect('ws://demos.kaazing.com/echo');
+//var io = require('socket.io')();
+ var socket = io.connect('ws://demos.kaazing.com/echo');
 
 // socket.on('connect', function(){
 	// console.log('WebSocket Client Connected');
@@ -96,7 +96,7 @@ var io = require('socket.io')();
 		// console.log(message);
 		// var utf8message=message.utf8Data; 
 		// console.log(utf8message);
-		treatment.splitFrame(utf8message);
+		//treatment.splitFrame(utf8message);
 		// });
 // socket.on('disconnect', function(){console.log('echo-protocol Connection Closed');});
 
