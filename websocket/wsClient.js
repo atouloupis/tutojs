@@ -81,7 +81,7 @@ var connected = false;
 // });
 
 var io = require('socket.io-client');
-var socket = io.connect('wss://api.hitbtc.com/api/2/ws');
+var socket = io.connect('wss://api.hitbtc.com/api/2/ws', {reconnect: true,transports: ['polling', 'websocket']});
 
 
 socket.on('connect', function(){
