@@ -84,7 +84,7 @@ socket.on('connect', function(){
 	connected = true;
 	});
 socket.on('connect_error', (error) => {
-	console.log('Error'+error.toString());
+	console.log('Connection Error'+error.toString());
 	});
 socket.on('event', function (message) { 
 		console.log(message);
