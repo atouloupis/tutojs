@@ -81,7 +81,7 @@ var connected = false;
 // });
 
 var io = require('socket.io-client');
-var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],origins:"*"});
+var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],rejectUnauthorized: false});
 
 
 socket.on('connect', function(){
