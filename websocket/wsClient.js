@@ -81,13 +81,13 @@ var connected = false;
 // });
 
 var io = require('socket.io-client');
-var socket = io.connect('wss://api.hitbtc.com/api/2/ws', {reconnect: true,transports: ['websocket']});
+var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket']});
 
 
-// socket.on('connect', function(){
-	// console.log('WebSocket Client Connected');
-	// connected = true;
-	// });
+socket.on('connect', function(){
+	console.log('WebSocket Client Connected');
+	connected = true;
+	});
 socket.on('connect_error', (error) => {
 	console.log('Connection Error'+error.toString());
 	});
