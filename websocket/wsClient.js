@@ -76,7 +76,9 @@ var file = 'data.json';
 
 // -----
 var connected = false;
-var socket = require('socket.io-client')('ws://api.hitbtc.com/api/2/ws');
+var socket = require('socket.io-client')('wss://api.hitbtc.com/api/2/ws', {
+  rejectUnauthorized:   false,
+});
 socket.on('connect', function(){
 	console.log('WebSocket Client Connected');
 	connected = true;
@@ -92,6 +94,10 @@ socket.on('event', function (message) {
 		});
 socket.on('disconnect', function(){console.log('echo-protocol Connection Closed');});
 
+socket.on('error', (error) => {
+  console.log(error.toString());
+});
+
 function sendRequest(rqst) {
     if (connected) {
 		socket.send(JSON.stringify(rqst));
@@ -99,4 +105,4 @@ function sendRequest(rqst) {
     }
 }
 
-sendRequest(rqstTicker1);
+//sendRequest(rqstTicker1);
