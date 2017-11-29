@@ -77,7 +77,9 @@ var file = 'data.json';
 // -----
 var connected = false;
 var socket = require('socket.io-client')('wss://api.hitbtc.com/api/2/ws', {
-  rejectUnauthorized:   false,
+	transports: [ 'websocket' ],
+	rejectUnauthorized:   false,
+	upgrade: false
 });
 socket.on('connect', function(){
 	console.log('WebSocket Client Connected');
