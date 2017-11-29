@@ -83,7 +83,7 @@ var connected = false;
 // var io = require('socket.io-client');
 // var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],rejectUnauthorized: false});
 //var io = require('socket.io')();
-var app = require('http').createServer(handler)
+var app = require('http').createServer(handler);
 var io = require('socket.io')(app);
  var socket = io.connect('ws://demos.kaazing.com/echo');
 
