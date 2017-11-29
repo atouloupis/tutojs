@@ -80,28 +80,29 @@ var connected = false;
 	// transports: [ 'websocket' ]
 // });
 
-var io = require('socket.io-client');
-var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],rejectUnauthorized: false});
+// var io = require('socket.io-client');
+// var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],rejectUnauthorized: false});
+var io = require('socket.io');
+var socket = io('ws://demos.kaazing.com/echo');
 
+// socket.on('connect', function(){
+	// console.log('WebSocket Client Connected');
+	// connected = true;
+	// });
+// socket.on('connect_error', (error) => {
+	// console.log('Connection Error'+error.toString());
+	// });
+// socket.on('event', function (message) { 
+		// console.log(message);
+		// var utf8message=message.utf8Data; 
+		// console.log(utf8message);
+		treatment.splitFrame(utf8message);
+		// });
+// socket.on('disconnect', function(){console.log('echo-protocol Connection Closed');});
 
-socket.on('connect', function(){
-	console.log('WebSocket Client Connected');
-	connected = true;
-	});
-socket.on('connect_error', (error) => {
-	console.log('Connection Error'+error.toString());
-	});
-socket.on('event', function (message) { 
-		console.log(message);
-		var utf8message=message.utf8Data; 
-		console.log(utf8message);
-		// treatment.splitFrame(utf8message);
-		});
-socket.on('disconnect', function(){console.log('echo-protocol Connection Closed');});
-
-socket.on('error', (error) => {
-  console.log(error.toString());
-});
+// socket.on('error', (error) => {
+  // console.log(error.toString());
+// });
 
 function sendRequest(rqst) {
     if (connected) {
