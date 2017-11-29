@@ -75,11 +75,11 @@ var file = 'data.json';
 // sendMessage (rqstTicker1);
 
 // -----
-
+var connected = false;
 var socket = require('socket.io-client')('wss://api.hitbtc.com/api/2/ws');
 socket.on('connect', function(){
 	console.log('WebSocket Client Connected');
-	var connected = true;
+	connected = true;
 	});
 socket.on('event', function (message) { 
 		console.log(message);
