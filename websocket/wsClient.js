@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var WebSocketClient = require('websocket').client;
+
 var jsonfile = require('jsonfile');
 var treatment = require('./treatmentFrame');
 
@@ -10,6 +10,7 @@ var rqstAuth = {   "method": "login",   "params": {     "algo": "BASIC",     "pK
 var rqstReport = {   "method": "subscribeReports",   "params": {} }; 
 var file = 'data.json';
 
+// var WebSocketClient = require('websocket').client;
 //var client = new WebSocketClient();
  
 // client.on('connectFailed', function(error) {
@@ -52,23 +53,47 @@ var file = 'data.json';
 
 
 
-websocket = new WebSocket("wss://api.hitbtc.com/api/2/ws");
+// var websocket = new WebSocket("wss://api.hitbtc.com/api/2/ws");
 
-websocket.onopen = function() {
-  console.log("<p>> CONNECTED</p>");
-};
+// websocket.onopen = function() {
+  // console.log("<p>> CONNECTED</p>");
+// };
 
-websocket.onmessage = function(evt) {
-  console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
-};
+// websocket.onmessage = function(evt) {
+  // console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
+// };
 
-websocket.onerror = function(evt) {
-  console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
-};
+// websocket.onerror = function(evt) {
+  // console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
+// };
 
-function sendMessage(message) {
-console.log("<p>> SENT: " + message + "</p>");
-websocket.send(message);
+// function sendMessage(message) {
+// console.log("<p>> SENT: " + message + "</p>");
+// websocket.send(message);
+// }
+
+// sendMessage (rqstTicker1);
+
+// -----
+
+var socket = require('socket.io-client')('wss://api.hitbtc.com/api/2/ws');
+socket.on('connect', function(){
+	console.log('WebSocket Client Connected');
+	var connected = true;
+	});
+socket.on('event', function (message) { 
+		console.log(message);
+		var utf8message=message.utf8Data; 
+		console.log(utf8message);
+		// treatment.splitFrame(utf8message);
+		});
+socket.on('disconnect', function(){console.log('echo-protocol Connection Closed');});
+
+function sendRequest(rqst) {
+    if (connected) {
+		socket.send(JSON.stringify(rqst));
+		console.log(JSON.stringify(rqst));	
+    }
 }
 
-sendMessage (rqstTicker1);
+sendRequest(rqstTicker1);
