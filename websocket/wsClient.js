@@ -81,6 +81,9 @@ socket.on('connect', function(){
 	console.log('WebSocket Client Connected');
 	connected = true;
 	});
+socket.on('connect_error', (error) => {
+	console.log('Error'+error.toString());
+	});
 socket.on('event', function (message) { 
 		console.log(message);
 		var utf8message=message.utf8Data; 
