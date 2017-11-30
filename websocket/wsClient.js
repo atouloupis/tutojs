@@ -53,39 +53,33 @@ var file = 'data.json';
 
 
 
-// var websocket = new WebSocket("wss://api.hitbtc.com/api/2/ws");
+var websocket = new WebSocket("wss://api.hitbtc.com/api/2/ws");
 
-// websocket.onopen = function() {
-  // console.log("<p>> CONNECTED</p>");
-// };
+websocket.onopen = function() {
+  console.log("<p>> CONNECTED</p>");
+};
 
-// websocket.onmessage = function(evt) {
-  // console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
-// };
+websocket.onmessage = function(evt) {
+  console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
+};
 
-// websocket.onerror = function(evt) {
-  // console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
-// };
+websocket.onerror = function(evt) {
+  console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
+};
 
-// function sendMessage(message) {
-// console.log("<p>> SENT: " + message + "</p>");
-// websocket.send(message);
-// }
+function sendMessage(message) {
+console.log("<p>> SENT: " + message + "</p>");
+websocket.send(message);
+}
 
-// sendMessage (rqstTicker1);
+sendMessage (rqstTicker1);
 
 // -----
-var connected = false;
-// var socket = require('socket.io-client')('wss://api.hitbtc.com/api/2/ws', {
+// var connected = false;
+// var socket = require('socket.io-client')('ws://demos.kaazing.com/echo', {
 	// transports: [ 'websocket' ]
 // });
 
-// var io = require('socket.io-client');
-// var socket = io.connect('ws://demos.kaazing.com/echo', {reconnect: true,transports: ['websocket'],rejectUnauthorized: false});
-//var io = require('socket.io')();
-var app = require('http').createServer(handler);
-var io = require('socket.io')(app);
- var socket = io.connect('ws://demos.kaazing.com/echo');
 
 // socket.on('connect', function(){
 	// console.log('WebSocket Client Connected');
@@ -106,11 +100,11 @@ var io = require('socket.io')(app);
   // console.log(error.toString());
 // });
 
-function sendRequest(rqst) {
-    if (connected) {
-		socket.send(JSON.stringify(rqst));
-		console.log(JSON.stringify(rqst));	
-    }
-}
+// function sendRequest(rqst) {
+    // if (connected) {
+		// socket.send(JSON.stringify(rqst));
+		// console.log(JSON.stringify(rqst));	
+    // }
+// }
 
 //sendRequest(rqstTicker1);
