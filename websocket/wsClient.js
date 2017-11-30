@@ -52,7 +52,7 @@ var file = 'data.json';
 // -------
 
 
-
+var WebSocket = require('ws');
 var websocket = new WebSocket("wss://api.hitbtc.com/api/2/ws");
 
 websocket.onopen = function() {
