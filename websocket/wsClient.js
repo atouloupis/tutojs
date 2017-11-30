@@ -53,23 +53,25 @@ var file = 'data.json';
 
 
 var WebSocket = require('ws');
-var websocket = new WebSocket("wss://api.hitbtc.com/api/2/ws");
+var ws = new WebSocket("wss://api.hitbtc.com/api/2/ws");
 
-websocket.onopen = function() {
+ws.onopen = function() {
   console.log("<p>> CONNECTED</p>");
 };
 
-websocket.onmessage = function(evt) {
+ws.onmessage = function(evt) {
   console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
 };
 
-websocket.onerror = function(evt) {
+ws.onerror = function(evt) {
   console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
 };
 
 function sendMessage(message) {
+if (ws.connected) {
 console.log("<p>> SENT: " + message + "</p>");
-websocket.send(message);
+ws.send(message);
+	}
 }
 
 sendMessage (rqstTicker1);
