@@ -69,7 +69,7 @@ ws.onerror = function(evt) {
 };
 
 function sendMessage(message) {
-if (connected) {
+if (connected==true) {
 console.log("<p>> SENT: " + message + "</p>");
 ws.send(message);
 	}
