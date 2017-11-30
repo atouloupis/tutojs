@@ -54,9 +54,10 @@ var file = 'data.json';
 
 var WebSocket = require('ws');
 var ws = new WebSocket("wss://api.hitbtc.com/api/2/ws");
-
+var connected = false;
 ws.onopen = function() {
   console.log("<p>> CONNECTED</p>");
+  var connected = true;
 };
 
 ws.onmessage = function(evt) {
@@ -68,7 +69,7 @@ ws.onerror = function(evt) {
 };
 
 function sendMessage(message) {
-if (ws.connected) {
+if (connected) {
 console.log("<p>> SENT: " + message + "</p>");
 ws.send(message);
 	}
