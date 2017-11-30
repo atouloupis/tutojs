@@ -63,8 +63,8 @@ ws.onopen = function() {
 	};
 	
 	function sendMessage(message) {
-		console.log("<p>> SENT: " + message + "</p>");
-		ws.send(message);
+		console.log("<p>> SENT: " + JSON.stringify(message) + "</p>");
+		ws.send(JSON.stringify(message));
 	}
 	sendMessage (rqstTicker1);
 };
