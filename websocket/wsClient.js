@@ -54,29 +54,25 @@ var file = 'data.json';
 
 var WebSocket = require('ws');
 var ws = new WebSocket("wss://api.hitbtc.com/api/2/ws");
-var connected = false;
+
 ws.onopen = function() {
-  console.log("<p>> CONNECTED</p>");
-  connected = true;
-};
+	console.log("<p>> CONNECTED</p>");
 
-ws.onmessage = function(evt) {
-  console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
+	ws.onmessage = function(evt) {
+		console.log("<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>");
+	};
+	
+	function sendMessage(message) {
+		console.log("<p>> SENT: " + message + "</p>");
+		ws.send(message);
+	}
+	sendMessage (rqstTicker1);
 };
-
 ws.onerror = function(evt) {
   console.log("<p style='color: red;'>> ERROR: " + evt.data + "</p>");
 };
 
-function sendMessage(message) {
-console.log("Inside SendMessage");
-if (connected==true) {
-console.log("<p>> SENT: " + message + "</p>");
-ws.send(message);
-	}
-}
 
-sendMessage (rqstTicker1);
 
 // -----
 // var connected = false;
