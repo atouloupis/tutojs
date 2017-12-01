@@ -2,12 +2,12 @@ module.exports.splitFrame = splitFrame;
 var updtOrders = require ('./updateActiveOrders');
 var checkOrder = require ('./checkOrder');
 
-function splitFrame (frame){
-	var jsonFrame = JSON.parse(frame);
-	// console.log("#"+JSON.stringify(jsonFrame));
+function splitFrame (jsonFrame){
+	// var jsonFrame = JSON.parse(frame);
+	console.log("#"+JSON.stringify(jsonFrame));
 	if (jsonFrame.method == "ticker")
 	{
-		//console.log(JSON.stringify(jsonFrame.params));
+		console.log(JSON.stringify(jsonFrame.params));
 		checkOrder.hasAnOrder(jsonFrame);
 	}
 	if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report")
