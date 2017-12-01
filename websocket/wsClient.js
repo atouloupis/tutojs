@@ -26,7 +26,7 @@ ws.onopen = function() {
 		treatment.splitFrame(evt.data);
 	};
 	
-	function sendMessage(message) {
+	function sendRequest(message) {
 		// console.log("SENT: " + JSON.stringify(message));
 		ws.send(JSON.stringify(message));
 	}
