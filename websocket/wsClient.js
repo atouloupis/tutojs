@@ -28,7 +28,7 @@ ws.onopen = function() {
 	
 	function sendRequest(message) {
 		// console.log("SENT: " + JSON.stringify(message));
-		ws.send(message);
+		ws.send(JSON.stringify(message));
 	}
 	// sendRequest(rqstTicker);
 	sendRequest(rqstTicker1);
