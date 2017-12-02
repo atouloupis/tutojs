@@ -21,10 +21,14 @@ function hasAnOrder (tickerFrame) {
 
 function activeSellOrBuy (order,ticker)
 	{
-	// console.log("####"+JSON.stringify(ticker));
+	console.log("ORDER : "+JSON.stringify(order.side));
+	if (order.side== "sell")buyOrderTooLow();
+	if (order.side== "buy")sellOrderTooHigh();
+	//console.log("TICKER : "+JSON.stringify(ticker));
 	}
 	
 function callEligibility (ticker)
 	{
-	// console.log("#####"+JSON.stringify(ticker));
+	console.log("#####"+JSON.stringify(ticker));
 	}
+

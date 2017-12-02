@@ -30,8 +30,8 @@ ws.onopen = function() {
 		// console.log("SENT: " + JSON.stringify(message));
 		ws.send(JSON.stringify(message));
 	}
-	// sendRequest(rqstTicker);
-	sendRequest(rqstTicker1);
+	sendRequest(rqstTicker);
+	//sendRequest(rqstTicker1);
 	// sendRequest(rqstAuth);
 	// sendRequest(rqstReport);
 };
