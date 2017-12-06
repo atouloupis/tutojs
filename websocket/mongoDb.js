@@ -24,7 +24,8 @@ var url = "mongodb://localhost:27017/"+dbName;
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-  db.createCollection(collectionName, function(err, res) {
+  var dbase = db.db(dbName);
+  dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
     db.close();
