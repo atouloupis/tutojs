@@ -23,10 +23,17 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
 
 MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbase = db.db(dbName);
-  var collectionList=db.getCollectionNames();
-  console.log("List of collection CREATE : "+collectionList);
+	if (err) throw err;
+	var dbase = db.db(dbName);
+	// var collectionList=db.getCollectionNames();
+  
+	db.getCollectionNames(function(err, colNames) {
+		if (err) return console.log(err);
+		colNames.forEach(function(name) {
+			console.log(name);
+		});
+	});
+  // console.log("List of collection CREATE : "+collectionList);
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
