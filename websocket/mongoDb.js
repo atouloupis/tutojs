@@ -25,6 +25,8 @@ var url = "mongodb://localhost:27017/"+dbName;
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbase = db.db(dbName);
+  var collectionList=getCollectionNames();
+  console.log("List of collection CREATE : "+collectionList);
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
@@ -41,6 +43,8 @@ var url = "mongodb://localhost:27017/"+dbName;
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbase = db.db(dbName);
+  var collectionList=getCollectionNames();
+  console.log("List of collection INSERT : "+collectionList);
   dbase.collection(collectionName).insertOne(myObj, function(err, res) {
     if (err) throw err;
     console.log("1 document inserted");
