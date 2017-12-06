@@ -27,12 +27,9 @@ MongoClient.connect(url, function(err, db) {
 	var dbase = db.db(dbName);
 	// var collectionList=db.getCollectionNames();
   
-	dbase.getCollectionNames(function(err, colNames) {
-		if (err) return console.log(err);
-		colNames.forEach(function(name) {
-			console.log(name);
-		});
-	});
+db.listCollections().toArray(function(err, collections){
+    console.log(collections);
+});
   // console.log("List of collection CREATE : "+collectionList);
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
