@@ -1,6 +1,7 @@
 module.exports.splitFrame = splitFrame;
 var updtOrders = require ('./updateActiveOrders');
 var checkOrder = require ('./checkOrder');
+var orderBook = require ('./orderBook');
 
 function splitFrame (jsonFrame){
 	var jsonFrame = JSON.parse(jsonFrame);
@@ -22,5 +23,9 @@ function splitFrame (jsonFrame){
 
 			}
 	}
-
+	if (jsonFrame.method == "snapshotOrderbook" | jsonFrame.method == "updateOrderbook")
+	{
+	var activeOrderParams = jsonFrame.params;
+	orderBook.updateOrderBook(activeOrderParams);
+	}
 };

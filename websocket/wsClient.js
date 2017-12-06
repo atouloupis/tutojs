@@ -8,6 +8,13 @@ var rqstTicker = {   "method": "subscribeTicker",   "params": {     "symbol": "I
 var rqstTicker1 = {   "method": "subscribeTicker",   "params": {     "symbol": "BQXETH"   },   "id": 123 }; 
 var rqstAuth = {   "method": "login",   "params": {     "algo": "BASIC",     "pKey": "75ea4dceeb285ee86c026d62700df14f",     "sKey": "919c86f1a996fa98ba4fc74ebb1a364d"   } };
 var rqstReport = {   "method": "subscribeReports",   "params": {} }; 
+var rqstOrderBook = {
+  "method": "subscribeOrderbook",
+  "params": {
+    "symbol": "IXTETH"
+  },
+  "id": 123
+}; 
 var file = 'data.json';
 
 var WebSocket = require('ws');
@@ -30,10 +37,11 @@ ws.onopen = function() {
 		// console.log("SENT: " + JSON.stringify(message));
 		ws.send(JSON.stringify(message));
 	}
-	sendRequest(rqstTicker);
+	// sendRequest(rqstTicker);
 	//sendRequest(rqstTicker1);
 	// sendRequest(rqstAuth);
 	// sendRequest(rqstReport);
+	sendRequest(rqstOrderBook);
 };
 
 
