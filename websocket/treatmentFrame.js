@@ -23,7 +23,7 @@ function splitFrame (jsonFrame){
 
 			}
 	}
-	if (jsonFrame.method == "snapshotOrderbook" | jsonFrame.method == "updateOrderbook")
+	if (jsonFrame.method == "updateOrderbook")
 	{
 	var activeOrderParams = jsonFrame.params;
 	orderBook.updateOrderBook(activeOrderParams);
