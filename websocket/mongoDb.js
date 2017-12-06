@@ -27,7 +27,7 @@ MongoClient.connect(url, function(err, db) {
 	var dbase = db.db(dbName);
 	// var collectionList=db.getCollectionNames();
   
-	db.getCollectionNames(function(err, colNames) {
+	dbase.getCollectionNames(function(err, colNames) {
 		if (err) return console.log(err);
 		colNames.forEach(function(name) {
 			console.log(name);
