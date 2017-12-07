@@ -2,45 +2,48 @@ var mongoDb = require ('./mongoDb');
 
 module.exports.updateOrderBook = updateOrderBook;
 
+
 function updateOrderBook(orderBookFrame, method)
 {
 var dbName = "orderBook";
 var collectionName = "orderBookFrame";
-// Créer la collection
-mongoDb.createMongoCollection(dbName,collectionName);
+// Crï¿½er la collection
+mongoDb.createCollection(dbName,collectionName);
 
 //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
 if (method=="snapshotOrderbook")
 	{
-	deleteQuery = '{ "symbol" : "'+orderBookFrame.params.symbol+'" }';
+	//console.log(orderBookFrame.symbol);
+	deleteQuery = '{ "symbol" : "'+orderBookFrame.symbol+'" }';
 	mongoDb.deleteRecords(dbName,collectionName,deleteQuery);
-	//Découper la trame pour respecter format
-	//Découpe de ask et enregistrement
-	for (var i=0;i<orderbookFrame.ask.lenght;i++)
+	//Dï¿½couper la trame pour respecter format
+	//Dï¿½coupe de ask et enregistrement
+	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
+	for (var i=0;i<orderBookAskArray.lenght;i++)
 		{
 		var askPriceSize=orderbookFrame.ask[i];
-		objAdd = '{ "symbol" : "'+orderBookFrame.params.symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }'
+		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }'
 		insertCollection(dbName,collectionName,objAdd)
 		}
-	//Découpe de bid et enregistrement
-	for (var i=0;i<orderbookFrame.bid.lenght;i++)
+	//Dï¿½coupe de bid et enregistrement
+	for (var i=0;i<orderBookFrame.bid.lenght;i++)
 		{
 		var bidPriceSize=orderbookFrame.bid[i];
-		objAdd = '{ "symbol" : "'+orderBookFrame.params.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }'
+		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }'
 		insertCollection(dbName,collectionName,objAdd)
 		}
 	}
 else {
 
 
-// Récupérer données dans Mongo
-	var findSymbolRecords[] = ['{ "symbol" : "'+orderBookFrame.params.symbol+'", "way" : "bid"}','{ "symbol" : "'+orderBookFrame.params.symbol+'", "way" : "ask"}'];
+// Rï¿½cupï¿½rer donnï¿½es dans Mongo
+	var findSymbolRecords = ['{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid"}','{ "symbol" : "'+orderBookFrame.params.symbol+'", "way" : "ask"}'];
 	
 /////////////////////////////Pour les Bid ////////////////
 for (var i=0;i<1;i++)
 	{
 	
-symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
+var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
 // Delete doublons 
 	for (var i=0;i<symbolRecords.lenght;i++)
 		{
@@ -49,22 +52,22 @@ symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
 			{
 			if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 				{
-				deleteQuery = '{ "symbol" : "'+orderBookFrame.params.symbol+'", "price" : "' + symbolRecords[j]._id'" }';
+				var deleteQuery = '{ "symbol" : "'+orderBookFrame.symbol+'", "price" : "' + symbolRecords[j]._id + '" }';
 				mongoDb.deleteRecords(dbName,collectionName,deleteQuery);
 				}
 			}
-		// Chercher si prix existe déjà	
+		// Chercher si prix existe dï¿½jï¿½	
 		if(symbolRecords[i].params.price == orderBookFrame.params.bid[0].price) 
 			{
 			// si oui remplacer size
-			newValues = '{"params" : { "size" : "'+orderBookFrame.params.bid[0].size+'"}}'
-			updateQuery = '{ "_id" : '+orderBookFrame._id+' }';
-			mongoDb.updateMongoCollection(dbName,collectionName,updateQuery, newValues);
+			var newValues = '{"params" : { "size" : "'+orderBookFrame.params.bid[0].size+'"}}'
+			var updateQuery = '{ "_id" : '+orderBookFrame._id+' }';
+			mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues);
 			}
-		// si non créer une nouvelle entrée
+		// si non crï¿½er une nouvelle entrï¿½e
 		else 
 			{
-			newEntryQuery = '{ "symbol" : "'+orderBookFrame.params.symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrame.params.bid[0].price+'", "size" : "'+orderBookFrame.params.bid[0].size+'"}}'
+			var newEntryQuery = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrame.params.bid[0].price+'", "size" : "'+orderBookFrame.params.bid[0].size+'"}}'
 			mongoDb.insertMongoCollection(dbName,collectionName,newEntryQuery);
 			}
 		}

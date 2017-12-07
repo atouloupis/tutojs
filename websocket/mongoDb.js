@@ -1,7 +1,9 @@
 module.exports.createMongoDb = createMongoDb;
-module.exports.createMongoCollection = createMongoCollection;
-module.exports.insertMongoCollection = insertMongoCollection;
-// module.exports.createMongoDb = createMongoDb;
+module.exports.createCollection = createMongoCollection;
+module.exports.insertCollection = insertMongoCollection;
+module.exports.deleteRecords = deleteMany;
+module.exports.findRecords = find;
+module.exports.updateCollection = update;
 
 var mongo = require('mongodb');
 
