@@ -21,6 +21,7 @@ function createMongoCollection(dbName,collectionName)
 {
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
+var k=0;
 
 MongoClient.connect(url, function(err, db) {
 	if (err) throw err;
@@ -29,13 +30,16 @@ MongoClient.connect(url, function(err, db) {
   
 dbase.listCollections().toArray(function(err, collections){
     console.log(collections);
+	for (var i=0;i<collections.length;i++)if (collections[i]=="collectionName") k++;
 });
   // console.log("List of collection CREATE : "+collectionList);
+if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
     db.close();
   });
+}
 });
 }
 
@@ -48,22 +52,64 @@ MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbase = db.db(dbName);
 
-  dbase.listCollections().toArray(function(err, collections){
-    console.log(collections);
+dbase.collection(collectionName).insertOne(myObj, function(err, res) {
+	if (err) throw err;
+	console.log("1 document inserted");
+	db.close();
 	});
-  
-  dbase.collection(collectionName).insertOne(myObj, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
-  });
 });
 }
 
-// function createMongoDb(name)
-// {
+function deleteMany(dbName,collectioName,query)
+{
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/"+dbName;
 
-// }
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbase = db.db(dbName);
+
+dbase.collection(collectioName).deleteMany(query, function(err, obj) {
+  if (err) throw err;
+  console.log("documents deleted");
+  db.close();
+	});
+});
+}
+
+function find(dbName,collectionName,query)
+{
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/"+dbName;
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbase = db.db(dbName);
+
+dbase.collection(collectionName).sort("{_id : -1}").find(query, function(err, result) {
+  if (err) throw err;
+  console.log("1 document found");
+  db.close();
+  return result;
+	});
+});
+}
+
+function update(dbName,collectionName,query, newValues)
+{
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/"+dbName;
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbase = db.db(dbName);
+dbase.collection(collectionName).updateOne(query, newValues, function(err, res) {
+  if (err) throw err;
+  console.log("1 document updated");
+  db.close();
+	});
+});
+}
 
 // function createMongoDb(name)
 // {

@@ -23,9 +23,9 @@ function splitFrame (jsonFrame){
 
 			}
 	}
-	if (jsonFrame.method == "updateOrderbook")
+	if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook")
 	{
 	var activeOrderParams = jsonFrame.params;
-	orderBook.updateOrderBook(activeOrderParams);
+	orderBook.updateOrderBook(activeOrderParams, jsonFrame.method);
 	}
 };
