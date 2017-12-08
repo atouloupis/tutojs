@@ -30,9 +30,9 @@ MongoClient.connect(url, function(err, db) {
 	var dbase = db.db(dbName);
 	// var collectionList=db.getCollectionNames();
   
-dbase.listCollections().toArray(function(err, collections){
+dbase.listCollections(function(err, collections){
     collectionsString=JSON.stringify(collections);
-	console.log(collectionsString);
+	console.log(collections);
 	console.log("collections[i] : "+collectionsString[0]+ "taille tableau" + collectionsString.lenght);
 	
 	for (var i=0;i<collections.length;i++)if (collections[i]=="collectionName") k++;
