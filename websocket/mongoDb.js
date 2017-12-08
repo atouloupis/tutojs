@@ -32,9 +32,11 @@ MongoClient.connect(url, function(err, db) {
   
 dbase.listCollections().toArray(function(err, collections){
     console.log(collections);
+	console.log("collections[i] : "+collections[0]+ "taille tableau" + collections.lenght);
+	
 	for (var i=0;i<collections.length;i++)if (collections[i]=="collectionName") k++;
 });
-  // console.log("List of collection CREATE : "+collectionList);
+  console.log("k : "+k);
 if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
