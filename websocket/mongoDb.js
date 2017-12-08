@@ -27,6 +27,9 @@ var k=0;
 
 MongoClient.connect(url, function(err, db) {
 	if (err) throw err;
+	 db.collectionNames(function(err, collections){
+      console.log("NEW : "+collections);
+  });
 	var dbase = db.db(dbName);
 	// var collectionList=db.getCollectionNames();
   
