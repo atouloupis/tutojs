@@ -28,16 +28,18 @@ var k=0;
 MongoClient.connect(url, function(err, db) {
 	if (err) throw err;
 	var dbase = db.db(dbName);
-	// var collectionList=db.getCollectionNames();
-  
-dbase.listCollections(function(err, collections){
-    collectionsString=JSON.stringify(collections);
-	console.log(collections);
-	console.log("collections[i] : "+collectionsString[0]+ "taille tableau" + collectionsString.lenght);
-	
-	for (var i=0;i<collections.length;i++)if (collections[i]=="collectionName") k++;
+
+dbase.listCollections().toArray(function(err, collections){
+	if (err) throw err;
+	console.log("Collection name "+collections.length);
+    //console.log("Collection name  "+collectionName);
+	for (var i=0;i<collections.length;i++)
+		{console.log("Collection name  "+collections[i].name);
+		if (collections[i].name==collectionName) k++;
+		console.log("Collection name K "+k);
+		}
 });
-  console.log("k : "+k);
+  //console.log("k : "+k);
 if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;

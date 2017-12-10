@@ -5,7 +5,7 @@ var orderBook = require ('./orderBook');
 
 function splitFrame (jsonFrame){
 	var jsonFrame = JSON.parse(jsonFrame);
-	console.log("0"+JSON.stringify(jsonFrame));
+	//console.log("0"+JSON.stringify(jsonFrame));
 	if (jsonFrame.method == "ticker")
 	{
 		//console.log(JSON.stringify(jsonFrame.params));
