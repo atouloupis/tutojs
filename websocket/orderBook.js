@@ -21,7 +21,7 @@ if (method=="snapshotOrderbook")
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
-	console.log("Lenght" : orderBookAskArray.length);
+	console.log("Lenght :" + orderBookAskArray.length);
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		var askPriceSize=orderbookFrame.ask[i];
