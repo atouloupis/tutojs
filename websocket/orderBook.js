@@ -24,6 +24,7 @@ if (method=="snapshotOrderbook")
 	console.log("Length :" + orderBookAskArray.length);
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
+		console.log("i = " + i);
 		var askPriceSize=orderBookAskArray[i];
 		console.log(orderBookAskArray);
 		var symbol = orderBookFrame.symbol;
