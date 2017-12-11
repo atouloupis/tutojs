@@ -89,13 +89,13 @@ function find(dbName,collectionName,query)
 
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
-console.log("ENTER FIND : "+dbName+collectionName);
+//console.log("ENTER FIND : "+dbName+collectionName);
 MongoClient.connect(url, function(err, db) {
-  console.log("INSIDE FIND : "+err);
-  console.log(db);
+//  console.log("INSIDE FIND : "+err);
+//  console.log(db);
   if (err) throw err;
   var dbase = db.db(dbName);
-console.log("TRY REQUEST FIND");
+//console.log("TRY REQUEST FIND");
 dbase.collection(collectionName).find(query, function(err, result) {
 	console.log(err);
   if (err) throw err;
