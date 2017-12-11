@@ -86,6 +86,7 @@ dbase.collection(collectioName).deleteMany(query, function(err, obj) {
 
 function find(dbName,collectionName,query)
 {
+console.log("ENTER FIND");
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
 

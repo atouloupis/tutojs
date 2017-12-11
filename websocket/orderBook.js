@@ -59,7 +59,6 @@ console.log(symbolRecords);
 // Delete doublons 
 	for (var i=0;i<symbolRecords.length;i++)
 		{
-		
 		for (var j=i+1;j<symbolRecords.length;j++)
 			{
 			if(symbolRecords[i].params.price == symbolRecords[j].params.price)
