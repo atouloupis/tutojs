@@ -52,12 +52,13 @@ else {
 	// console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
 /////////////////////////////Pour les Bid ////////////////
 var symbolRecords=mongoDb.findRecords(dbName,collectionName,'{"symbol" : "IXTETH", "way" : "bid"}');
+console.log(symbolRecords);
 for (var i=0;i<1;i++)
 	{
 
 console.log(findSymbolRecords[i]);
 //var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
-console.log(symbolRecords);
+
 //symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "price" : "0.0001", "size" : "200"}}]');
 // Delete doublons 
 	for (var i=0;i<symbolRecords.length;i++)

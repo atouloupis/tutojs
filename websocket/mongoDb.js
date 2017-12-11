@@ -95,11 +95,12 @@ MongoClient.connect(url, function(err, db) {
 //  console.log(db);
   if (err) throw err;
   var dbase = db.db(dbName);
-//console.log("TRY REQUEST FIND");
+console.log("TRY REQUEST FIND");
 dbase.collection(collectionName).find(query, function(err, result) {
 	console.log(err);
   if (err) throw err;
   console.log("1 document found");
+  console.log(result);
   db.close();
   return result;
 	});
