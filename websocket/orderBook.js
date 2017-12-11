@@ -62,13 +62,13 @@ for (var i=0;i<1;i++)
 				{
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
-					var deleteQuery = '{ "symbol" : "'+symbol+'", "price" : "' + symbolRecords[j]._id + '" }';
+					var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
 					console.log(deleteQuery);
-					mongoDb.deleteRecords(dbName,collectionName,deleteQuery);
+					mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery));
 					}
 				}
 			// Chercher si prix existe d�j�	
-			console.log(orderBookFrame);
+			//console.log(orderBookFrame);
 			//console.log(symbolRecords[i].params.price);
 			console.log("This is the TYPEOF" + typeof orderBookFrame.bid[0]);
 			if (typeof orderBookFrame.bid[0] != "undefined")
@@ -79,17 +79,17 @@ for (var i=0;i<1;i++)
 					{
 					// si oui remplacer size
 					var newValues = '{"params" : { "size" : "'+orderBookFrame.params.bid[0].size+'"}}';
-					console.log(newValues);
+					//console.log(newValues);
 					var updateQuery = '{ "_id" : '+orderBookFrame._id+' }';
-					console.log(updateQuery);
-					mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues);
+					//console.log(updateQuery);
+					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), JSON.parse(newValues));
 					}
 				// si non cr�er une nouvelle entr�e
 				else 
 					{
 					var newEntryQuery = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrameBidPrice+'", "size" : "'+orderBookFrameBidSize+'"}}');
-					console.log(newEntryQuery);
-					mongoDb.insertCollection(dbName,collectionName,newEntryQuery);
+					//console.log(newEntryQuery);
+					mongoDb.insertCollection(dbName,collectionName,JSON.parse(newEntryQuery));
 					}
 				}
 			}
