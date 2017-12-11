@@ -71,13 +71,12 @@ symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "p
 			}
 		// Chercher si prix existe d�j�	
 		console.log(orderBookFrame);
-		console.log(symbolRecords[i].params.price);
-		var orderBookFrame.bid = JSON.parse("{ 'price': '2.991170', 'size': '30.00' }");
+		//console.log(symbolRecords[i].params.price);
 		console.log(orderBookFrame.bid.indexOf('price'));
-		var orderBookFrameBidPrice=orderBookFrame.bid[0].price;
-		var orderBookFrameBidSize=orderBookFrame.bid[0].size;
-		if (orderBookFrameBidPrice != "undefined")
+		if (orderBookFrame.bid.indexOf('price') != -1)
 			{
+			var orderBookFrameBidPrice=orderBookFrame.bid[0].price;
+			var orderBookFrameBidSize=orderBookFrame.bid[0].size;
 			if(symbolRecords[i].params.price == orderBookFrame.bid[0].price) 
 				{
 				// si oui remplacer size
