@@ -35,10 +35,10 @@ if (method=="snapshotOrderbook")
 	var orderBookBidArray=orderBookFrame.bid;
 	for (var i=0;i<orderBookFrame.bid.length;i++)
 		{
-		console.log("i = " + i);
+		// console.log("i = " + i);
 		var bidPriceSize=JSON.stringify(orderBookBidArray[i]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : ' + bidPriceSize +' }');
-		console.log(objAdd);
+		//console.log(objAdd);
 		mongoDb.insertCollection(dbName,collectionName,objAdd);
 		}
 	}
@@ -46,13 +46,13 @@ else {
 
 
 // R�cup�rer donn�es dans Mongo
-	var findSymbolRecords = ['{ "symbol" : "'+symbol+'", "way" : "bid"}','{ "symbol" : "'+symbol+'", "way" : "ask"}'];
+	var findSymbolRecords = [{ '"symbol" : "'+symbol+'", "way" : "bid"}','{ "symbol" : "'+symbol+'", "way" : "ask"'}];
 	console.log(findSymbolRecords);
 /////////////////////////////Pour les Bid ////////////////
 for (var i=0;i<1;i++)
 	{
 var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
-console.log(findSymbolRecords);
+console.log(symbolRecords);
 // Delete doublons 
 	for (var i=0;i<symbolRecords.length;i++)
 		{
