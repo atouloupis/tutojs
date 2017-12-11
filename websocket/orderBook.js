@@ -47,9 +47,9 @@ else {
 
 // R�cup�rer donn�es dans Mongo
 	var findSymbolRecords = JSON.parse('[{ "symbol" : "'+symbol+'", "way" : "bid"},{ "symbol" : "'+symbol+'", "way" : "ask"}]');
-	//console.log("LENGTH :" +findSymbolRecords.length);
-	// console.log("LENGTH :" +JSON.stringify(findSymbolRecords[0]));
-	// console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
+	console.log("LENGTH :" +findSymbolRecords.length);
+	 console.log("LENGTH :" +JSON.stringify(findSymbolRecords[0]));
+	 console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
 /////////////////////////////Pour les Bid ////////////////
 var symbolRecords=mongoDb.findRecords(dbName,collectionName,'{"symbol" : "IXTETH", "way" : "bid"}');
 console.log(symbolRecords);
@@ -59,7 +59,7 @@ for (var i=0;i<1;i++)
 console.log(findSymbolRecords[i]);
 //var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
 
-//symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "price" : "0.0001", "size" : "200"}}]');
+symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "price" : "0.0001", "size" : "200"}}]');
 // Delete doublons 
 	for (var i=0;i<symbolRecords.length;i++)
 		{
