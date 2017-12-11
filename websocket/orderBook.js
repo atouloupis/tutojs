@@ -25,10 +25,7 @@ if (method=="snapshotOrderbook")
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		console.log("i = " + i);
-		var askPriceSize=orderBookAskArray[i];
-		console.log(orderBookAskArray[0]);
-		console.log(orderBookAskArray[1]);
-		console.log(orderBookAskArray[2]);
+		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
 		var symbol = orderBookFrame.symbol;
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }');
 		console.log(objAdd);
