@@ -51,7 +51,10 @@ else {
 	 console.log("LENGTH :" +JSON.stringify(findSymbolRecords[0]));
 	 console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
 /////////////////////////////Pour les Bid ////////////////
-var symbolRecords=mongoDb.findRecords(dbName,collectionName,JSON.parse('{"symbol" : "IXTETH", "way" : "bid"}'));
+mongoDb.findRecords(dbName,collectionName,JSON.parse('{"symbol" : "IXTETH", "way" : "bid"}'),function(result){
+consol.log(result);
+});
+
 console.log(symbolRecords);
 for (var i=0;i<1;i++)
 	{
