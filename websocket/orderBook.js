@@ -56,15 +56,16 @@ for (var i=0;i<1;i++)
 	{
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
 		// Delete doublons 
+		console.log(symbolRecords);
 		for (var i=0;i<symbolRecords.length;i++)
 			{
 			for (var j=i+1;j<symbolRecords.length;j++)
 				{
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
-					var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
-					console.log(deleteQuery);
-					mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery));
+					// var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
+					// console.log(deleteQuery);
+					// mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery));
 					}
 				}
 			// Chercher si prix existe d�j�	
