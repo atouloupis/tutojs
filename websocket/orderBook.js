@@ -48,8 +48,8 @@ else {
 // R�cup�rer donn�es dans Mongo
 	var findSymbolRecords = JSON.parse('[{ "symbol" : "'+symbol+'", "way" : "bid"},{ "symbol" : "'+symbol+'", "way" : "ask"}]');
 	console.log("LENGTH :" +findSymbolRecords.length);
-	console.log("LENGTH :" +findSymbolRecords[0]);
-	console.log("LENGTH :" +findSymbolRecords[1]);
+	console.log("LENGTH :" +JSON.stringify(findSymbolRecords[0]));
+	console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
 /////////////////////////////Pour les Bid ////////////////
 for (var i=0;i<1;i++)
 	{
