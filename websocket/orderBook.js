@@ -20,7 +20,7 @@ if (method=="snapshotOrderbook")
 	console.log("deleted");
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
-	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
+	var orderBookAskArray=orderBookFrame.ask;
 	console.log("Length :" + orderBookAskArray.length);
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
