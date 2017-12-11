@@ -84,7 +84,7 @@ for (var i=0;i<1;i++)
 					// si oui remplacer size
 					var newValues = '{"params" : { "size" : "'+orderBookFrame.bid[0].size+'"}}';
 					//console.log(newValues);
-					var updateQuery = '{ "_id" : '+orderBookFrame._id+' }';
+					var updateQuery = '{ "_id" : "'+orderBookFrame._id+'" }';
 					//console.log(updateQuery);
 					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), JSON.parse(newValues));
 					}
