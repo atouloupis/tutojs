@@ -71,6 +71,8 @@ symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "p
 			}
 		// Chercher si prix existe d�j�	
 		console.log(orderBookFrame);
+		console.log(symbolRecords[i].params.price);
+		
 		if(symbolRecords[i].params.price == orderBookFrame.bid[0].price) 
 			{
 			// si oui remplacer size

@@ -96,7 +96,7 @@ MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbase = db.db(dbName);
 console.log("TRY REQUEST FIND");
-dbase.collection(collectionName).sort("{_id : -1}").find(query, function(err, result) {
+dbase.collection(collectionName).find(query, function(err, result) {
 	console.log(err);
   if (err) throw err;
   console.log("1 document found");
