@@ -56,6 +56,7 @@ for (var i=0;i<1;i++)
 console.log(findSymbolRecords[i]);
 var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
 console.log(symbolRecords);
+symbolRecords=[1];
 // Delete doublons 
 	for (var i=0;i<symbolRecords.length;i++)
 		{
