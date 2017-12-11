@@ -82,10 +82,11 @@ for (var i=0;i<1;i++)
 				if(symbolRecords[i].params.price == orderBookFrame.bid[0].price) 
 					{
 					// si oui remplacer size
-					var newValues = '{"params" : { "size" : "'+orderBookFrame.bid[0].size+'"}}';
+					var newValues = '{ "size" : "'+orderBookFrame.bid[0].size+'"}';
 					//console.log(newValues);
-					var updateQuery = '{ "_id" : "'+orderBookFrame._id+'" }';
-					//console.log(updateQuery);
+					var updateQuery = '{ "_id" : "'+orderBookFrame.bid[0]._id+'" }';
+					console.log("UPDATE QUERY");
+					console.log(updateQuery);
 					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), JSON.parse(newValues));
 					}
 				// si non cr�er une nouvelle entr�e
