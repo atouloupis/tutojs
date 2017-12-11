@@ -100,7 +100,7 @@ dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err
 	//console.log(err);
   if (err) throw err;
   //console.log("1 document found");
-  //console.log(result);
+  console.log(result);
   db.close();
   return result;
 	});
