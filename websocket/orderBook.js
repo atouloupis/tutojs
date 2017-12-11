@@ -56,13 +56,16 @@ for (var i=0;i<1;i++)
 	{
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
 		// Delete doublons 
-		console.log(symbolRecords);
+		
 		for (var i=0;i<symbolRecords.length;i++)
 			{
 			for (var j=i+1;j<symbolRecords.length;j++)
 				{
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
+					console.log(symbolRecords[j]);
+					console.log(symbolRecords[i]);
+					break;
 					// var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
 					// console.log(deleteQuery);
 					// mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery));
@@ -79,7 +82,7 @@ for (var i=0;i<1;i++)
 				if(symbolRecords[i].params.price == orderBookFrame.bid[0].price) 
 					{
 					// si oui remplacer size
-					var newValues = '{"params" : { "size" : "'+orderBookFrame.params.bid[0].size+'"}}';
+					var newValues = '{"params" : { "size" : "'+orderBookFrame.bid[0].size+'"}}';
 					//console.log(newValues);
 					var updateQuery = '{ "_id" : '+orderBookFrame._id+' }';
 					//console.log(updateQuery);
