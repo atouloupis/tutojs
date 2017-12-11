@@ -86,11 +86,13 @@ dbase.collection(collectioName).deleteMany(query, function(err, obj) {
 
 function find(dbName,collectionName,query)
 {
-console.log("ENTER FIND");
+
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
-
+console.log("ENTER FIND : "+dbName+collectionName);
 MongoClient.connect(url, function(err, db) {
+  console.log("INSIDE FIND : "+err);
+  console.log(db);
   if (err) throw err;
   var dbase = db.db(dbName);
 console.log("TRY REQUEST FIND");
