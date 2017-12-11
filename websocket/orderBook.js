@@ -22,11 +22,11 @@ if (method=="snapshotOrderbook")
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
 	console.log("Length :" + orderBookAskArray.length);
-	console.log("ASK :" + orderbookFrame.ask);
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
-		var askPriceSize=orderbookFrame.ask[i];
-		var symbol = JSON.stringify(orderBookFrame.symbol);
+		var askPriceSize=orderBookAskArray[i];
+		console.log(askPriceSize);
+		var symbol = orderBookFrame.symbol;
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }');
 		console.log(objAdd);
 		insertCollection(dbName,collectionName,objAdd)
