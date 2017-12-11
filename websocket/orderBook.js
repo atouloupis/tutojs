@@ -89,7 +89,7 @@ for (var i=0;i<1;i++)
 					{
 					var newEntryQuery = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrameBidPrice+'", "size" : "'+orderBookFrameBidSize+'"}}');
 					//console.log(newEntryQuery);
-					mongoDb.insertCollection(dbName,collectionName,JSON.parse(newEntryQuery));
+					mongoDb.insertCollection(dbName,collectionName,newEntryQuery);
 					}
 				}
 			}
