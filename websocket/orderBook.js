@@ -38,7 +38,7 @@ if (method=="snapshotOrderbook")
 		console.log("i = " + i);
 		var bidPriceSize=JSON.stringify(orderBookBidArray[i]);
 		var symbol = orderBookFrame.symbol;
-		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }');
+		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : ' + bidPriceSize +' }');
 		console.log(objAdd);
 		mongoDb.insertCollection(dbName,collectionName,objAdd);
 		}
