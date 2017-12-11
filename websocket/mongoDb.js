@@ -61,7 +61,7 @@ MongoClient.connect(url, function(err, db) {
 
 dbase.collection(collectionName).insertOne(myObj, function(err, res) {
 	if (err) throw err;
-	console.log("1 document inserted");
+	//console.log("1 document inserted");
 	db.close();
 	});
 });
