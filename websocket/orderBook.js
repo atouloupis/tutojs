@@ -83,7 +83,7 @@ symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "p
 		// si non cr�er une nouvelle entr�e
 		else 
 			{
-			var newEntryQuery = '{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrame.params.bid[0].price+'", "size" : "'+orderBookFrame.params.bid[0].size+'"}}'
+			var newEntryQuery = '{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrame.bid[0].price+'", "size" : "'+orderBookFrame.bid[0].size+'"}}'
 			console.log(newEntryQuery);
 			mongoDb.insertMongoCollection(dbName,collectionName,newEntryQuery);
 			}
