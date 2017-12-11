@@ -14,11 +14,14 @@ mongoDb.createCollection(dbName,collectionName);
 if (method=="snapshotOrderbook")
 	{
 	//console.log(orderBookFrame.symbol);
-	deleteQuery = '{ "symbol" : "'+orderBookFrame.symbol+'" }';
+	deleteQuery = JSON.parse('{ "symbol" : "'+orderBookFrame.symbol+'" }');
+	console.log(deleteQuery);
 	mongoDb.deleteRecords(dbName,collectionName,deleteQuery);
+	console.log("deleted");
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
+	console.log(orderBookAskArray);
 	for (var i=0;i<orderBookAskArray.lenght;i++)
 		{
 		var askPriceSize=orderbookFrame.ask[i];
