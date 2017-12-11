@@ -54,7 +54,7 @@ else {
 
 for (var i=0;i<1;i++)
 	{
-	mongoDb.findRecords(dbName,collectionName,JSON.parse(findSymbolRecords[i]),function(symbolRecords){
+	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
 		// Delete doublons 
 		for (var i=0;i<symbolRecords.length;i++)
 			{
