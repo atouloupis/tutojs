@@ -26,18 +26,20 @@ if (method=="snapshotOrderbook")
 		{
 		console.log("i = " + i);
 		var askPriceSize=orderBookAskArray[i];
-		console.log(orderBookAskArray);
+		console.log(orderBookAskArray[0]);
+		console.log(orderBookAskArray[1]);
+		console.log(orderBookAskArray[2]);
 		var symbol = orderBookFrame.symbol;
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }');
 		console.log(objAdd);
-		insertCollection(dbName,collectionName,objAdd)
+		insertCollection(dbName,collectionName,objAdd);
 		}
 	//D�coupe de bid et enregistrement
 	for (var i=0;i<orderBookFrame.bid.length;i++)
 		{
 		var bidPriceSize=orderbookFrame.bid[i];
-		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }'
-		insertCollection(dbName,collectionName,objAdd)
+		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }';
+		insertCollection(dbName,collectionName,objAdd);
 		}
 	}
 else {
