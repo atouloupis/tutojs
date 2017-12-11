@@ -51,6 +51,7 @@ else {
 /////////////////////////////Pour les Bid ////////////////
 for (var i=0;i<1;i++)
 	{
+console.log(findSymbolRecords[i]);
 var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
 console.log(symbolRecords);
 // Delete doublons 
