@@ -75,7 +75,7 @@ symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "p
 		// Chercher si prix existe d�j�	
 		console.log(orderBookFrame);
 		//console.log(symbolRecords[i].params.price);
-		console.log("This is the TYPEOF" + typeof orderBookFrame.bid[0].price);
+		console.log("This is the TYPEOF" + typeof orderBookFrame.bid[0]);
 		if (typeof orderBookFrame.bid[0].price != "undefined")
 			{
 			var orderBookFrameBidPrice=orderBookFrame.bid[0].price;
