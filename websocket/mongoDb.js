@@ -31,12 +31,12 @@ MongoClient.connect(url, function(err, db) {
 
 dbase.listCollections().toArray(function(err, collections){
 	if (err) throw err;
-	console.log("Collection name "+collections.length);
+	//console.log("Collection name "+collections.length);
     //console.log("Collection name  "+collectionName);
 	for (var i=0;i<collections.length;i++)
-		{console.log("Collection name  "+collections[i].name);
+		{//console.log("Collection name  "+collections[i].name);
 		if (collections[i].name==collectionName) k++;
-		console.log("Collection name K "+k);
+		//console.log("Collection name K "+k);
 		}
 });
   //console.log("k : "+k);

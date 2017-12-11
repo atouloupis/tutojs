@@ -21,8 +21,8 @@ if (method=="snapshotOrderbook")
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
-	// console.log(orderBookAskArray);
-	for (var i=0;i<orderBookAskArray.lenght;i++)
+	console.log("Lenght" : orderBookAskArray.length);
+	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		var askPriceSize=orderbookFrame.ask[i];
 		var symbol = JSON.stringify(orderBookFrame.symbol);
@@ -31,7 +31,7 @@ if (method=="snapshotOrderbook")
 		insertCollection(dbName,collectionName,objAdd)
 		}
 	//D�coupe de bid et enregistrement
-	for (var i=0;i<orderBookFrame.bid.lenght;i++)
+	for (var i=0;i<orderBookFrame.bid.length;i++)
 		{
 		var bidPriceSize=orderbookFrame.bid[i];
 		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }'
@@ -50,10 +50,10 @@ for (var i=0;i<1;i++)
 	
 var symbolRecords=mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i]);
 // Delete doublons 
-	for (var i=0;i<symbolRecords.lenght;i++)
+	for (var i=0;i<symbolRecords.length;i++)
 		{
 		
-		for (var j=i+1;j<symbolRecords.lenght;j++)
+		for (var j=i+1;j<symbolRecords.length;j++)
 			{
 			if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 				{
