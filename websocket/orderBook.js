@@ -15,27 +15,31 @@ if (method=="snapshotOrderbook")
 	{
 	//console.log(orderBookFrame.symbol);
 	deleteQuery = JSON.parse('{ "symbol" : "'+orderBookFrame.symbol+'" }');
-	console.log(deleteQuery);
+	//console.log(deleteQuery);
 	mongoDb.deleteRecords(dbName,collectionName,deleteQuery);
-	console.log("deleted");
+	//console.log("deleted");
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=orderBookFrame.ask;
-	console.log("Length :" + orderBookAskArray.length);
+	//console.log("Length :" + orderBookAskArray.length);
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
-		console.log("i = " + i);
+		//console.log("i = " + i);
 		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
 		var symbol = orderBookFrame.symbol;
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');
-		console.log(objAdd);
+		//console.log(objAdd);
 		mongoDb.insertCollection(dbName,collectionName,objAdd);
 		}
 	//D�coupe de bid et enregistrement
+	var orderBookBidArray=orderBookFrame.bid;
 	for (var i=0;i<orderBookFrame.bid.length;i++)
 		{
-		var bidPriceSize=orderbookFrame.bid[i];
-		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }';
+		console.log("i = " + i);
+		var bidPriceSize=JSON.stringify(orderBookBidArray[i]);
+		var symbol = orderBookFrame.symbol;
+		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }');
+		console.log(objAdd);
 		mongoDb.insertCollection(dbName,collectionName,objAdd);
 		}
 	}
