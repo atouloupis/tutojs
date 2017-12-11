@@ -72,7 +72,7 @@ symbolRecords=JSON.parse('[{ "symbol" : "IXTETH", "way" : "bid", "params" : { "p
 		// Chercher si prix existe d�j�	
 		console.log(orderBookFrame);
 		console.log(symbolRecords[i].params.price);
-		orderBookFrame=JSON.parse("['ask':[ { 'price': '2.909470', 'size': '10.00' },{ 'price': '2.909580', 'size': '0.00' },{ 'price': '2.927110', 'size': '15.00' },{ 'price': '2.927750', 'size': '0.00' },{ 'price': '2.991170', 'size': '30.00' },{ 'price': '2.992700', 'size': '0.00' } ],  'bid': [],  'symbol': 'BCHETH',  'sequence': 9173918 ]");
+		orderBookFrame=JSON.parse("'ask':[ { 'price': '2.909470', 'size': '10.00' },{ 'price': '2.909580', 'size': '0.00' },{ 'price': '2.927110', 'size': '15.00' },{ 'price': '2.927750', 'size': '0.00' },{ 'price': '2.991170', 'size': '30.00' },{ 'price': '2.992700', 'size': '0.00' } ],  'bid': [],  'symbol': 'BCHETH',  'sequence': 9173918 ");
 		console.log(orderBookFrame.bid.indexOf('price'));
 		var orderBookFrameBidPrice=orderBookFrame.bid[0].price;
 		var orderBookFrameBidSize=orderBookFrame.bid[0].size;
