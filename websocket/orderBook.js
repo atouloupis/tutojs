@@ -21,11 +21,13 @@ if (method=="snapshotOrderbook")
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=JSON.stringify(orderBookFrame.ask);
-	console.log(orderBookAskArray);
+	// console.log(orderBookAskArray);
 	for (var i=0;i<orderBookAskArray.lenght;i++)
 		{
 		var askPriceSize=orderbookFrame.ask[i];
-		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }'
+		console.log(orderBookFrame.symbol);
+		var objAdd = JSON.parse('{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "ask", "params" : "' + askPriceSize +'" }');
+		console.log(objAdd);
 		insertCollection(dbName,collectionName,objAdd)
 		}
 	//D�coupe de bid et enregistrement
