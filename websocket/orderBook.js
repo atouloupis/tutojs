@@ -29,14 +29,14 @@ if (method=="snapshotOrderbook")
 		var symbol = orderBookFrame.symbol;
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');
 		console.log(objAdd);
-		insertCollection(dbName,collectionName,objAdd);
+		mongoDb.insertCollection(dbName,collectionName,objAdd);
 		}
 	//D�coupe de bid et enregistrement
 	for (var i=0;i<orderBookFrame.bid.length;i++)
 		{
 		var bidPriceSize=orderbookFrame.bid[i];
 		var objAdd = '{ "symbol" : "'+orderBookFrame.symbol+'", "way" : "bid", "params" : "' + bidPriceSize +'" }';
-		insertCollection(dbName,collectionName,objAdd);
+		mongoDb.insertCollection(dbName,collectionName,objAdd);
 		}
 	}
 else {
