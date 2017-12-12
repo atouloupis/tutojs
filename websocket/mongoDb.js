@@ -38,7 +38,7 @@ dbase.listCollections().toArray(function(err, collections){
 		if (collections[i].name==collectionName) k++;
 		//console.log("Collection name K "+k);
 		}
-});
+
   //console.log("k : "+k);
 if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
@@ -47,6 +47,7 @@ if (k==0){
     db.close();
   });
 }
+});
 });
 }
 
