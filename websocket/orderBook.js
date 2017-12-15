@@ -15,11 +15,11 @@ var collectionName = "orderBookFrame";
 var symbol = orderBookFrame.symbol;
 // Cr�er la collection
 mongoDb.createCollection(dbName,collectionName);
-console.log(orderBookFrame);
+//console.log(orderBookFrame);
 //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
 if (method=="snapshotOrderbook")
 	{
-	console.log(orderBookFrame.symbol);
+	//console.log(orderBookFrame.symbol);
 	deleteQuery = JSON.parse('{ "symbol" : "'+symbol+'" }');
 	//console.log(deleteQuery);
 	mongoDb.deleteRecords(dbName,collectionName,deleteQuery,function(){
@@ -27,7 +27,7 @@ if (method=="snapshotOrderbook")
 	//D�couper la trame pour respecter format
 	//D�coupe de ask et enregistrement
 	var orderBookAskArray=orderBookFrame.ask;
-	//console.log("Length :" + orderBookFrame.ask.length);
+	console.log("Length :" + orderBookFrame.ask.length);
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		//console.log("i = " + i);
