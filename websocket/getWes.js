@@ -5,7 +5,6 @@ var wsClient = require ('./wsClient');
 
 var app = require('express')(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
 	fs = require('fs');
 	
 app.get('/', function (req, res) {

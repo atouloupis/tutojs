@@ -1,5 +1,6 @@
 var mongoDb = require ('./mongoDb');
 var io = require('socket.io').listen(server);
+var server = require('http').createServer(app);
 module.exports.updateOrderBook = updateOrderBook;
 
 
