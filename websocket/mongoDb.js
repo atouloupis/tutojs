@@ -80,6 +80,7 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectioName).deleteMany(query, function(err, obj) {
   if (err) throw err;
   console.log("documents deleted");
+  callback();
   db.close();
 	});
 });
