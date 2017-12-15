@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>MongoDB temps réel !</title>
+        <style>
+            #zone_chat strong {
+                color: white;
+                background-color: black;
+                padding: 2px;
+            }
+        </style>
+    </head>
+ 
+    <body>
+        <h1>MongoDB temps réel !</h1>
+
+        <section id="zone_chat">
+            
+        </section>
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+
+            // Connexion à socket.io
+            var socket = io.connect('http://localhost:8080');
+
+            // Quand on reçoit un message, on l'insère dans la page
+            socket.on('message', function(data) {
+                insereMessage(data.message)
+            })
+
+            // Ajoute un message dans la page
+            function insereMessage(message) {
+                $('#zone_chat').text('<p><strong> Message </strong> ' + message + '</p>');
+            }
+        </script>
+    </body>
+</html>
+

@@ -68,7 +68,7 @@ dbase.collection(collectionName).insertOne(myObj, function(err, res) {
 });
 }
 
-function deleteMany(dbName,collectioName,query)
+function deleteMany(dbName,collectioName,query,callback)
 {
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
