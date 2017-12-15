@@ -105,7 +105,7 @@ for (var i=0;i<1;i++)
 				}
 			}
 mongoDb.findRecords(dbName,collectionName,"",function(message){
-	console.log(message);
+	//console.log(message);
 	io.sockets.on('connection', function (socket) {
 		socket.broadcast.emit('message', {message: message});
 	});
