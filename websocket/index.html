@@ -28,7 +28,7 @@
 
             // Quand on reçoit un message, on l'insère dans la page
             socket.on('message', function(data) {
-                insereMessage(data.message)
+                insereMessage(data)
             })
 
             // Ajoute un message dans la page
