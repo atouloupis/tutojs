@@ -3,6 +3,16 @@ var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
+var app = require('express')(),
+    server = require('http').createServer(app),
+	fs = require('fs');
+	
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
+server.listen(8080);
+
 
 
 module.exports.updateOrderBook = updateOrderBook;
