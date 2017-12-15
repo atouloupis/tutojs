@@ -115,11 +115,7 @@ mongoDb.findRecords(dbName,collectionName,"",function(message){
 	//console.log(message);
 	message = JSON.stringify(message);
 	io.sockets.on('connection', function (socket) {
-		socket.broadcast.emit('message', 
-			{
-				console.log(message);
-				message: message
-				});
+		socket.broadcast.emit('message',{message: message});
 	});
 });
 		});
