@@ -15,14 +15,15 @@
     <body>
         <h1>MongoDB temps réel !</h1>
 
+<ul id="messages"></ul>
 <table>
    <tr>
        <th>Bid</th>
        <th>Ask</th>
    </tr>
    <tr>
-       <td id="messages1"></td>
-       <td id="messages2"></td>
+       <td id="messages"></td>
+       <td id="messages">33 ans</td>
    </tr>
 </table>
 
@@ -43,9 +44,8 @@
           return false;
         });
         socket.on('chat message', function(msg){
-          $('#messages1').text(msg));
-		  $('#messages2').append($('<li>').text("1"));
-		  //$('#messages').text(msg));
+          $('#messages').append($('<li>').text(msg));
+		  $('#messages').text("test withoutupdate"));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });

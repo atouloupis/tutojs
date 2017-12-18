@@ -11,7 +11,7 @@ var rqstReport = {   "method": "subscribeReports",   "params": {} };
 var rqstOrderBook = {
   "method": "subscribeOrderbook",
   "params": {
-    "symbol": "IXTETH"
+    "symbol": "BTGETH"
   },
   "id": 123
 }; 
