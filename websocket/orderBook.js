@@ -117,8 +117,11 @@ mongoDb.findRecords(dbName,collectionName,"",function(message){
 	//message = JSON.stringify(message);
 	for (var i=0;i<message.length;i++)
 	{
-		if (message[i].way == "bid")io.emit('bid message',message[i].price);
-		else io.emit('ask message', message[i].price);
+		if (message[i].way == "bid")
+		{io.emit('bid message',message[i].price);}
+		else 
+		{io.emit('ask message', message[i].price);}
+	}
 		//socket.broadcast.emit('message',message);
 
 });
