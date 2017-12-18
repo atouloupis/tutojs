@@ -19,11 +19,18 @@
             
         </section>
 
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
         <script>
+$(function () {
+        var socket = io();
 
-            // Connexion à socket.io
+        socket.on('message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      });
+            /* // Connexion à socket.io
             var socket = io.connect('http://localhost:3000');
 			$('#zone_chat').text("Executed connect");
 			$('#zone_chat').text(JSON.stringify(socket));
@@ -36,7 +43,7 @@
             // Ajoute un message dans la page
             function insereMessage(message) {
                 $('#zone_chat').text('<p><strong> Message </strong> ' + message + '</p>');
-            }
+            }*/
         </script>
     </body>
 </html>
