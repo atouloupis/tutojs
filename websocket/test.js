@@ -1,3 +1,4 @@
+var mongo = require('mongodb');
 var mongoDb = require ('./mongoDb');
 var dbName = "orderBook";
 var collectionName = "orderBookFrame";
