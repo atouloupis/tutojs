@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3000);
+
 
 var dbName = "orderBook";
 var collectionName = "orderBookFrame";
@@ -25,3 +25,5 @@ mongoDb.findRecords(dbName,collectionName,"",function(message){
 		socket.broadcast.emit('message',message);
 	});
 });
+
+server.listen(3000);
