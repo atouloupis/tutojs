@@ -1,4 +1,5 @@
 var mongoDb = require ('./mongoDb');
+var mongo = require('mongodb');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -97,7 +98,7 @@ for (var i=0;i<1;i++)
 					// si oui remplacer size
 					var newValues = JSON.parse('{ "$set": {"params" : { "size" : '+orderBookFrame.bid[0].size+'}}}');
 					console.log(newValues);
-					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
+					var updateQuery = { _id: new mongo.ObjectID(symbolRecords[i]._id)};
 					console.log("UPDATE QUERY");
 					 //console.log(updateQuery);
 					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), newValues,function(){
