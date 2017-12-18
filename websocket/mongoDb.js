@@ -112,7 +112,6 @@ dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err
 	});
   db.close();
 });
- callback ();
 }
 
 function update(dbName,collectionName,query, newValues,callback)
