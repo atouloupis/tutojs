@@ -123,6 +123,7 @@ mongoDb.findRecords(dbName,collectionName,"",function(message){
 		else 
 		{ask.push(message[i].params.price);}
 	}
+	console.log(bid);
 	io.emit('bid message',toString(bid));
 	io.emit('ask message', toString(ask));
 		//socket.broadcast.emit('message',message);
