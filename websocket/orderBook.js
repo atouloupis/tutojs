@@ -1,16 +1,15 @@
-var mongoDb = require ('./mongoDb');
 var app = require('express')();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
-var fs = require('fs');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 	
-app.get('/', function (req, res) {
+app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3000);
-
-
+http.listen(port, function(){
+  console.log('listening on *:' + port);
+});
 
 module.exports.updateOrderBook = updateOrderBook;
 
@@ -112,12 +111,12 @@ for (var i=0;i<1;i++)
 				}
 			}
 mongoDb.findRecords(dbName,collectionName,"",function(message){
-	console.log(message);
+	//console.log(message);
 	
 	message = JSON.stringify(message);
-	io.sockets.on('connection', function (socket) {
-		socket.broadcast.emit('message',message);
-	});
+	io.emit('chat message','message commming from IO');
+		//socket.broadcast.emit('message',message);
+
 });
 		});
 	}
