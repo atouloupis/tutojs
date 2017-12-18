@@ -16,11 +16,11 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 	console.log("Searched");
-	console.log(message);
+	//console.log(message);
 	
-	message = JSON.stringify(message);
+	//message = JSON.stringify(message);
 
-		socket.emit('message',message);
+		socket.emit('message','message commming from IO');
 	});
 });
 
