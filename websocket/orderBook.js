@@ -79,8 +79,9 @@ for (var i=0;i<1;i++)
 					// console.log(symbolRecords[j]);
 					// console.log(symbolRecords[i]);
 					 var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
-					// console.log(deleteQuery);
+					 console.log("doublon delete" + deleteQuery);
 					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function(){});
+					console.log("DELETED line 84");
 					}
 				}
 			// Chercher si prix existe d�j�	
@@ -99,8 +100,8 @@ for (var i=0;i<1;i++)
 					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
 					console.log("UPDATE QUERY");
 					 //console.log(updateQuery);
-					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), newValues,function(){});
-					console.log("updated");
+					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), newValues,function(){
+					console.log("updated");});
 					}
 				// si non cr�er une nouvelle entr�e
 				else 

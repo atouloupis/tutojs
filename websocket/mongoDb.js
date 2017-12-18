@@ -47,12 +47,10 @@ if (k==0){
 
   });
 }
-    
-	
-});
 db.close();
+callback();   
 });
-callback();
+});
 }
 
 function insertMongoCollection(dbName,collectionName,myObj,callback)
@@ -67,10 +65,11 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectionName).insertOne(myObj, function(err, res) {
 	if (err) throw err;
 	//console.log("1 document inserted");
+	db.close();
+	callback();
 	});
-db.close();
 });
-callback();
+
 }
 
 function deleteMany(dbName,collectioName,query,callback)
@@ -85,10 +84,11 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectioName).deleteMany(query, function(err, obj) {
   if (err) throw err;
   console.log("documents deleted");
+   callback();
 	});
  db.close();
 });
- callback();
+
 }
 
 function find(dbName,collectionName,query,callback)
@@ -125,10 +125,11 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectionName).updateOne(query, newValues, function(err, res) {
   if (err) throw err;
   console.log("1 document updated");
-	});
   db.close();
+  callback();
+	});
+  
 });
- callback();
 }
 
 // function createMongoDb(name)
