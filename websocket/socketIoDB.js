@@ -15,7 +15,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 //mongoDb.findRecords(dbName,collectionName,"",function(message){
-  socket.on('chat message', function(msg){
+//  socket.on('chat message', function(msg){
 	console.log("Searched");
 	//console.log(message);
 	
@@ -23,7 +23,7 @@ io.on('connection', function(socket){
 
 		io.emit('chat message','message commming from IO');
 //	});
-  });
+//  });
 });
 
 
