@@ -15,8 +15,9 @@ var dbName = "orderBook";
 var collectionName = "orderBookFrame";
 
 io.sockets.on('connection', function (socket) {
-
+console.log("Connected");
 mongoDb.findRecords(dbName,collectionName,"",function(message){
+	console.log("Searched");
 	console.log(message);
 	
 	message = JSON.stringify(message);
