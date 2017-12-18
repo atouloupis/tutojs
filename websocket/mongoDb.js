@@ -19,7 +19,7 @@ MongoClient.connect(url, function(err, db) {
 });
 }
 
-function createMongoCollection(dbName,collectionName)
+function createMongoCollection(dbName,collectionName,callback)
 {
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
@@ -45,13 +45,14 @@ if (k==0){
     if (err) throw err;
     console.log("Collection created!");
     db.close();
+	callback();
   });
 }
 });
 });
 }
 
-function insertMongoCollection(dbName,collectionName,myObj)
+function insertMongoCollection(dbName,collectionName,myObj,callback)
 {
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
@@ -64,6 +65,7 @@ dbase.collection(collectionName).insertOne(myObj, function(err, res) {
 	if (err) throw err;
 	//console.log("1 document inserted");
 	db.close();
+	callback();
 	});
 });
 }
@@ -109,7 +111,7 @@ dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err
 });
 }
 
-function update(dbName,collectionName,query, newValues)
+function update(dbName,collectionName,query, newValues,callback)
 {
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
@@ -121,6 +123,7 @@ dbase.collection(collectionName).updateOne(query, newValues, function(err, res) 
   if (err) throw err;
   console.log("1 document updated");
   db.close();
+  callback();
 	});
 });
 }
