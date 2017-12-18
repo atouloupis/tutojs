@@ -95,7 +95,7 @@ for (var i=0;i<1;i++)
 				if(symbolRecords[i].params.price == orderBookFrame.bid[0].price) 
 					{
 					// si oui remplacer size
-					var newValues = '{ $set: {params : { size : "'+orderBookFrame.bid[0].size+'"}}}';
+					var newValues = '{ $set: {params : { size : '+orderBookFrame.bid[0].size+'}}}';
 					console.log(newValues);
 					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
 					console.log("UPDATE QUERY");
@@ -107,9 +107,9 @@ for (var i=0;i<1;i++)
 				else 
 					{
 					var newEntryQuery = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrameBidPrice+'", "size" : "'+orderBookFrameBidSize+'"}}');
-					console.log("newEntryQuery");
-					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){});
-					console.log("newEntryOK");
+					//console.log("newEntryQuery");
+					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){
+					console.log("newEntryOK");});
 					}
 				}
 			}
