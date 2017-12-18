@@ -80,8 +80,8 @@ for (var i=0;i<1;i++)
 					// console.log(symbolRecords[i]);
 					 var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
 					 console.log("doublon delete" + deleteQuery);
-					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function(){});
-					console.log("DELETED line 84");
+					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function(){
+					console.log("DELETED line 84");});
 					}
 				}
 			// Chercher si prix existe d�j�	
