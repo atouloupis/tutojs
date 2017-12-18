@@ -1,29 +1,29 @@
 var mongoDb = require ('./mongoDb');
 
 var app = require('express')();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
-var fs = require('fs');
-	
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
-
-
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 
 var dbName = "orderBook";
 var collectionName = "orderBookFrame";
 
-io.sockets.on('connection', function (socket) {
-console.log("Connected");
+
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket){
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 	console.log("Searched");
 	console.log(message);
 	
 	message = JSON.stringify(message);
 
-		socket.broadcast.emit('message',message);
+		socket.emit('message',message);
 	});
 });
 
-server.listen(3000);
+http.listen(port, function(){
+  console.log('listening on *:' + port);
+});

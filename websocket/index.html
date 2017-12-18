@@ -29,7 +29,7 @@
 			$('#zone_chat').text(JSON.stringify(socket));
             // Quand on reçoit un message, on l'insère dans la page
             socket.on('message', function(data) {
-				//console.log(data);
+				$('#zone_chat').text("MESSAGE RECEIVED");
                 insereMessage(data);
             })
 
