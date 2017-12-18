@@ -113,10 +113,10 @@ for (var i=0;i<1;i++)
 			}
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 	//console.log(message);
+	
 	message = JSON.stringify(message);
-	io.sockets.on('connection', function (socket) {
+	var socket = io.connect('http://localhost:3000');
 		socket.broadcast.emit('message',message);
-	});
 });
 		});
 	}
