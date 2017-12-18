@@ -15,14 +15,17 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 //mongoDb.findRecords(dbName,collectionName,"",function(message){
+  socket.on('chat message', function(msg){
 	console.log("Searched");
 	//console.log(message);
 	
 	//message = JSON.stringify(message);
 
-		io.emit('message','message commming from IO');
+		io.emit('chat message','message commming from IO');
 //	});
+  });
 });
+
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
