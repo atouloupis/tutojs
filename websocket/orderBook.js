@@ -113,15 +113,18 @@ for (var i=0;i<1;i++)
 			}
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 	console.log(message.length);
-	
+	var bid = [];
+	var ask =[];
 	//message = JSON.stringify(message);
 	for (var i=0;i<message.length;i++)
 	{
 		if (message[i].way == "bid")
-		{io.emit('bid message',message[i].params.price);}
+		{bid.push(message[i].params.price);}
 		else 
-		{io.emit('ask message', message[i].params.price);}
+		{ask.push(message[i].params.price);}
 	}
+	io.emit('bid message',toString(bid));
+	io.emit('ask message', toString(ask));
 		//socket.broadcast.emit('message',message);
 
 });
