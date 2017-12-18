@@ -28,7 +28,7 @@ if (method=="snapshotOrderbook")
 	{
 	//console.log(orderBookFrame.symbol);
 	deleteQuery = JSON.parse('{ "symbol" : "'+symbol+'" }');
-	//console.log(deleteQuery);
+	console.log(deleteQuery);
 	mongoDb.deleteRecords(dbName,collectionName,deleteQuery,function(){
 	//console.log("deleted");
 	//D�couper la trame pour respecter format
