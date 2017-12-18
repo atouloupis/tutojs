@@ -97,16 +97,18 @@ for (var i=0;i<1;i++)
 					var newValues = '{ $set: {params : { size : "'+orderBookFrame.bid[0].size+'"}}}';
 					console.log(newValues);
 					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
-					// console.log("UPDATE QUERY");
-					// console.log(updateQuery);
+					console.log("UPDATE QUERY");
+					 //console.log(updateQuery);
 					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), newValues,function(){});
+					console.log("updated");
 					}
 				// si non cr�er une nouvelle entr�e
 				else 
 					{
 					var newEntryQuery = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrameBidPrice+'", "size" : "'+orderBookFrameBidSize+'"}}');
-					//console.log(newEntryQuery);
+					console.log("newEntryQuery");
 					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){});
+					console.log("newEntryOK");
 					}
 				}
 			}
