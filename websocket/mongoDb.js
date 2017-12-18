@@ -108,11 +108,11 @@ dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err
   if (err) throw err;
   //console.log("1 document found");
   //console.log(result);
-
+ callback (result);
 	});
   db.close();
 });
- callback (result);
+ callback ();
 }
 
 function update(dbName,collectionName,query, newValues,callback)
