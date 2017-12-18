@@ -22,7 +22,7 @@
        <th>Ask</th>
    </tr>
    <tr>
-       <td> <span id="messages"></div></td>
+       <td> <ul id="messages"></ul></td>
        <td> <text id="messages">33 ans </h1></td>
    </tr>
 </table>
@@ -44,8 +44,8 @@
           return false;
         });
         socket.on('chat message', function(msg){
-          //$('#messages').append($('<li>').text(msg));
-		  $('#messages').text(msg));
+          $('#messages').append($('<li>').text(msg));
+		  //$('#messages').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });
