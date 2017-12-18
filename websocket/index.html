@@ -26,10 +26,10 @@
             // Connexion à socket.io
             var socket = io.connect('http://localhost:3000');
 			$('#zone_chat').text("Executed connect");
-			$('#zone_chat').text(socket);
+			$('#zone_chat').text(JSON.stringify(socket));
             // Quand on reçoit un message, on l'insère dans la page
             socket.on('message', function(data) {
-				console.log(data);
+				//console.log(data);
                 insereMessage(data);
             })
 
