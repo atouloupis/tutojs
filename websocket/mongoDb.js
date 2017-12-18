@@ -44,12 +44,15 @@ if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
-    db.close();
-	callback();
+
   });
 }
+    
+	
 });
+db.close();
 });
+callback();
 }
 
 function insertMongoCollection(dbName,collectionName,myObj,callback)
@@ -64,10 +67,10 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectionName).insertOne(myObj, function(err, res) {
 	if (err) throw err;
 	//console.log("1 document inserted");
-	db.close();
-	callback();
 	});
+db.close();
 });
+callback();
 }
 
 function deleteMany(dbName,collectioName,query,callback)
@@ -82,10 +85,10 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectioName).deleteMany(query, function(err, obj) {
   if (err) throw err;
   console.log("documents deleted");
-  callback();
-  db.close();
 	});
+ db.close();
 });
+ callback();
 }
 
 function find(dbName,collectionName,query,callback)
@@ -105,10 +108,11 @@ dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err
   if (err) throw err;
   //console.log("1 document found");
   //console.log(result);
-  db.close();
-  callback (result);
+
 	});
+  db.close();
 });
+ callback (result);
 }
 
 function update(dbName,collectionName,query, newValues,callback)
@@ -122,10 +126,10 @@ MongoClient.connect(url, function(err, db) {
 dbase.collection(collectionName).updateOne(query, newValues, function(err, res) {
   if (err) throw err;
   console.log("1 document updated");
-  db.close();
-  callback();
 	});
+  db.close();
 });
+ callback();
 }
 
 // function createMongoDb(name)
