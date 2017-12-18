@@ -99,7 +99,7 @@ for (var i=0;i<1;i++)
 					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
 					// console.log("UPDATE QUERY");
 					// console.log(updateQuery);
-					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), JSON.parse(newValues),function(){});
+					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), newValues,function(){});
 					}
 				// si non cr�er une nouvelle entr�e
 				else 
