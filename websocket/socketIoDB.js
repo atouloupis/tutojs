@@ -14,14 +14,14 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-mongoDb.findRecords(dbName,collectionName,"",function(message){
+//mongoDb.findRecords(dbName,collectionName,"",function(message){
 	console.log("Searched");
 	//console.log(message);
 	
 	//message = JSON.stringify(message);
 
-		socket.emit('message','message commming from IO');
-	});
+		io.emit('message','message commming from IO');
+//	});
 });
 
 http.listen(port, function(){
