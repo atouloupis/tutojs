@@ -51,7 +51,7 @@ if (method=="snapshotOrderbook")
 		var bidPriceSize=JSON.stringify(orderBookBidArray[i]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : ' + bidPriceSize +' }');
 		//console.log(objAdd);
-		mongoDb.insertCollection(dbName,collectionName,objAdd,function());
+		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
 		}
 	});
 	}	
@@ -80,7 +80,7 @@ for (var i=0;i<1;i++)
 					// console.log(symbolRecords[i]);
 					 var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
 					// console.log(deleteQuery);
-					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function());
+					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function(){});
 					}
 				}
 			// Chercher si prix existe d�j�	
@@ -99,14 +99,14 @@ for (var i=0;i<1;i++)
 					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
 					// console.log("UPDATE QUERY");
 					// console.log(updateQuery);
-					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), JSON.parse(newValues),function());
+					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), JSON.parse(newValues),function(){});
 					}
 				// si non cr�er une nouvelle entr�e
 				else 
 					{
 					var newEntryQuery = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrameBidPrice+'", "size" : "'+orderBookFrameBidSize+'"}}');
 					//console.log(newEntryQuery);
-					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function());
+					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){});
 					}
 				}
 			}
