@@ -20,6 +20,8 @@
     "json": "^9.0.6",
     "jsonfile": "^4.0.0",
     "stringify": "^5.1.0",
-    "websocket": "^1.0.25"
+    "websocket": "^1.0.25",
+	"express": "^4.15.2",
+    "socket.io": "^1.7.3"
   }
 }
