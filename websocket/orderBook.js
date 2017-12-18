@@ -112,7 +112,7 @@ for (var i=0;i<1;i++)
 				}
 			}
 mongoDb.findRecords(dbName,collectionName,"",function(message){
-	console.log(message);
+	//console.log(message);
 	
 	//message = JSON.stringify(message);
 	for (var i=0;i<message.length;i++)
