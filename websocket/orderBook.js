@@ -41,7 +41,7 @@ if (method=="snapshotOrderbook")
 		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');
 		//console.log(objAdd);
-		mongoDb.insertCollection(dbName,collectionName,objAdd,function());
+		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
 		}
 	//D�coupe de bid et enregistrement
 	var orderBookBidArray=orderBookFrame.bid;
