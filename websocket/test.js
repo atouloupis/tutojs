@@ -8,5 +8,6 @@ var objAdd=JSON.parse('{ "symbol" : "BTGETH", "way" : "ask", "params" : {"size":
 var updateQuery= JSON.parse('{ "_id" : "5a3814a2e2a0622ed39b8d48" }');
 var newValues =JSON.parse('{"$set": {"params" : { "size" : 20}}}');
 
+console.log(newValues);
 
 mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});
