@@ -95,7 +95,7 @@ for (var i=0;i<1;i++)
 					{
 					// si oui remplacer size
 					var newValues = '{ $set: {"params.size" : "'+orderBookFrame.bid[0].size+'"}}';
-					//console.log(newValues);
+					console.log(newValues);
 					var updateQuery = '{ "_id" : "'+symbolRecords[i]._id+'" }';
 					// console.log("UPDATE QUERY");
 					// console.log(updateQuery);
