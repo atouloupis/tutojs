@@ -113,9 +113,9 @@ for (var i=0;i<1;i++)
 			}
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 	//console.log(message);
-	console.log("to emit");
+	
 	message = JSON.stringify(message);
-	io.emit(message);
+	io.emit('chat message',message);
 		//socket.broadcast.emit('message',message);
 
 });
