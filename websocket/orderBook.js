@@ -82,7 +82,8 @@ for (var i=0;i<1;i++)
 					 var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
 					 //console.log("doublon delete" + deleteQuery);
 					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function(){
-					//console.log("DELETED line 84");});
+					//console.log("DELETED line 84");
+					});
 					}
 				}
 			// Chercher si prix existe d�j�	
@@ -102,7 +103,8 @@ for (var i=0;i<1;i++)
 					//console.log("UPDATE QUERY");
 					 //console.log(updateQuery);
 					mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){
-					//console.log("updated");});
+					//console.log("updated");
+					});
 					}
 				// si non cr�er une nouvelle entr�e
 				else 
@@ -110,7 +112,8 @@ for (var i=0;i<1;i++)
 					var newEntryQuery = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : { "price" : "'+orderBookFrameBidPrice+'", "size" : "'+orderBookFrameBidSize+'"}}');
 					//console.log("newEntryQuery");
 					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){
-					console.log("newEntryOK");});
+					//console.log("newEntryOK");
+					});
 					}
 				}
 			}
