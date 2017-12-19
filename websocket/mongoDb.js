@@ -4,6 +4,7 @@ module.exports.insertCollection = insertMongoCollection;
 module.exports.deleteRecords = deleteMany;
 module.exports.findRecords = find;
 module.exports.updateCollection = update;
+module.exports.count=count;
 
 var mongo = require('mongodb');
 
@@ -127,6 +128,24 @@ dbase.collection(collectionName).updateOne(query, newValues, function(err, res) 
   //console.log("1 document updated");
   db.close();
   callback();
+	});
+  
+});
+}
+
+function count(dbName,collectionName,callback)
+{
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/"+dbName;
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbase = db.db(dbName);
+dbase.collection(collectionName).count(function(err, res) {
+  if (err) throw err;
+  //console.log("1 document updated");
+  db.close();
+  callback(res);
 	});
   
 });
