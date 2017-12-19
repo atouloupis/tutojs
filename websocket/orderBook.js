@@ -86,7 +86,6 @@ for (var k=0;k<1;k++)
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
 					console.log(symbolRecords[i].params.price+" = "+symbolRecords[j].params.price);
-					console.log(symbolRecords[j].price);
 					// console.log(symbolRecords[j]);
 					// console.log(symbolRecords[i]);
 					 deleteQuery = [deletequery,'{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }'];
