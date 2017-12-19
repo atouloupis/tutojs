@@ -13,4 +13,4 @@ var newValues =JSON.parse('{"$set": {"params" : { "size" : 20}}}');
 mongoDb.findRecords(dbName,collectionName,updateQuery,function(message){
 console.log(message);});
 
-mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});
+//mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});

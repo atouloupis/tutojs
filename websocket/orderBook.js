@@ -116,7 +116,7 @@ function deleteDouble(findSymbolRecords,callback){
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
 					count(116);
-					 deleteQuery = [deletequery,'{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }'];
+					 deleteQuery = deletequery.push('{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }');
 					}
 				}
 			}
