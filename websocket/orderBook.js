@@ -160,5 +160,5 @@ function count(line){
 
 mongoDb.count(dbName,collectionName,function(count){
 	console.log(count+"ligne : "+line);
-	}
+	});
 }
