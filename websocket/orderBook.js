@@ -53,7 +53,8 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 			count(53);
 			for (var k=0;k<2;k++)
 			{
-			
+			console.log("SYMBOL RECORD QUERY");
+			console.log(findSymbolRecords[k]);
 				// Delete doublons 
 				deleteDouble(findSymbolRecords[k],function (){
 					count(59);
