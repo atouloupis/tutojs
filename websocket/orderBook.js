@@ -102,6 +102,7 @@ function snapshotAddBid(orderBookBidArray,callback) {
 }
 
 function deleteDouble(findSymbolRecords,callback){
+	count(105);
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords,function(symbolRecords){
 		var deleteQuery=[];
 		count(107);
