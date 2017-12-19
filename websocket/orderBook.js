@@ -104,12 +104,16 @@ function snapshotAddBid(orderBookBidArray,callback) {
 function deleteDouble(findSymbolRecords,callback){
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords,function(symbolRecords){
 		var deleteQuery=[];
+		count(107);
 		for (var i=0;i<symbolRecords.length;i++)
 			{
+			count(110);
 			for (var j=i+1;j<symbolRecords.length;j++)
 				{
+				count(113);
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
+					count(116);
 					 deleteQuery = [deletequery,'{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }'];
 					}
 				}
