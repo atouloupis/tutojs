@@ -108,6 +108,7 @@ function deleteDouble(findSymbolRecords,callback){
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords,function(symbolRecords){
 		var deleteQuery=[];
 		count(107);
+		if (symbolRecords.length<1) callback();
 		for (var i=0;i<symbolRecords.length;i++)
 			{
 			count(110);
@@ -121,7 +122,7 @@ function deleteDouble(findSymbolRecords,callback){
 					}
 				}
 			}
-		if (deleteQuery.length<1) callback();
+			
 		for (var i=0;i<deleteQuery.length;i++)
 		{
 			count(91);
