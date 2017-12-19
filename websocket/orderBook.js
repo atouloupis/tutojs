@@ -16,7 +16,7 @@ http.listen(port, function(){
 module.exports.updateOrderBook = updateOrderBook;
 
 
-function updateOrderBook(orderBookFrame, method)
+function updateOrderBook(orderBookFrame, method,callback)
 {
 var dbName = "orderBook";
 var collectionName = "orderBookFrame";
@@ -164,6 +164,7 @@ mongoDb.count(dbName,collectionName,function(count){
 	console.log(count+"ligne : "+line);
 	});
 }
+callback();
 }
 
 

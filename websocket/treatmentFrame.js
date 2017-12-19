@@ -26,6 +26,6 @@ function splitFrame (jsonFrame){
 	if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook")
 	{
 	var activeOrderParams = jsonFrame.params;
-	orderBook.updateOrderBook(activeOrderParams, jsonFrame.method);
+	orderBook.updateOrderBook(activeOrderParams, jsonFrame.method,function(){});
 	}
 };
