@@ -16,7 +16,7 @@ http.listen(port, function(){
 module.exports.updateOrderBook = updateOrderBook;
 
 
-function updateOrderBook(orderBookFrame, method,callback)
+function updateOrderBook(orderBookFrame, method,callbackMain)
 {
 	var dbName = "orderBook";
 	var collectionName = "orderBookFrame";
@@ -35,11 +35,14 @@ function updateOrderBook(orderBookFrame, method,callback)
 				//D�coupe de ask et enregistrement
 				var orderBookAskArray=orderBookFrame.ask;	
 				//Appel de la fonction d'ajout des ASK à partir d'un snapshot
-				snapshotAddAsk(orderBookAskArray,function(){});
+				snapshotAddAsk(orderBookAskArray,function(){
 				//D�coupe de bid et enregistrement
 				var orderBookBidArray=orderBookFrame.bid;
 				//Appel de la fonction d'ajout des BID à partir d'un snapshot
-				snapshotAddBid(orderBookBidArray,function(){});
+				snapshotAddBid(orderBookBidArray,function(){
+				callbackMain();
+				});	
+				});
 			});
 		}	
 		else {
@@ -48,9 +51,12 @@ function updateOrderBook(orderBookFrame, method,callback)
 			/////////////////////////////Pour les Bid/ask ////////////////
 			for (var k=0;k<1;k++)
 			{
+			console.log("K ="+k);
 				// Delete doublons 
 				deleteDouble(findSymbolRecords[k],function (){
-					insertOrReplace(findSymbolRecords[k],function(){});
+					insertOrReplace(findSymbolRecords[k],function(){
+						if (k==1)callbackMain();
+					});
 				});
 			}
 		}
