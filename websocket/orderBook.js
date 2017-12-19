@@ -48,15 +48,15 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 		}	
 		else {
 			// R�cup�rer donn�es dans Mongo
-			var findSymbolRecords = JSON.parse('[{ "symbol" : "'+symbol+'", "way" : "bid"},{ "symbol" : "'+symbol+'", "way" : "ask"}]');
+			var findSymbolRecords = ['{ "symbol" : "'+symbol+'", "way" : "bid"}','{ "symbol" : "'+symbol+'", "way" : "ask"}'];
 			/////////////////////////////Pour les Bid/ask ////////////////
 			count(53);
 			for (var k=0;k<2;k++)
 			{
 				// Delete doublons 
-				deleteDouble(findSymbolRecords[k],function (){
+				deleteDouble(JSON.parse(findSymbolRecords[k]),function (){
 					count(59);
-					insertOrReplace(findSymbolRecords[k],function(){
+					insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
 						if (k==1)
 						{
 						count(63);
@@ -181,6 +181,7 @@ function sendToWeb(){
 			else 
 				{ask.push(message[i].params.price);}
 		}
+		console.log("BID");
 		console.log(bid);
 		io.emit('bid message',bid.toString());
 		io.emit('ask message', ask.toString());
