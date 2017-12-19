@@ -58,21 +58,20 @@ if (method=="snapshotOrderbook")
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "bid", "params" : ' + bidPriceSize +' }');
 		//console.log(objAdd);
 		count(60);
-		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
+		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(62);
+		if (i==orderBookFrame.bid.length-1)callback("terminé");
+		});
 		}
 	});
 	}	
 else {
-
-
 // R�cup�rer donn�es dans Mongo
 	var findSymbolRecords = JSON.parse('[{ "symbol" : "'+symbol+'", "way" : "bid"},{ "symbol" : "'+symbol+'", "way" : "ask"}]');
 	// console.log("LENGTH :" +findSymbolRecords.length);
 	 // console.log("LENGTH :" +JSON.stringify(findSymbolRecords[0]));
 	 // console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
-/////////////////////////////Pour les Bid ////////////////
-
+/////////////////////////////Pour les Bid/ask ////////////////
 for (var k=0;k<1;k++)
 	{
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[k],function(symbolRecords){
@@ -126,6 +125,7 @@ for (var k=0;k<1;k++)
 					 count(114);
 					mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){
 					count(116);
+					callback("terminé");
 					//console.log("updated");
 					});
 					}
@@ -137,10 +137,12 @@ for (var k=0;k<1;k++)
 					count(125);
 					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){
 					count(127);
+					callback("terminé");
 					//console.log("newEntryOK");
 					});
 					}
 				}
+				else callback("terminé");
 			}
 		});
 		});
@@ -174,7 +176,6 @@ mongoDb.count(dbName,collectionName,function(count){
 	console.log(count+"ligne : "+line);
 	});
 }
-callback("terminé");
 }
 
 
