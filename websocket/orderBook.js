@@ -73,9 +73,9 @@ else {
 	 // console.log("LENGTH :" +JSON.stringify(findSymbolRecords[1]));
 /////////////////////////////Pour les Bid ////////////////
 
-for (var i=0;i<1;i++)
+for (var k=0;k<1;k++)
 	{
-	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
+	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[k],function(symbolRecords){
 		// Delete doublons 
 		var deleteQuery=[];
 		for (var i=0;i<symbolRecords.length;i++)
@@ -102,8 +102,8 @@ for (var i=0;i<1;i++)
 			count(94);
 			});
 		}
-	}
-	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
+	
+	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[k],function(symbolRecords){
 		for (var i=0;i<symbolRecords.length;i++)
 		{
 			// Chercher si prix existe d�j�	
@@ -141,6 +141,14 @@ for (var i=0;i<1;i++)
 					}
 				}
 			}
+		});
+		});
+	}
+
+	}
+	
+
+});
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 	console.log(message.length);
 	var bid = [];
@@ -157,11 +165,6 @@ mongoDb.findRecords(dbName,collectionName,"",function(message){
 	io.emit('bid message',bid.toString());
 	io.emit('ask message', ask.toString());
 		//socket.broadcast.emit('message',message);
-
-});
-		});
-	}
-}	
 
 });
 function count(line){
