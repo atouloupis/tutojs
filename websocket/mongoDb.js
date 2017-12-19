@@ -97,10 +97,9 @@ var url = "mongodb://localhost:27017/"+dbName;
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbase = db.db(dbName);
-  console.log(db);
+
 dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err, result) {
   if (err) throw err;
-    console.log(result);
 	callback (result);
   db.close();
  });

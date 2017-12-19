@@ -41,7 +41,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				//Appel de la fonction d'ajout des BID à partir d'un snapshot
 				snapshotAddBid(orderBookBidArray,function(){
 				sendToWeb();
-				callbackMain();
+				callbackMain("FINISH1");
 				});	
 				});
 			});
@@ -53,8 +53,6 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 			count(53);
 			for (var k=0;k<2;k++)
 			{
-			console.log("SYMBOL RECORD QUERY");
-			console.log(findSymbolRecords[k]);
 				// Delete doublons 
 				deleteDouble(findSymbolRecords[k],function (){
 					count(59);
@@ -63,7 +61,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 						{
 						count(63);
 						sendToWeb();
-						callbackMain();
+						callbackMain("FINISH2");
 						}
 					});
 				});
