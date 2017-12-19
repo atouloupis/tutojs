@@ -77,6 +77,7 @@ function count(line){
 	}
 
 function snapshotAddAsk(orderBookAskArray,callback) {
+	if (orderBookAskArray.length<1) callback();
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
@@ -89,6 +90,7 @@ function snapshotAddAsk(orderBookAskArray,callback) {
 		}
 }
 function snapshotAddBid(orderBookBidArray,callback) {
+	if (orderBookBidArray.length<1) callback();
 	for (var i=0;i<orderBookBidArray.length;i++)
 		{
 		var bidPriceSize=JSON.stringify(orderBookBidArray[i]);
@@ -119,6 +121,7 @@ function deleteDouble(findSymbolRecords,callback){
 					}
 				}
 			}
+		if (deleteQuery.length<1) callback();
 		for (var i=0;i<deleteQuery.length;i++)
 		{
 			count(91);
@@ -132,6 +135,7 @@ function deleteDouble(findSymbolRecords,callback){
 
 function insertOrReplace(findSymbolRecords,callback){
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords,function(symbolRecords){
+		if (symbolRecords.length<1) callback();
 		for (var i=0;i<symbolRecords.length;i++)
 		{
 			// Chercher si prix existe d�j�	
