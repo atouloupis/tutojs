@@ -60,7 +60,7 @@ if (method=="snapshotOrderbook")
 		count(60);
 		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(62);
-		if (i==orderBookFrame.bid.length-1)callback("terminé");
+		if (i==orderBookFrame.bid.length-1)callback("terminé1");
 		});
 		}
 	});
@@ -124,7 +124,7 @@ for (var k=0;k<1;k++)
 					 count(114);
 					mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){
 					count(116);
-					callback("terminé");
+					callback("terminé2");
 					//console.log("updated");
 					});
 					}
@@ -136,12 +136,12 @@ for (var k=0;k<1;k++)
 					count(125);
 					mongoDb.insertCollection(dbName,collectionName,newEntryQuery,function(){
 					count(127);
-					callback("terminé");
+					callback("terminé3");
 					//console.log("newEntryOK");
 					});
 					}
 				}
-				else callback("terminé");
+				else callback("terminé4");
 			}
 		});
 		});
