@@ -6,11 +6,20 @@ var collectionName = "orderBookFrame";
 //mongoDb.deleteRecords(dbName,collectionName,JSON.parse('{ "symbol" : "BTGETH" }'),function(){});
 var objAdd=JSON.parse('{ "symbol" : "BTGETH", "way" : "ask", "params" : {"size":10, "price" : 123456} }')
 //mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
-var updateQuery = { _id: new mongo.ObjectID("5a3814a2e2a0622ed39b8d48")};
+//var updateQuery = { _id: new mongo.ObjectID("5a3814a2e2a0622ed39b8d48")};
 //var updateQuery= JSON.parse('{ "_id" :"' + o_id + '"}');
 var newValues =JSON.parse('{"$set": {"params" : { "size" : 20}}}');
 
-mongoDb.findRecords(dbName,collectionName,updateQuery,function(message){
+var findSymbolRecords = ['{ "symbol" : "'+symbol+'", "way" : "bid"}','{ "symbol" : "'+symbol+'", "way" : "ask"}'];
+
+for (i=0;i<findSymbolRecords.length;i++)
+{
+mongoDb.findRecords(dbName,collectionName,JSON.parse(findSymbolRecords[i]),function(message){
 console.log(message);});
+}
+
+
+// mongoDb.findRecords(dbName,collectionName,updateQuery,function(message){
+// console.log(message);});
 
 //mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});
