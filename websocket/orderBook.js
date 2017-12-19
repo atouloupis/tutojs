@@ -48,7 +48,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 		}	
 		else {
 			// R�cup�rer donn�es dans Mongo
-			var findSymbolRecords = ['{ "symbol" : "'+symbol+'", "way" : "bid"}','{ "symbol" : "'+symbol+'", "way" : "ask"}'];
+			var findSymbolRecords = ['{ "symbol" : "'+symbol+'", "way" : "ask"}','{ "symbol" : "'+symbol+'", "way" : "bid"}'];
 			/////////////////////////////Pour les Bid/ask ////////////////
 			count(53);
 			for (var k=0;k<2;k++)
