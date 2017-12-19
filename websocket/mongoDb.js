@@ -101,6 +101,8 @@ MongoClient.connect(url, function(err, db) {
 
 dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err, result) {
   if (err) throw err;
+  console.log("RESULTA");
+  console.log(result);
 	callback (result);
   db.close();
  });
