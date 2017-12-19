@@ -77,32 +77,35 @@ for (var i=0;i<1;i++)
 	{
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
 		// Delete doublons 
-		
+		var deleteQuery=[];
 		for (var i=0;i<symbolRecords.length;i++)
 			{
 			for (var j=i+1;j<symbolRecords.length;j++)
 				{
-				setTimeout(function(){
 				console.log(symbolRecords[i].params.price+" = "+symbolRecords[j].params.price);
-				}, 2000);
 				
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
-					setTimeout(function(){
-				console.log("OUI");
-				}, 2000);
 					
 					// console.log(symbolRecords[j]);
 					// console.log(symbolRecords[i]);
-					 var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
+					 deleteQuery = [deletequery,'{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }'];
 					 //console.log("doublon delete" + deleteQuery);
-					 count(91);
-					 mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery),function(){
-					//console.log("DELETED line 84");
-					count(94);
-					});
 					}
 				}
+			}
+		for (var i=0;i<deleteQuery.length;i++)
+		{
+			count(91);
+			mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery[i]),function(){
+			//console.log("DELETED line 84");
+			count(94);
+			});
+		}
+	}
+	mongoDb.findRecords(dbName,collectionName,findSymbolRecords[i],function(symbolRecords){
+		for (var i=0;i<symbolRecords.length;i++)
+		{
 			// Chercher si prix existe d�j�	
 			//console.log(orderBookFrame);
 			//console.log(symbolRecords[i].params.price);
@@ -167,7 +170,7 @@ mongoDb.count(dbName,collectionName,function(count){
 	console.log(count+"ligne : "+line);
 	});
 }
-callback();
+callback("terminé");
 }
 
 
