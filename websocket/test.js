@@ -10,7 +10,7 @@ var objAdd=JSON.parse('{ "symbol" : "BTGETH", "way" : "ask", "params" : {"size":
 //var updateQuery= JSON.parse('{ "_id" :"' + o_id + '"}');
 var newValues =JSON.parse('{"$set": {"params" : { "size" : 20}}}');
 
-var findSymbolRecords = ['{ "symbol" : "'+symbol+'", "way" : "bid"}','{ "symbol" : "'+symbol+'", "way" : "ask"}'];
+var findSymbolRecords = ['{ "symbol" : "BTGETH", "way" : "bid"}','{ "symbol" : "BTGETH", "way" : "ask"}'];
 
 for (i=0;i<findSymbolRecords.length;i++)
 {
