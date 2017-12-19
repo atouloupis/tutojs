@@ -45,11 +45,13 @@ if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
-
+	db.close();
+	callback();
   });
 }
-db.close();
-callback();   
+else 
+	{db.close();
+	callback();}   
 });
 });
 }

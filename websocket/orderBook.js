@@ -50,14 +50,17 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 			// R�cup�rer donn�es dans Mongo
 			var findSymbolRecords = JSON.parse('[{ "symbol" : "'+symbol+'", "way" : "bid"},{ "symbol" : "'+symbol+'", "way" : "ask"}]');
 			/////////////////////////////Pour les Bid/ask ////////////////
+			count(53);
 			for (var k=0;k<2;k++)
 			{
 			
 				// Delete doublons 
 				deleteDouble(findSymbolRecords[k],function (){
+					count(59);
 					insertOrReplace(findSymbolRecords[k],function(){
 						if (k==1)
 						{
+						count(63);
 						sendToWeb();
 						callbackMain();
 						}
