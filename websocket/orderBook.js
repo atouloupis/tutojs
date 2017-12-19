@@ -82,8 +82,13 @@ for (var i=0;i<1;i++)
 			{
 			for (var j=i+1;j<symbolRecords.length;j++)
 				{
+				setTimeout(function(){
+				console.log(symbolRecords[i].params.price+" = "+symbolRecords[j].params.price);
+				}, 2000);
+				
 				if(symbolRecords[i].params.price == symbolRecords[j].params.price)
 					{
+					console.log("OUI");
 					// console.log(symbolRecords[j]);
 					// console.log(symbolRecords[i]);
 					 var deleteQuery = '{ "symbol" : "'+symbol+'", "_id" : "' + symbolRecords[j]._id + '" }';
