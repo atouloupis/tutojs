@@ -32,15 +32,10 @@ MongoClient.connect(url, function(err, db) {
 
 dbase.listCollections().toArray(function(err, collections){
 	if (err) throw err;
-	//console.log("Collection name "+collections.length);
-    //console.log("Collection name  "+collectionName);
 	for (var i=0;i<collections.length;i++)
-		{//console.log("Collection name  "+collections[i].name);
+		{
 		if (collections[i].name==collectionName) k++;
-		//console.log("Collection name K "+k);
 		}
-
-  //console.log("k : "+k);
 if (k==0){
   dbase.createCollection(collectionName, function(err, res) {
     if (err) throw err;
@@ -88,29 +83,24 @@ dbase.collection(collectioName).deleteMany(query, function(err, obj) {
   if (err) throw err;
   //console.log("documents deleted");
    callback();
-	});
- db.close();
+	db.close();
+   });
 });
 
 }
 
 function find(dbName,collectionName,query,callback)
 {
-
+console.log(query);
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"+dbName;
-//console.log("ENTER FIND : "+dbName+collectionName);
 MongoClient.connect(url, function(err, db) {
-//  console.log("INSIDE FIND : "+err);
-//  console.log(db);
   if (err) throw err;
   var dbase = db.db(dbName);
-//console.log("TRY REQUEST FIND");
+  console.log(db);
 dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err, result) {
-	//console.log(err);
   if (err) throw err;
-  //console.log("1 document found");
-  //console.log(result);
+    console.log(result);
 	callback (result);
   db.close();
  });
@@ -152,13 +142,3 @@ dbase.collection(collectionName).count(function(err, res) {
   
 });
 }
-
-// function createMongoDb(name)
-// {
-
-// }
-
-// function createMongoDb(name)
-// {
-
-// }
