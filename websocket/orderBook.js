@@ -101,7 +101,7 @@ for (var i=0;i<1;i++)
 					var updateQuery = { _id: new mongo.ObjectID(symbolRecords[i]._id)};
 					console.log("UPDATE QUERY");
 					 //console.log(updateQuery);
-					mongoDb.updateCollection(dbName,collectionName,JSON.parse(updateQuery), newValues,function(){
+					mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){
 					console.log("updated");});
 					}
 				// si non cr�er une nouvelle entr�e
