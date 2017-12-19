@@ -40,6 +40,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				var orderBookBidArray=orderBookFrame.bid;
 				//Appel de la fonction d'ajout des BID à partir d'un snapshot
 				snapshotAddBid(orderBookBidArray,function(){
+				sendToWeb();
 				callbackMain();
 				});	
 				});
@@ -51,34 +52,24 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 			/////////////////////////////Pour les Bid/ask ////////////////
 			for (var k=0;k<2;k++)
 			{
-			console.log("K ="+k);
+			
 				// Delete doublons 
 				deleteDouble(findSymbolRecords[k],function (){
 					insertOrReplace(findSymbolRecords[k],function(){
-						if (k==1)callbackMain();
+						if (k==1)
+						{
+						sendToWeb();
+						callbackMain();
+						}
 					});
 				});
 			}
 		}
 	});
-	mongoDb.findRecords(dbName,collectionName,"",function(message){
-		console.log(message.length);
-		var bid = [];
-		var ask =[];
-		for (var i=0;i<message.length;i++)
-		{
-			if (message[i].way == "bid")
-				{bid.push(message[i].params.price);}
-			else 
-				{ask.push(message[i].params.price);}
-		}
-		io.emit('bid message',bid.toString());
-		io.emit('ask message', ask.toString());
-
-	});
-	function count(line){
+	
+function count(line){
 		mongoDb.count(dbName,collectionName,function(count){
-			console.log(count+"ligne : "+line);
+			//console.log(count+"ligne : "+line);
 		});
 	}
 
@@ -165,6 +156,25 @@ function insertOrReplace(findSymbolRecords,callback){
 				else callback();
 			}
 		});
+}
+
+function sendToWeb(){
+	mongoDb.findRecords(dbName,collectionName,"",function(message){
+		console.log(message.length);
+		var bid = [];
+		var ask =[];
+		for (var i=0;i<message.length;i++)
+		{
+			if (message[i].way == "bid")
+				{bid.push(message[i].params.price);}
+			else 
+				{ask.push(message[i].params.price);}
+		}
+		console.log(bid);
+		io.emit('bid message',bid.toString());
+		io.emit('ask message', ask.toString());
+
+	});
 }
 
 }
