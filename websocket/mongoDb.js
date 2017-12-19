@@ -111,9 +111,9 @@ dbase.collection(collectionName).find(query).sort({_id:-1}).toArray(function(err
   if (err) throw err;
   //console.log("1 document found");
   //console.log(result);
- callback (result);
-	});
+	callback (result);
   db.close();
+ });
 });
 }
 
