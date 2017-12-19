@@ -83,7 +83,7 @@ MongoClient.connect(url, function(err, db) {
 
 dbase.collection(collectioName).deleteMany(query, function(err, obj) {
   if (err) throw err;
-  console.log("documents deleted");
+  //console.log("documents deleted");
    callback();
 	});
  db.close();
@@ -124,7 +124,7 @@ MongoClient.connect(url, function(err, db) {
   var dbase = db.db(dbName);
 dbase.collection(collectionName).updateOne(query, newValues, function(err, res) {
   if (err) throw err;
-  console.log("1 document updated");
+  //console.log("1 document updated");
   db.close();
   callback();
 	});
