@@ -38,6 +38,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				snapshotAddAsk(orderBookAskArray,function(){
 				//D�coupe de bid et enregistrement
 				var orderBookBidArray=orderBookFrame.bid;
+				console.log(orderBookBidArray);
 				//Appel de la fonction d'ajout des BID à partir d'un snapshot
 				snapshotAddBid(orderBookBidArray,function(){
 				sendToWeb();
@@ -108,7 +109,7 @@ function deleteDouble(findSymbolRecords,callback){
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords,function(symbolRecords){
 		var deleteQuery=[];
 		count(107);
-		if (symbolRecords.length==0) callback("Lenght = 0"+findSymbolRecords);
+		if (symbolRecords.length==0) callback("Lenght = 0"+JSON.stringify(findSymbolRecords));
 		for (var i=0;i<symbolRecords.length;i++)
 			{
 			count(110);
