@@ -35,10 +35,10 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				//D�coupe de ask et enregistrement
 				var orderBookAskArray=orderBookFrame.ask;	
 				//Appel de la fonction d'ajout des ASK à partir d'un snapshot
-				snapshotAddAsk(orderBookAskArray,function(){
+				snapshotAddAsk(orderBookAskArray,function(log){
 				//D�coupe de bid et enregistrement
 				var orderBookBidArray=orderBookFrame.bid;
-				console.log(orderBookBidArray);
+				console.log(log);
 				//Appel de la fonction d'ajout des BID à partir d'un snapshot
 				snapshotAddBid(orderBookBidArray,function(){
 				sendToWeb();
@@ -78,7 +78,7 @@ function count(line){
 	}
 
 function snapshotAddAsk(orderBookAskArray,callback) {
-	if (orderBookAskArray.length<1) callback();
+	if (orderBookAskArray.length<1) callback("snapshotFinish2");
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
@@ -86,7 +86,11 @@ function snapshotAddAsk(orderBookAskArray,callback) {
 		count(48);
 		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(50);
-		if (i==orderBookAskArray.length-1)callback();
+		if (i==orderBookAskArray.length-1)
+			{
+			count(666);
+			callback("snapshotFinish2");
+			}
 		});
 		}
 }
