@@ -79,7 +79,7 @@ function count(line){
 
 function snapshotAddAsk(orderBookAskArray,callback) {
 	if (orderBookAskArray.length<1) callback("snapshotFinish1");
-	for (var counterAsk=0;counterAsk<orderBookAskArray.length || function(){callback("callback comma operator"; }(), false;counterAsk++)
+	for (var counterAsk=0;counterAsk<orderBookAskArray.length || function(){callback("callback comma operator";) }(), false;counterAsk++)
 		{
 		var askPriceSize=JSON.stringify(orderBookAskArray[counterAsk]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');;
