@@ -86,7 +86,7 @@ function snapshotAddAsk(orderBookAskArray,callback) {
 		count(48);
 		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(50);
-		console.log("orderbookarray.length"+orderBookAskArray.length);
+		console.log("i"+i);
 		if (i==orderBookAskArray.length-1)
 			{
 			count(666);
