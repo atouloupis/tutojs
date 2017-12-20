@@ -54,16 +54,16 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 			for (var k=0;k<2;k++)
 			{
 				// Delete doublons 
-				deleteDouble(JSON.parse(findSymbolRecords[k]),function (){
+				deleteDouble(JSON.parse(findSymbolRecords[k]),function (log){
 					count(59);
-					console.log("END OF DELETEDOUBLE");
+					console.log(log);
 					// insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
-						// if (k==1)
-						// {
+						 if (k==1)
+						 {
 						// count(63);
 						// sendToWeb();
-						// callbackMain("FINISH2");
-						// }
+						callbackMain("FINISH2");
+						 }
 					// });
 				});
 			}
@@ -108,7 +108,7 @@ function deleteDouble(findSymbolRecords,callback){
 	mongoDb.findRecords(dbName,collectionName,findSymbolRecords,function(symbolRecords){
 		var deleteQuery=[];
 		count(107);
-		if (symbolRecords.length<1) callback();
+		if (symbolRecords.length==0) callback("Lenght = 0"+findSymbolRecords);
 		for (var i=0;i<symbolRecords.length;i++)
 			{
 			count(110);
@@ -127,7 +127,7 @@ function deleteDouble(findSymbolRecords,callback){
 		{
 			count(91);
 			mongoDb.deleteRecords(dbName,collectionName,JSON.parse(deleteQuery[i]),function(){
-			if (i==deleteQuery.length-1)callback();
+			if (i==deleteQuery.length-1)callback("End of loop deleteQuery : " + deleteQuery.length);
 			count(94);
 			});
 		}
