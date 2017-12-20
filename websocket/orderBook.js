@@ -56,15 +56,15 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				// Delete doublons 
 				deleteDouble(JSON.parse(findSymbolRecords[k]),function (){
 					count(59);
-					console.log(JSON.parse(findSymbolRecords[k]));
-					insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
-						if (k==1)
-						{
-						count(63);
-						sendToWeb();
-						callbackMain("FINISH2");
-						}
-					});
+					console.log("END OF DELETEDOUBLE");
+					// insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
+						// if (k==1)
+						// {
+						// count(63);
+						// sendToWeb();
+						// callbackMain("FINISH2");
+						// }
+					// });
 				});
 			}
 		}
