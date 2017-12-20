@@ -79,15 +79,16 @@ function count(line){
 
 function snapshotAddAsk(orderBookAskArray,callback) {
 	if (orderBookAskArray.length<1) callback("snapshotFinish1");
-	for (var i=0;i<orderBookAskArray.length;i++)
+	for (var counterAsk=0;counterAsk<orderBookAskArray.length;counterAsk++)
 		{
-		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
+		var askPriceSize=JSON.stringify(orderBookAskArray[counterAsk]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');;
 		count(48);
+		console.log("counter beforInsert"+counterAsk);
 		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(50);
-		console.log("i"+i);
-		if (i==orderBookAskArray.length-1)
+		console.log("counter afterInsert"+counterAsk);
+		if (counterAsk==orderBookAskArray.length-1)
 			{
 			count(666);
 			callback("snapshotFinish2");
