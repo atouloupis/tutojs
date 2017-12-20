@@ -78,7 +78,7 @@ function count(line){
 	}
 
 function snapshotAddAsk(orderBookAskArray,callback) {
-	if (orderBookAskArray.length<1) callback("snapshotFinish2");
+	if (orderBookAskArray.length<1) callback("snapshotFinish1");
 	for (var i=0;i<orderBookAskArray.length;i++)
 		{
 		var askPriceSize=JSON.stringify(orderBookAskArray[i]);
@@ -86,6 +86,7 @@ function snapshotAddAsk(orderBookAskArray,callback) {
 		count(48);
 		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(50);
+		console.log("orderbookarray.length"+orderBookAskArray.length);
 		if (i==orderBookAskArray.length-1)
 			{
 			count(666);
