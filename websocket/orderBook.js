@@ -38,7 +38,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				snapshotAddAsk(orderBookAskArray,function(log){
 				//D�coupe de bid et enregistrement
 				var orderBookBidArray=orderBookFrame.bid;
-				console.log(log);
+				console.log("log if = "+log);
 				//Appel de la fonction d'ajout des BID à partir d'un snapshot
 				snapshotAddBid(orderBookBidArray,function(){
 				sendToWeb();
@@ -57,7 +57,7 @@ function updateOrderBook(orderBookFrame, method,callbackMain)
 				// Delete doublons 
 				deleteDouble(JSON.parse(findSymbolRecords[k]),function (log){
 					count(59);
-					console.log(log);
+					console.log("log else = "+log);
 					// insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
 						 if (k==1)
 						 {
@@ -84,7 +84,7 @@ function snapshotAddAsk(orderBookAskArray,callback) {
 		var askPriceSize=JSON.stringify(orderBookAskArray[counterAsk]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');;
 		count(48);
-		console.log("counter beforInsert"+counterAsk);
+		//console.log("counter beforInsert"+counterAsk);
 		mongoDb.insertCollection(dbName,collectionName,objAdd,function(){
 		count(50);
 		console.log("counter afterInsert"+counterAsk+"oderbookask"+orderBookAskArray.length-1);
@@ -181,7 +181,7 @@ function insertOrReplace(findSymbolRecords,callback){
 
 function sendToWeb(){
 	mongoDb.findRecords(dbName,collectionName,"",function(message){
-		console.log(message.length);
+		console.log("message_size= "+ message.length);
 		var bid = [];
 		var ask =[];
 		for (var i=0;i<message.length;i++)
