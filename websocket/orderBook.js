@@ -79,8 +79,8 @@ function count(line){
 
 function snapshotAddAsk(orderBookAskArray,callback) {
 	if (orderBookAskArray.length<1) callback("snapshotFinish1");
-	for (var counterAsk=0;counterAsk<orderBookAskArray.length || function(){callback("callback comma operator"); return false;}();counterAsk++)
-		{
+	for (var counterAsk=0;counterAsk<orderBookAskArray.length;counterAsk++)
+		 (function(counterAsk) {
 		var askPriceSize=JSON.stringify(orderBookAskArray[counterAsk]);
 		var objAdd = JSON.parse('{ "symbol" : "'+symbol+'", "way" : "ask", "params" : ' + askPriceSize +' }');;
 		count(48);
@@ -94,6 +94,7 @@ function snapshotAddAsk(orderBookAskArray,callback) {
 			callback("snapshotFinish2");
 			}
 		});
+		})(counterAsk);
 		}
 }
 function snapshotAddBid(orderBookBidArray,callback) {
