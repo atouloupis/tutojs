@@ -132,6 +132,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     var orderBookFrameBidSize = orderBookFrame.bid[0].size;
                     if (symbolRecords[i].params.price == orderBookFrame.bid[0].price) {
                         // si oui remplacer size
+						
                         var newValues = JSON.parse('{ "$set": {"params" : { "size" : ' + orderBookFrame.bid[0].size + '}}}');
                         var updateQuery = {
                             _id: new mongo.ObjectID(symbolRecords[i]._id)
@@ -144,7 +145,18 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     }
                     // si non cr�er une nouvelle entr�e
                     else {
-                        var newEntryQuery = JSON.parse('{ "symbol" : "' + symbol + '", "way" : "bid", "params" : { "price" : "' + orderBookFrameBidPrice + '", "size" : "' + orderBookFrameBidSize + '"}}');
+                        var newEntryQuery = []; 
+						
+						newEntryQuery.push({ 
+						symbol:symbol,
+						way : "bid", 
+						params : 
+							{ 
+							price : orderBookFrameBidPrice, 
+							size : orderBookFrameBidSize,
+							}
+						});
+						
                         count(125);
                         mongoDb.insertCollection(collectionName, newEntryQuery, function() {
                             count(127);
