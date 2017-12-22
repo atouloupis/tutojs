@@ -33,12 +33,12 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             // R�cup�rer donn�es dans Mongo
 
             /////////////////////////////Pour les Bid/ask ////////////////
-                    count(42);
-                    insertOrReplace(orderBookFrame,function(){
-                        count(63);
-                        sendToWeb();
-                        callbackMain("FINISH2");
-               });
+            count(42);
+            insertOrReplace(orderBookFrame, function() {
+                count(63);
+                sendToWeb();
+                callbackMain("FINISH2");
+            });
         }
     });
 
@@ -50,92 +50,90 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
     function snapshotAddAsk(orderBookAskArray, callback) {
         if (orderBookAskArray.length < 1) callback("snapshotFinish1");
-        var objAdd=[];
-		for (var i = 0; i < orderBookAskArray.length; i++) {
-				objAdd.push({
-				symbol:symbol,
-				way:"ask",
-				params:orderBookAskArray[i]
-				});
-        }				
+        var objAdd = [];
+        for (var i = 0; i < orderBookAskArray.length; i++) {
+            objAdd.push({
+                symbol: symbol,
+                way: "ask",
+                params: orderBookAskArray[i]
+            });
+        }
         count(72);
 
         mongoDb.insertCollection(collectionName, objAdd, function() {
             count(75);
             callback("snapshotFinish2");
-            });
+        });
 
     }
 
     function snapshotAddBid(orderBookBidArray, callback) {
         if (orderBookBidArray.length < 1) callback();
-		var objAdd=[];
+        var objAdd = [];
         for (var i = 0; i < orderBookBidArray.length; i++) {
-				objAdd.push({
-				symbol:symbol,
-				way:"bid",
-				params:orderBookBidArray[i]
-				});
-        }		
-            count(91);
-            mongoDb.insertCollection(collectionName, objAdd, function() {
-                count(93);
-                callback();
+            objAdd.push({
+                symbol: symbol,
+                way: "bid",
+                params: orderBookBidArray[i]
             });
+        }
+        count(91);
+        mongoDb.insertCollection(collectionName, objAdd, function() {
+            count(93);
+            callback();
+        });
     }
 
     function insertOrReplace(orderBookFrame, callback) {
 
-                if (typeof orderBookFrame.bid[0] != "undefined") {
-			var queryBid = {
-			symbol:symbol,
-			way : "bid",
-			params : 
-				{ 
-				price : orderBookFrame.bid[0].price
-				}
-			};
+        if (typeof orderBookFrame.bid[0] != "undefined") {
+            var queryBid = {
+                symbol: symbol,
+                way: "bid",
+                params: {
+                    price: orderBookFrame.bid[0].price
+                }
+            };
 
-			var newEntryBid = { 
-						symbol:symbol,
-						way : "bid", 
-						params : 
-							{ 
-							price : orderBookFrame.bid[0].price, 
-							size : orderBookFrame.bid[0].size
-							}
-						};
-                        count(140);
-                        mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
-                            count(142);							
-                        });
-                    }
-                 
-				if (typeof orderBookFrame.ask[0] != "undefined") {
-						var queryAsk = {
-						symbol:symbol,
-						way : "ask",
-						params : 
-							{ 
-							price : orderBookFrame.ask[0].price
-							}
-						};
-						var newEntryAsk = { 
-						symbol:symbol,
-						way : "ask", 
-						params : 
-							{ 
-							price : orderBookFrame.ask[0].price, 
-							size : orderBookFrame.ask[0].size
-							}
-						};
-						mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
-                            count(179);
-                        });
-					
-					}
-				callback();
-     }
+            var newEntryBid = {
+                symbol: symbol,
+                way: "bid",
+                params: {
+                    price: orderBookFrame.bid[0].price,
+                    size: orderBookFrame.bid[0].size
+                }
+            };
+			queryBid= JSON.parse(queryBid);
+			newEntryBid=JSON.parse(newEntryBid);
+            count(140);
+            mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
+                count(142);
+            });
+        }
+
+        if (typeof orderBookFrame.ask[0] != "undefined") {
+            var queryAsk = {
+                symbol: symbol,
+                way: "ask",
+                params: {
+                    price: orderBookFrame.ask[0].price
+                }
+            };
+            var newEntryAsk = {
+                symbol: symbol,
+                way: "ask",
+                params: {
+                    price: orderBookFrame.ask[0].price,
+                    size: orderBookFrame.ask[0].size
+                }
+            };
+            mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
+                count(179);
+            });
+
+        }
+        callback();
+    }
 
     function sendToWeb() {
         mongoDb.findRecords(collectionName, "", function(message) {
