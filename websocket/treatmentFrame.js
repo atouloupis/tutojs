@@ -1,14 +1,16 @@
-    mongoClient.connect(urlOrderBook, function(err, db) {
-	if (err) throw err;
-	var dbOrderBook=db.db("orderBook");
-	exports.dbase=dbOrderBook;
-	console.log(dbOrderBook);
-	module.exports.splitFrame = splitFrame;
+var mongoClient = require('mongodb').MongoClient;
+var urlOrderBook = "mongodb://localhost:27017/orderBook";
 var updtOrders = require ('./updateActiveOrders');
 var checkOrder = require ('./checkOrder');
 var orderBook = require ('./orderBook');
-var mongoClient = require('mongodb').MongoClient;
-var urlOrderBook = "mongodb://localhost:27017/orderBook";
+
+mongoClient.connect(urlOrderBook, function(err, db) {
+	if (err) throw err;
+	var dbOrderBook=db.db("orderBook");
+
+	console.log(dbOrderBook);
+	module.exports.splitFrame = splitFrame;
+	exports.dbase=dbOrderBook;
 	});
 
 
