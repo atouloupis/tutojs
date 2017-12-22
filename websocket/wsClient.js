@@ -4,6 +4,18 @@ var mongoClient = require('mongodb').MongoClient;
 var urlOrderBook = "mongodb://localhost:27017/orderBook";
 var jsonfile = require('jsonfile');
 var treatment = require('./treatmentFrame');
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
+exports.io = io;
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+http.listen(port, function() {
+    console.log('listening on *:' + port);
+});
 
 var rqstTicker = {
     "method": "subscribeTicker",

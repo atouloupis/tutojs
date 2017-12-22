@@ -1,33 +1,20 @@
 var mongoDb = require('./mongoDb');
 var mongo = require('mongodb');
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
-
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
-
-http.listen(port, function() {
-    console.log('listening on *:' + port);
-});
-
+var ioSource = require('./wsClient.js');
 module.exports.updateOrderBook = updateOrderBook;
 
 
 function updateOrderBook(orderBookFrame, method, callbackMain) {
-    var dbName = "orderBook";
     var collectionName = "orderBookFrame";
     var symbol = orderBookFrame.symbol;
     // Cr�er la collection
     count(25);
-    mongoDb.createCollection(dbName, collectionName, function() {
+    mongoDb.createCollection(collectionName, function() {
         //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
             count(31);
             deleteQuery = JSON.parse('{ "symbol" : "' + symbol + '" }');
-            mongoDb.deleteRecords(dbName, collectionName, deleteQuery, function() {
+            mongoDb.deleteRecords(collectionName, deleteQuery, function() {
                 count(36);
                 //D�couper la trame pour respecter format
                 //D�coupe de ask et enregistrement
@@ -67,7 +54,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     });
 
     function count(line) {
-        mongoDb.count(dbName, collectionName, function(count) {
+        mongoDb.count(collectionName, function(count) {
             console.log(count + "ligne : " + line);
         });
     }
@@ -80,7 +67,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 var objAdd = JSON.parse('{ "symbol" : "' + symbol + '", "way" : "ask", "params" : ' + askPriceSize + ' }');;
                 count(48);
                 //console.log("counter beforInsert"+counterAsk);
-                mongoDb.insertCollection(dbName, collectionName, objAdd, function() {
+                mongoDb.insertCollection(collectionName, objAdd, function() {
                     count(50);
                     console.log("counter afterInsert" + counterAsk + "oderbookask" + orderBookAskArray.length - 1);
                     if (counterAsk == orderBookAskArray.length - 1) {
@@ -98,7 +85,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             var bidPriceSize = JSON.stringify(orderBookBidArray[i]);
             var objAdd = JSON.parse('{ "symbol" : "' + symbol + '", "way" : "bid", "params" : ' + bidPriceSize + ' }');
             count(60);
-            mongoDb.insertCollection(dbName, collectionName, objAdd, function() {
+            mongoDb.insertCollection(collectionName, objAdd, function() {
                 count(62);
                 if (i == orderBookBidArray.length - 1) callback();
             });
@@ -107,7 +94,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
     function deleteDouble(findSymbolRecords, callback) {
         count(105);
-        mongoDb.findRecords(dbName, collectionName, findSymbolRecords, function(symbolRecords) {
+        mongoDb.findRecords(collectionName, findSymbolRecords, function(symbolRecords) {
             var deleteQuery = [];
             count(107);
             if (symbolRecords.length == 0) callback("Lenght = 0" + JSON.stringify(findSymbolRecords));
@@ -124,7 +111,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
             for (var i = 0; i < deleteQuery.length; i++) {
                 count(91);
-                mongoDb.deleteRecords(dbName, collectionName, JSON.parse(deleteQuery[i]), function() {
+                mongoDb.deleteRecords(collectionName, JSON.parse(deleteQuery[i]), function() {
                     if (i == deleteQuery.length - 1) callback("End of loop deleteQuery : " + deleteQuery.length);
                     count(94);
                 });
@@ -133,7 +120,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     }
 
     function insertOrReplace(findSymbolRecords, callback) {
-        mongoDb.findRecords(dbName, collectionName, findSymbolRecords, function(symbolRecords) {
+        mongoDb.findRecords(collectionName, findSymbolRecords, function(symbolRecords) {
             if (symbolRecords.length < 1) callback();
             for (var i = 0; i < symbolRecords.length; i++) {
                 // Chercher si prix existe d�j�	
@@ -147,7 +134,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                             _id: new mongo.ObjectID(symbolRecords[i]._id)
                         };
                         count(114);
-                        mongoDb.updateCollection(dbName, collectionName, updateQuery, newValues, function() {
+                        mongoDb.updateCollection(collectionName, updateQuery, newValues, function() {
                             count(116);
                             if (i == symbolRecords.length - 1) callback();
                         });
@@ -156,7 +143,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     else {
                         var newEntryQuery = JSON.parse('{ "symbol" : "' + symbol + '", "way" : "bid", "params" : { "price" : "' + orderBookFrameBidPrice + '", "size" : "' + orderBookFrameBidSize + '"}}');
                         count(125);
-                        mongoDb.insertCollection(dbName, collectionName, newEntryQuery, function() {
+                        mongoDb.insertCollection(collectionName, newEntryQuery, function() {
                             count(127);
                             if (i == symbolRecords.length - 1) callback();
                         });
@@ -167,7 +154,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     }
 
     function sendToWeb() {
-        mongoDb.findRecords(dbName, collectionName, "", function(message) {
+        mongoDb.findRecords(collectionName, "", function(message) {
             console.log("message_size= " + message.length);
             var bid = [];
             var ask = [];
@@ -180,8 +167,8 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             }
             console.log("BID");
             console.log(bid);
-            io.emit('bid message', bid.toString());
-            io.emit('ask message', ask.toString());
+            ioSource.io.emit('bid message', bid.toString());
+            ioSource.io.emit('ask message', ask.toString());
 
         });
     }
