@@ -21,8 +21,8 @@ function createMongoDb(dbName) {
 }
 
 function createMongoCollection(dbName, collectionName, callback) {
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/" + dbName;
+    // var MongoClient = require('mongodb').MongoClient;
+    // var url = "mongodb://localhost:27017/" + dbName;
     var k = 0;
 
     MongoClient.connect(url, function(err, db) {

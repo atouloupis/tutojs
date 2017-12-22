@@ -26,6 +26,12 @@ function splitFrame (jsonFrame){
 	if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook")
 	{
 	var activeOrderParams = jsonFrame.params;
+	var dbName = "orderBook";
+	var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/" + dbName;
+
+    MongoClient.connect(url, function(err, db) {
 	orderBook.updateOrderBook(activeOrderParams, jsonFrame.method,function(termine){console.log(termine)});
+	});
 	}
 };
