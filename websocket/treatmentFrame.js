@@ -1,21 +1,7 @@
-var mongoClient = require('mongodb').MongoClient;
-var urlOrderBook = "mongodb://localhost:27017/orderBook";
 var updtOrders = require ('./updateActiveOrders');
 var checkOrder = require ('./checkOrder');
 var orderBook = require ('./orderBook');
-
-mongoClient.connect(urlOrderBook, function(err, db) {
-	if (err) throw err;
-	var dbOrderBook=db.db("orderBook");
-
-	console.log(dbOrderBook);
-	module.exports.splitFrame = splitFrame;
-	exports.dbase=dbOrderBook;
-	});
-
-
-
-
+module.exports.splitFrame = splitFrame;
 
 function splitFrame (jsonFrame){
 	var jsonFrame = JSON.parse(jsonFrame);
