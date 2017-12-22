@@ -85,7 +85,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 				objAdd.push({
 				symbol:symbol,
 				way:"bid",
-				params:orderBookAskArray[i]
+				params:orderBookBidArray[i]
 				});
         }		
             count(60);
