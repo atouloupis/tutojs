@@ -142,9 +142,11 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             var bid = [];
             var ask = [];
             for (var i = 0; i < message.length; i++) {
+
                 if (message[i].way == "bid") {
                     bid.push(message[i].params.price);
                 } else {
+							console.log(message[i]);
                     ask.push(message[i].params.price);
                 }
             }
