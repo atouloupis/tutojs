@@ -102,7 +102,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 						params : 
 							{ 
 							price : orderBookFrame.bid[0].price, 
-							size : orderBookFrame.bid[0].size,
+							size : orderBookFrame.bid[0].size
 							}
 						};
                         count(140);
@@ -126,7 +126,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 						params : 
 							{ 
 							price : orderBookFrame.ask[0].price, 
-							size : orderBookFrame.ask[0].size,
+							size : orderBookFrame.ask[0].size
 							}
 						};
 						mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
