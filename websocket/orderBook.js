@@ -31,15 +31,22 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             });
         } else {
             // R�cup�rer donn�es dans Mongo
-            var findSymbolRecords = ['{ "symbol" : "' + symbol + '", "way" : "ask"}', '{ "symbol" : "' + symbol + '", "way" : "bid"}'];
+            var findSymbolRecords = 
+				[
+					{ 
+					symbol : symbol,
+					way : "ask"},
+					{
+					symbol : symbol,
+					way : "bid"}
+				];
             /////////////////////////////Pour les Bid/ask ////////////////
             count(38);
             for (var k = 0; k < 2; k++) {
                 // Delete doublons 
                 // deleteDouble(JSON.parse(findSymbolRecords[k]), function(log) {
                     count(42);
-                    console.log("log else = " + log);
-                    insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
+                    insertOrReplace(orderBookFrame,findSymbolRecords[k],function(){
                     if (k == 1) {
                         count(63);
                         sendToWeb();
@@ -119,7 +126,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
         });
     }
 
-    function insertOrReplace(findSymbolRecords, callback) {
+    function insertOrReplace(orderBookFrame,findSymbolRecords, callback) {
         mongoDb.findRecords(collectionName, findSymbolRecords, function(symbolRecords) {
             if (symbolRecords.length < 1) callback();
             for (var i = 0; i < symbolRecords.length; i++) {
