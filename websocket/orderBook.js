@@ -61,22 +61,23 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
     function snapshotAddAsk(orderBookAskArray, callback) {
         if (orderBookAskArray.length < 1) callback("snapshotFinish1");
-        for (var counterAsk = 0; counterAsk < orderBookAskArray.length; counterAsk++) {
-            (function(counterAsk) {
-                var askPriceSize = JSON.stringify(orderBookAskArray[counterAsk]);
-                var objAdd = JSON.parse('{ "symbol" : "' + symbol + '", "way" : "ask", "params" : ' + askPriceSize + ' }');;
-                count(48);
-                //console.log("counter beforInsert"+counterAsk);
-                mongoDb.insertCollection(collectionName, objAdd, function() {
-                    count(50);
-                    console.log("counter afterInsert" + counterAsk + "oderbookask" + orderBookAskArray.length - 1);
-                    if (counterAsk == orderBookAskArray.length - 1) {
-                        count(666);
-                        callback("snapshotFinish2");
-                    }
-                });
-            })(counterAsk);
-        }
+        var objAdd=[];
+		for (var i = 0; i < orderBookAskArray.length; i++) {
+                // var askPriceSize = JSON.stringify(orderBookAskArray[i]);
+                
+				objAdd.push({
+				symbol:symbol
+				way : "ask"
+				params : orderBookAskArray[i]
+				});
+        }				
+        count(48);
+
+        mongoDb.insertCollection(collectionName, objAdd, function() {
+            count(50);
+            callback("snapshotFinish2");
+            });
+
     }
 
     function snapshotAddBid(orderBookBidArray, callback) {
