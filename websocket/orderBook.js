@@ -8,14 +8,14 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     var collectionName = "orderBookFrame";
     var symbol = orderBookFrame.symbol;
     // Cr�er la collection
-    count(25);
+    count(11);
     mongoDb.createCollection(collectionName, function() {
         //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
-            count(31);
+            count(15);
             deleteQuery = JSON.parse('{ "symbol" : "' + symbol + '" }');
             mongoDb.deleteRecords(collectionName, deleteQuery, function() {
-                count(36);
+                count(18);
                 //D�couper la trame pour respecter format
                 //D�coupe de ask et enregistrement
                 var orderBookAskArray = orderBookFrame.ask;
@@ -35,11 +35,11 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             // R�cup�rer donn�es dans Mongo
             var findSymbolRecords = ['{ "symbol" : "' + symbol + '", "way" : "ask"}', '{ "symbol" : "' + symbol + '", "way" : "bid"}'];
             /////////////////////////////Pour les Bid/ask ////////////////
-            count(53);
+            count(38);
             for (var k = 0; k < 2; k++) {
                 // Delete doublons 
                 deleteDouble(JSON.parse(findSymbolRecords[k]), function(log) {
-                    count(59);
+                    count(42);
                     console.log("log else = " + log);
                     // insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
                     if (k == 1) {
@@ -69,10 +69,10 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 				params:orderBookAskArray[i]
 				});
         }				
-        count(48);
+        count(72);
 
         mongoDb.insertCollection(collectionName, objAdd, function() {
-            count(50);
+            count(75);
             callback("snapshotFinish2");
             });
 
@@ -88,35 +88,35 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 				params:orderBookBidArray[i]
 				});
         }		
-            count(60);
+            count(91);
             mongoDb.insertCollection(collectionName, objAdd, function() {
-                count(62);
+                count(93);
                 callback();
             });
     }
 
     function deleteDouble(findSymbolRecords, callback) {
-        count(105);
+        count(99);
         mongoDb.findRecords(collectionName, findSymbolRecords, function(symbolRecords) {
             var deleteQuery = [];
-            count(107);
+            count(102);
             if (symbolRecords.length == 0) callback("Lenght = 0" + JSON.stringify(findSymbolRecords));
             for (var i = 0; i < symbolRecords.length; i++) {
-                count(110);
+                count(105);
                 for (var j = i + 1; j < symbolRecords.length; j++) {
-                    count(113);
+                    count(107);
                     if (symbolRecords[i].params.price == symbolRecords[j].params.price) {
-                        count(116);
+                        count(109);
                         deleteQuery = deletequery.push('{ "symbol" : "' + symbol + '", "_id" : "' + symbolRecords[j]._id + '" }');
                     }
                 }
             }
 
             for (var i = 0; i < deleteQuery.length; i++) {
-                count(91);
+                count(116);
                 mongoDb.deleteRecords(collectionName, JSON.parse(deleteQuery[i]), function() {
                     if (i == deleteQuery.length - 1) callback("End of loop deleteQuery : " + deleteQuery.length);
-                    count(94);
+                    count(119);
                 });
             }
         });
@@ -137,9 +137,9 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                         var updateQuery = {
                             _id: new mongo.ObjectID(symbolRecords[i]._id)
                         };
-                        count(114);
+                        count(140);
                         mongoDb.updateCollection(collectionName, updateQuery, newValues, function() {
-                            count(116);
+                            count(142);
                             if (i == symbolRecords.length - 1) callback();
                         });
                     }
@@ -157,9 +157,9 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 							}
 						});
 						
-                        count(125);
+                        count(160);
                         mongoDb.insertCollection(collectionName, newEntryQuery, function() {
-                            count(127);
+                            count(162);
                             if (i == symbolRecords.length - 1) callback();
                         });
                     }
@@ -170,7 +170,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
     function sendToWeb() {
         mongoDb.findRecords(collectionName, "", function(message) {
-            console.log("message_size= " + message.length);
             var bid = [];
             var ask = [];
             for (var i = 0; i < message.length; i++) {
@@ -180,8 +179,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     ask.push(message[i].params.price);
                 }
             }
-            console.log("BID");
-            console.log(bid);
             ioSource.io.emit('bid message', bid.toString());
             ioSource.io.emit('ask message', ask.toString());
 

@@ -49,7 +49,6 @@ function find(collectionName, query, callback) {
         _id: -1
     }).toArray(function(err, result) {
         if (err) throw err;
-        console.log("RESULTA");
         callback(result);
     });
 }
