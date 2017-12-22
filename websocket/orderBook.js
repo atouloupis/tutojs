@@ -31,30 +31,14 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             });
         } else {
             // R�cup�rer donn�es dans Mongo
-            var findSymbolRecords = 
-				[
-					{ 
-					symbol : symbol,
-					way : "ask"},
-					{
-					symbol : symbol,
-					way : "bid"}
-				];
+
             /////////////////////////////Pour les Bid/ask ////////////////
-            count(38);
-            for (var k = 0; k < 2; k++) {
-                // Delete doublons 
-                // deleteDouble(JSON.parse(findSymbolRecords[k]), function(log) {
                     count(42);
-                    insertOrReplace(orderBookFrame,findSymbolRecords[k],function(){
-                    if (k == 1) {
+                    insertOrReplace(orderBookFrame,function(){
                         count(63);
                         sendToWeb();
                         callbackMain("FINISH2");
-                    }
-                    // });
-                });
-             }
+               });
         }
     });
 
@@ -100,54 +84,19 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             });
     }
 
-    function deleteDouble(findSymbolRecords, callback) {
-        count(99);
-        mongoDb.findRecords(collectionName, findSymbolRecords, function(symbolRecords) {
-            var deleteQuery = [];
-            count(102);
-            if (symbolRecords.length == 0) callback("Lenght = 0" + JSON.stringify(findSymbolRecords));
-            for (var i = 0; i < symbolRecords.length; i++) {
-                count(105);
-                for (var j = i + 1; j < symbolRecords.length; j++) {
-                    if (symbolRecords[i].params.price == symbolRecords[j].params.price) {
-                        count(109);
-                        deleteQuery = deletequery.push('{ "symbol" : "' + symbol + '", "_id" : "' + symbolRecords[j]._id + '" }');
-                    }
-                }
-            }
+    function insertOrReplace(orderBookFrame, callback) {
 
-            for (var i = 0; i < deleteQuery.length; i++) {
-                count(116);
-                mongoDb.deleteRecords(collectionName, JSON.parse(deleteQuery[i]), function() {
-                    if (i == deleteQuery.length - 1) callback("End of loop deleteQuery : " + deleteQuery.length);
-                    count(119);
-                });
-            }
-        });
-    }
-
-    function insertOrReplace(orderBookFrame,findSymbolRecords, callback) {
-        mongoDb.findRecords(collectionName, findSymbolRecords, function(symbolRecords) {
-            if (symbolRecords.length < 1) callback();
-            for (var i = 0; i < symbolRecords.length; i++) {
-                // Chercher si prix existe d�j�	
                 if (typeof orderBookFrame.bid[0] != "undefined") {
-                    if (symbolRecords[i].params.price == orderBookFrame.bid[0].price) {
-                        // si oui remplacer size
-						
-                        var newValues = JSON.parse('{ "$set": {"params" : { "size" : ' + orderBookFrame.bid[0].size + '}}}');
-                        var updateQuery = {
-                            _id: new mongo.ObjectID(symbolRecords[i]._id)
-                        };
-                        count(140);
-                        mongoDb.updateCollection(collectionName, updateQuery, newValues, function() {
-                            count(142);
-                            if (i == symbolRecords.length - 1) callback();
-                        });
-                    }
-                    // si non cr�er une nouvelle entr�e
-                    else {
-                        var newEntryQuery = { 
+			var queryBid = {
+			symbol:symbol,
+			way : "bid",
+			params : 
+				{ 
+				price : orderBookFrame.bid[0].price
+				}
+			}
+
+			var newEntryBid = { 
 						symbol:symbol,
 						way : "bid", 
 						params : 
@@ -156,23 +105,37 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 							size : orderBookFrame.bid[0].size,
 							}
 						};
-						var updateQuery = {
-						params :
-							{
-							price : orderBookFrame.bid[0].price
-							}
-						};
-						
-                        count(160);
-                        mongoDb.updateCollection(collectionName, updateQuery, newEntryQuery, function() {
-                            count(162);
-                            if (i == symbolRecords.length - 1) callback();
+                        count(140);
+                        mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
+                            count(142);							
                         });
                     }
-                } else callback();
-            }
-        });
-    }
+                 
+				if (typeof orderBookFrame.ask[0] != "undefined") {
+						var queryAsk = {
+						symbol:symbol,
+						way : "ask",
+						params : 
+							{ 
+							price : orderBookFrame.ask[0].price
+							}
+						}
+						var newEntryAsk = { 
+						symbol:symbol,
+						way : "ask", 
+						params : 
+							{ 
+							price : orderBookFrame.ask[0].price, 
+							size : orderBookFrame.ask[0].size,
+							}
+						};
+						mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
+                            count(179);
+                        });
+					
+					}
+				callback();
+     }
 
     function sendToWeb() {
         mongoDb.findRecords(collectionName, "", function(message) {
