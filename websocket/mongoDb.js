@@ -7,8 +7,7 @@ module.exports.updateCollection = update;
 module.exports.count = count;
 
 var mongo = require('mongodb');
-
-
+var treatmentFrame = require('./treatmentFrame.js');
 
 function createMongoDb(dbName) {
     var MongoClient = require('mongodb').MongoClient;
@@ -25,11 +24,11 @@ function createMongoCollection(dbName, collectionName, callback) {
     // var url = "mongodb://localhost:27017/" + dbName;
     var k = 0;
 
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbase = db.db(dbName);
+    //MongoClient.connect(url, function(err, db) {
+        // if (err) throw err;
+        // var dbase = db.db(dbName);
 
-        dbase.listCollections().toArray(function(err, collections) {
+        treatmentFrame.dbase.listCollections().toArray(function(err, collections) {
             if (err) throw err;
             for (var i = 0; i < collections.length; i++) {
                 if (collections[i].name == collectionName) k++;
@@ -38,15 +37,15 @@ function createMongoCollection(dbName, collectionName, callback) {
                 dbase.createCollection(collectionName, function(err, res) {
                     if (err) throw err;
                     console.log("Collection created!");
-                    db.close();
+//                    db.close();
                     callback();
                 });
             } else {
-                db.close();
+//                db.close();
                 callback();
             }
         });
-    });
+    //});
 }
 
 function insertMongoCollection(dbName, collectionName, myObj, callback) {
