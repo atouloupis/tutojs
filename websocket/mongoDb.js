@@ -30,7 +30,7 @@ function createMongoCollection(collectionName, callback) {
 }
 
 function insertMongoCollection(collectionName, myObj, callback) {
-    connectDbaseSource.dbase.collection(collectionName).insertOne(myObj, function(err, res) {
+    connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
         if (err) throw err;
         callback();
     });
