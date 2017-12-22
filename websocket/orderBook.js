@@ -38,18 +38,18 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             count(38);
             for (var k = 0; k < 2; k++) {
                 // Delete doublons 
-                deleteDouble(JSON.parse(findSymbolRecords[k]), function(log) {
+                // deleteDouble(JSON.parse(findSymbolRecords[k]), function(log) {
                     count(42);
                     console.log("log else = " + log);
-                    // insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
+                    insertOrReplace(JSON.parse(findSymbolRecords[k]),function(){
                     if (k == 1) {
-                        // count(63);
-                        // sendToWeb();
+                        count(63);
+                        sendToWeb();
                         callbackMain("FINISH2");
                     }
                     // });
                 });
-            }
+            // }
         }
     });
 
@@ -104,7 +104,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             for (var i = 0; i < symbolRecords.length; i++) {
                 count(105);
                 for (var j = i + 1; j < symbolRecords.length; j++) {
-                    count(107);
                     if (symbolRecords[i].params.price == symbolRecords[j].params.price) {
                         count(109);
                         deleteQuery = deletequery.push('{ "symbol" : "' + symbol + '", "_id" : "' + symbolRecords[j]._id + '" }');
@@ -128,8 +127,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             for (var i = 0; i < symbolRecords.length; i++) {
                 // Chercher si prix existe d�j�	
                 if (typeof orderBookFrame.bid[0] != "undefined") {
-                    var orderBookFrameBidPrice = orderBookFrame.bid[0].price;
-                    var orderBookFrameBidSize = orderBookFrame.bid[0].size;
                     if (symbolRecords[i].params.price == orderBookFrame.bid[0].price) {
                         // si oui remplacer size
 						
@@ -145,20 +142,18 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     }
                     // si non cr�er une nouvelle entr�e
                     else {
-                        var newEntryQuery = []; 
-						
-						newEntryQuery.push({ 
+                        var newEntryQuery = { 
 						symbol:symbol,
 						way : "bid", 
 						params : 
 							{ 
-							price : orderBookFrameBidPrice, 
-							size : orderBookFrameBidSize,
+							price : orderBookFrame.bid[0].price, 
+							size : orderBookFrame.bid[0].size,
 							}
-						});
+						};
 						
                         count(160);
-                        mongoDb.insertCollection(collectionName, newEntryQuery, function() {
+                        mongoDb.updateCollection(collectionName, newEntryQuery, newEntryQuery, function() {
                             count(162);
                             if (i == symbolRecords.length - 1) callback();
                         });
