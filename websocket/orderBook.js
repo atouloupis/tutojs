@@ -105,8 +105,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 }
             }
 			};
-			queryBid= JSON.parse(queryBid);
-			newEntryBid=JSON.parse(newEntryBid);
             count(140);
             mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
                 count(142);
