@@ -146,7 +146,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 if (message[i].way == "bid") {
                     bid.push(message[i].params.price);
                 } else {
-							console.log(message[i]);
                     ask.push(message[i].params.price);
                 }
             }
