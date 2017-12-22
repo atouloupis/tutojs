@@ -9,7 +9,7 @@ var dbOrderBook;
 
     mongoClient.connect(urlOrderBook, function(err, db) {
 	if (err) throw err;
-	dbOrderBook=db;
+	dbOrderBook=db.db(dbName);
 	});
 function splitFrame (jsonFrame){
 	var jsonFrame = JSON.parse(jsonFrame);
