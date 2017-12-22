@@ -94,7 +94,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 				{ 
 				price : orderBookFrame.bid[0].price
 				}
-			}
+			};
 
 			var newEntryBid = { 
 						symbol:symbol,
@@ -119,7 +119,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 							{ 
 							price : orderBookFrame.ask[0].price
 							}
-						}
+						};
 						var newEntryAsk = { 
 						symbol:symbol,
 						way : "ask", 
