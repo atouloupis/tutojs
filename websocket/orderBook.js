@@ -54,7 +54,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     }
                     // });
                 });
-            // }
+             }
         }
     });
 
