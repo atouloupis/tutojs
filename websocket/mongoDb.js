@@ -1,4 +1,3 @@
-module.exports.createMongoDb = createMongoDb;
 module.exports.createCollection = createMongoCollection;
 module.exports.insertCollection = insertMongoCollection;
 module.exports.deleteRecords = deleteMany;
