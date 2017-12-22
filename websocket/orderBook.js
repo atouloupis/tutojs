@@ -95,14 +95,16 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 }
             };
 
-            var newEntryBid = {
+            var newEntryBid = { $set:
+			{
                 symbol: symbol,
                 way: "bid",
                 params: {
                     price: orderBookFrame.bid[0].price,
                     size: orderBookFrame.bid[0].size
                 }
-            };
+            }
+			};
 			queryBid= JSON.parse(queryBid);
 			newEntryBid=JSON.parse(newEntryBid);
             count(140);
