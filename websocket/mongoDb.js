@@ -27,7 +27,7 @@ function createMongoCollection(dbName, collectionName, callback) {
     //MongoClient.connect(url, function(err, db) {
         // if (err) throw err;
         // var dbase = db.db(dbName);
-console.log(dbase);
+console.log(treatmentFrame.dbase);
         treatmentFrame.dbase.listCollections().toArray(function(err, collections) {
             if (err) throw err;
             for (var i = 0; i < collections.length; i++) {
