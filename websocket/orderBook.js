@@ -66,9 +66,9 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 // var askPriceSize = JSON.stringify(orderBookAskArray[i]);
                 
 				objAdd.push({
-				"symbol":symbol
-				"way":"ask"
-				"params":orderBookAskArray[i]
+				symbol:symbol,
+				way:"ask",
+				params:orderBookAskArray[i]
 				});
         }				
         count(48);
