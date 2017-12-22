@@ -63,8 +63,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
         if (orderBookAskArray.length < 1) callback("snapshotFinish1");
         var objAdd=[];
 		for (var i = 0; i < orderBookAskArray.length; i++) {
-                // var askPriceSize = JSON.stringify(orderBookAskArray[i]);
-                
 				objAdd.push({
 				symbol:symbol,
 				way:"ask",
@@ -82,15 +80,19 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
     function snapshotAddBid(orderBookBidArray, callback) {
         if (orderBookBidArray.length < 1) callback();
+		var objAdd=[];
         for (var i = 0; i < orderBookBidArray.length; i++) {
-            var bidPriceSize = JSON.stringify(orderBookBidArray[i]);
-            var objAdd = JSON.parse('{ "symbol" : "' + symbol + '", "way" : "bid", "params" : ' + bidPriceSize + ' }');
+				objAdd.push({
+				symbol:symbol,
+				way:"bid",
+				params:orderBookAskArray[i]
+				});
+        }		
             count(60);
             mongoDb.insertCollection(collectionName, objAdd, function() {
                 count(62);
-                if (i == orderBookBidArray.length - 1) callback();
+                callback();
             });
-        }
     }
 
     function deleteDouble(findSymbolRecords, callback) {
