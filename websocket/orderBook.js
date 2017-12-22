@@ -119,13 +119,14 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     price: orderBookFrame.ask[0].price
                 }
             };
-            var newEntryAsk = {
+            var newEntryAsk = { $set:{
                 symbol: symbol,
                 way: "ask",
                 params: {
                     price: orderBookFrame.ask[0].price,
                     size: orderBookFrame.ask[0].size
-                }
+					}
+				}
             };
             mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
                 count(179);
