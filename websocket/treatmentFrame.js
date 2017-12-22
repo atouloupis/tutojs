@@ -5,11 +5,12 @@ var checkOrder = require ('./checkOrder');
 var orderBook = require ('./orderBook');
 var mongoClient = require('mongodb').MongoClient;
 var urlOrderBook = "mongodb://localhost:27017/orderBook";
-var dbOrderBook;
+
 
     mongoClient.connect(urlOrderBook, function(err, db) {
 	if (err) throw err;
-	dbOrderBook=db.db("orderBook");
+	var dbOrderBook=db.db("orderBook");
+	console.log(dbOrderBook);
 	});
 function splitFrame (jsonFrame){
 	var jsonFrame = JSON.parse(jsonFrame);
