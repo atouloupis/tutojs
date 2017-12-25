@@ -15,18 +15,21 @@
     <body>
         <h1>MongoDB temps réel !</h1>
 
-<ul id="messages"></ul>
-<table>
+        <!--<ul id="messages"></ul>-->
+        <br>
+        <ul id="messages1"></ul>
+        <br>
+        <table>
    <tr>
        <th>Bid</th>
        <th>Ask</th>
    </tr>
    <tr>
        <td> <ul id="messages"></ul></td>
-       <td> <text id="messages">33 ans </h1></td>
+       <td> <text id="messages">33 ans </text></td>
    </tr>
 </table>
-
+        <ul id="messages"></ul>
 
 
    <form action="">
@@ -45,9 +48,20 @@
         });
         socket.on('bid message', function(msg){
           //$('#messages').append($('<li>').text(msg));
-		  $('#messages').text(msg);
+            msg.sort(function(a, b) {
+                return a - b;
+            });
+		  $('#messages').text("BID : " + msg.reverse());
           window.scrollTo(0, document.body.scrollHeight);
         });
+          socket.on('ask message', function(msg){
+              //$('#messages').append($('<li>').text(msg));
+              msg.sort(function(a, b) {
+                  return a - b;
+              });
+              $('#messages1').text("ASK : " + msg);
+              window.scrollTo(0, document.body.scrollHeight);
+          });
       });
             /* // Connexion à socket.io
             var socket = io.connect('http://localhost:3000');
@@ -63,6 +77,22 @@
             function insereMessage(message) {
                 $('#zone_chat').text('<p><strong> Message </strong> ' + message + '</p>');
             }*/
+      function createTable(tableData) {
+          var table = document.createElement('table');
+          var row = {};
+          var cell = {};
+
+          tableData.forEach(function(rowData) {
+              row = table.insertRow(-1);
+              rowData.forEach(function(cellData) {
+                  cell = row.insertCell();
+                  cell.textContent = cellData;
+              });
+          });
+          document.body.appendChild(table);
+      }
+
+      createTable([["row 1, cell 1", "row 2, cell 2"], ["row 2, cell 1", "row 2, cell 2"], ["row 3, cell 1", "row 3, cell 2"]]);
         </script>
     </body>
 </html>

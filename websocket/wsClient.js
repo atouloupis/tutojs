@@ -2,7 +2,6 @@
 
 var mongoClient = require('mongodb').MongoClient;
 var urlOrderBook = "mongodb://localhost:27017/orderBook";
-var jsonfile = require('jsonfile');
 var treatment = require('./treatmentFrame');
 var app = require('express')();
 var http = require('http').Server(app);
@@ -46,11 +45,10 @@ var rqstReport = {
 var rqstOrderBook = {
     "method": "subscribeOrderbook",
     "params": {
-        "symbol": "BTGETH"
+        "symbol": "BCHETH"
     },
     "id": 123
 };
-var file = 'data.json';
 
 var WebSocket = require('ws');
 var ws = new WebSocket("wss://api.hitbtc.com/api/2/ws");

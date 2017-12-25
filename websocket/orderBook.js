@@ -1,5 +1,4 @@
 var mongoDb = require('./mongoDb');
-var mongo = require('mongodb');
 var ioSource = require('./wsClient.js');
 module.exports.updateOrderBook = updateOrderBook;
 
@@ -8,7 +7,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     var collectionName = "orderBookFrame";
     var symbol = orderBookFrame.symbol;
     // Cr�er la collection
-    count(11);
+    //count(11);
     mongoDb.createCollection(collectionName, function() {
         //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
@@ -33,9 +32,9 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             // R�cup�rer donn�es dans Mongo
 
             /////////////////////////////Pour les Bid/ask ////////////////
-            count(42);
+      //      count(42);
             insertOrReplace(orderBookFrame, function() {
-                count(63);
+        //        count(63);
                 sendToWeb();
                 callbackMain("FINISH2");
             });
@@ -87,49 +86,22 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     function insertOrReplace(orderBookFrame, callback) {
 
         if (typeof orderBookFrame.bid[0] != "undefined") {
-            var queryBid = {
-                symbol: symbol,
-                way: "bid",
-                params: {
-                    price: orderBookFrame.bid[0].price
-                }
-            };
+            var queryBid = {symbol: symbol,way: "bid","params.price": orderBookFrame.bid[0].price};
 
-            var newEntryBid = { $set:
-			{
-                symbol: symbol,
-                way: "bid",
-                params: {
-                    price: orderBookFrame.bid[0].price,
-                    size: orderBookFrame.bid[0].size
-                }
-            }
-			};
-            count(140);
+            var newEntryBid = { $set:{symbol: symbol,way: "bid",params: {price: orderBookFrame.bid[0].price,size: orderBookFrame.bid[0].size}}};
+            //count(140);
             mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
-                count(142);
+                //count(142);
             });
         }
 
         if (typeof orderBookFrame.ask[0] != "undefined") {
-            var queryAsk = {
-                symbol: symbol,
-                way: "ask",
-                params: {
-                    price: orderBookFrame.ask[0].price
-                }
-            };
-            var newEntryAsk = { $set:{
-                symbol: symbol,
-                way: "ask",
-                params: {
-                    price: orderBookFrame.ask[0].price,
-                    size: orderBookFrame.ask[0].size
-					}
-				}
-            };
+            var queryAsk = {symbol: symbol,way: "ask","params.price": orderBookFrame.ask[0].price};
+            var newEntryAsk = {$set:{symbol: symbol,way: "ask",params: {price: orderBookFrame.ask[0].price,size: orderBookFrame.ask[0].size}}};
+            //console.log(queryAsk);
+            //console.log(newEntryAsk);
             mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
-                count(179);
+               // count(179);
             });
 
         }
@@ -137,19 +109,20 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     }
 
     function sendToWeb() {
-        mongoDb.findRecords(collectionName, "", function(message) {
+        query={symbol:symbol};
+        mongoDb.findRecords(collectionName, query, function(message) {
             var bid = [];
             var ask = [];
             for (var i = 0; i < message.length; i++) {
 
                 if (message[i].way == "bid") {
-                    bid.push(message[i].params.price);
+                    if (message[i].params.size!=0.00)bid.push(message[i].params.price);
                 } else {
-                    ask.push(message[i].params.price);
+                    if (message[i].params.size!=0.00)ask.push(message[i].params.price);
                 }
             }
-            ioSource.io.emit('bid message', bid.toString());
-            ioSource.io.emit('ask message', ask.toString());
+            ioSource.io.emit('bid message', bid);
+            ioSource.io.emit('ask message', ask);
 
         });
     }

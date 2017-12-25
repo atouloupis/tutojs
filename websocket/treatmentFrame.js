@@ -17,7 +17,6 @@ function splitFrame(jsonFrame) {
             // console.log("##########"+JSON.stringify(activeOrderParams));
             updtOrders.newActiveOrders(activeOrderParams);
             // console.log(JSON.stringify(activeOrderParams[i]));
-
         }
     }
     if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook") {
@@ -25,5 +24,6 @@ function splitFrame(jsonFrame) {
         orderBook.updateOrderBook(activeOrderParams, jsonFrame.method, function(termine) {
             console.log(termine)
         });
+
     }
 };
