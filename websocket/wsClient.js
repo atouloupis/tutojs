@@ -8,11 +8,11 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 exports.io = io;
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-http.listen(port, function() {
+http.listen(port, function () {
     console.log('listening on *:' + port);
 });
 
@@ -52,22 +52,22 @@ var rqstOrderBook = {
 
 var WebSocket = require('ws');
 var ws = new WebSocket("wss://api.hitbtc.com/api/2/ws");
+exports.ws = ws;
 
-
-mongoClient.connect(urlOrderBook, function(err, db) {
+mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
     exports.dbase = dbOrderBook;
 
-    ws.onopen = function() {
+    ws.onopen = function () {
 
         console.log("CONNECTED");
 
-        ws.onerror = function(evt) {
+        ws.onerror = function (evt) {
             // console.log("ERROR: " + evt.data);
         };
 
-        ws.onmessage = function(evt) {
+        ws.onmessage = function (evt) {
             // console.log(" RESPONSE: " + evt.data);
             treatment.splitFrame(evt.data);
         };
@@ -76,6 +76,7 @@ mongoClient.connect(urlOrderBook, function(err, db) {
             // console.log("SENT: " + JSON.stringify(message));
             ws.send(JSON.stringify(message));
         }
+
         // sendRequest(rqstTicker);
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
