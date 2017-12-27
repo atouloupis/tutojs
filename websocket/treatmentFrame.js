@@ -1,8 +1,10 @@
 var updtOrders = require('./updateActiveOrders');
+var updateTradeHistory = require('./updateTradeHistory');
 var checkOrder = require('./checkOrder');
 var orderBook = require('./orderBook');
 var mongoDb = require('./mongoDb');
-var get = require('./getRestFull')
+var api = require('./getRestFull');
+var transfer = require('./transferCoin');
 
 module.exports.splitFrame = splitFrame;
 
@@ -11,7 +13,7 @@ function splitFrame(jsonFrame) {
     var collectionName = "symbol";
     mongoDb.createCollection(collectionName, function () {
         if (date.getHours() == 0) {
-            get.getHitBTC("/api/2/symbol", function (symbol) {
+            api.getHitBTC("/api/2/symbol","GET", function (symbol) {
                 mongoDb.deleteRecords(collectionName, "", function () {
                     mongoDb.insertCollection(collectionName, symbol, function () {
                     })
@@ -23,6 +25,15 @@ function splitFrame(jsonFrame) {
         if (jsonFrame.method == "ticker") {
             //console.log(JSON.stringify(jsonFrame.params));
             checkOrder.hasAnOrder(jsonFrame);
+        }
+        if (jsonFrame.method == "snapshotTrades" | jsonFrame.method == "updateTrades") {
+            // console.log("###"+JSON.stringify(jsonFrame));
+            var tradeHistoryParams = jsonFrame.params;
+            if (tradeHistoryParams != "undefined") {
+                // console.log("##########"+JSON.stringify(activeOrderParams));
+                updateTradeHistory.newTradeHistory(tradeHistoryParams);
+                // console.log(JSON.stringify(activeOrderParams[i]));
+            }
         }
         if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
             // console.log("###"+JSON.stringify(jsonFrame));
@@ -38,7 +49,9 @@ function splitFrame(jsonFrame) {
             orderBook.updateOrderBook(activeOrderParams, jsonFrame.method, function (termine) {
                 console.log(termine)
             });
-
         }
+        if (jsonFrame.id == "tradingBalance") {
+            var tradingBalanceResult = jsonFrame.result;
+            transfer.checkCoinWithdraw(tradingBalanceResult, function () {});
     });
 }

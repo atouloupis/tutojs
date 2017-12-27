@@ -1,12 +1,12 @@
 module.exports.getHitBTC=getHitBTC;
 
 
-function getHitBTC(path,callback) {
+function getHitBTC(path,method,callback) {
     var options = {
         host: "https://api.hitbtc.com/",
         port: 80,
         path: path,
-        method: 'GET',
+        method: method,
         authorization : 'Basic ' + new Buffer('75ea4dceeb285ee86c026d62700df14f:919c86f1a996fa98ba4fc74ebb1a364d').toString('base64')
     };
 
@@ -17,3 +17,4 @@ function getHitBTC(path,callback) {
         });
     }).end();
 }
+

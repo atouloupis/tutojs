@@ -16,13 +16,14 @@ function cancelOrder(id) {
     wsConnection.ws.send(query);
 }
 
-function placeNewOrder(clientId,symbol,side,price,quantity) {
+function placeNewOrder(symbol,side,type,price,quantity) {
     var query = {
         "method": "newOrder",
         "params": {
             "clientOrderId": generateUUID(),//Required parameter. Uniqueness must be guaranteed within a single trading day, including all active orders.
             "symbol": symbol,
             "side": side,//sell or buy
+            "type": type, //Optional. Default - limit. One of: limit, market, stopLimit, stopMarket
             "price": price,
             "quantity": quantity
         },

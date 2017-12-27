@@ -49,6 +49,7 @@ var rqstOrderBook = {
     },
     "id": 123
 };
+var rqstTradingBalance = { "method": "getTradingBalance", "params": {}, "id": "tradingBalance" };
 
 var WebSocket = require('ws');
 var ws = new WebSocket("wss://api.hitbtc.com/api/2/ws");

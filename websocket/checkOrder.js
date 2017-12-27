@@ -1,9 +1,11 @@
 module.exports.hasAnOrder = hasAnOrder;
+var treatmentOnOrder=require('./treatmentOnOrder');
 var mongoDb = require('./mongoDb');
 var eligibility = require('./eligibility');
 
+
 function hasAnOrder(tickerFrame) {
-    var collectionName="activeOrders",
+    var collectionName="activeOrders";
     mongoDb.findRecords(collectionName,"",function(activeOrders){
     var k = 0;
     // console.log("#"+JSON.stringify(tickerFrame));
@@ -25,17 +27,18 @@ function activeSellOrBuy(order, ticker) {
         var diff = orderThanMarket(order, ticker, "bid");
         orderBookVolumes(order, "ask", function(volume){
         //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 5% alors vendre au prix
-        if (diff < -5) sellOrder(order);
+        if (diff < -5) {
+            treatmentOnOrder.cancelOrder(order.id);
+            treatmentOnOrder.placeOrder(order.symbol,"sell","market","",order.quantity);
+        }
         else if (ticker.params.ask > order.price) {
             //stopScript, on continue;
 
     //sinon est ce que le volume de l'orderbook ask inf+orderbook égal a mon ordre est supérieur de 10 fois la quantité de mon ordre
         } else if ((volume.inf+volume.equal)>10*order.quantity) {
         //Si oui on annule l'ordre et on appelle l'eligibilité
-            cancelOrder(order,function() {
-                eligibility.eligibilitySell(order,ticker,function(){}); //vérifier si on lance un ordre de vente sur cette monnaie
-
-            });
+            treatmentOnOrder.cancelOrder(order.id);
+            eligibility.eligibilitySell(order,ticker,function(){}); //vérifier si on lance un ordre de vente sur cette monnaie
             //Si non, on continue
         } else {}
         });
@@ -46,19 +49,16 @@ function activeSellOrBuy(order, ticker) {
         //SI diff entre notre ordre d'achat et le ticker de vente ask  inf 1% alors annuler l'ordre
         if (diff < 1)
         {
-            cancelOrder(order,function (){
+            treatmentOnOrder.cancelOrder(order.id);
                 eligibility.eligibilityBuy(ticker,function(){});//vérifier si on lance un ordre de vente sur cette monnaie
-            });
-
         }
         //Sinon est ce que le ticker d'achat bid est inférieur à mon ordre d'achat
         else if (ticker.params.bid < order.price) {}//Si oui on continue
         //Sinon est ce que le volume de l'orderbook bid inf a mon ordre est supérieur de X% au volume total
         else if ((volume.inf+volume.equal)> 10*order.quantity) {
             //Si oui on annule mon ordre
-            cancelOrder(order,function (){
+            treatmentOnOrder.cancelOrder(order.id);
                 eligibility.eligibilityBuy(ticker,function(){});//vérifier si on lance un ordre de vente sur cette monnaie
-            });
         }
         //Si non, on continue
         else {}
@@ -75,8 +75,6 @@ function orderThanMarket(order, ticker, marketSide) {
     console.log("DIFF : " + marketSide + JSON.stringify(diff));
     return diff;
 }
-
-function sellOrder(order) {} //vendre au prix
 
 function orderBookVolumes(order, marketSide, callback) {
     //volume orderbook ask devant le order sell superieur a x% du volume orderbook ask global alors cancel le order sell
@@ -105,4 +103,3 @@ function orderBookVolumes(order, marketSide, callback) {
 
 
 } //console.log("#####"+JSON.stringify(order));
-function cancelOrder(order,callback) {} //console.log("#####"+JSON.stringify(order));

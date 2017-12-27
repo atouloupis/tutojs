@@ -1,18 +1,17 @@
 module.exports.newTradeHistory = newTradeHistory;
 var mongoDb = require('./mongoDb');
-var get = require('./getRestFull')
+var api = require('./getRestFull')
 
 function newTradeHistory(frame) {
     var date = new Date;
     var collectionName = "tradeHistory";
     mongoDb.createCollection(collectionName, function () {
-
         if (date.getHours()==0)
         {
-            get.getHitBTC("/api/2/history/trades",function(tradesHistory){
+            api.getHitBTC("/api/2/history/trades","GET",function(tradesHistory){
                 mongoDb.deleteRecords(collectionName,"",function(){
-                    mongoDb.insertCollection(collectionName,activeOrder,function (){})
-                }) ;
+                    mongoDb.insertCollection(collectionName,tradesHistory,function (){})
+                });
             });
         }
         for (var i = 0; i < frame.length; i++) {
@@ -21,7 +20,4 @@ function newTradeHistory(frame) {
             });
         }
     });
-
-
-
 }
