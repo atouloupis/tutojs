@@ -12,15 +12,16 @@ function newActiveOrders(frame) {
         get.getHitBTC("/api/2/order",function(activeOrder){
         mongoDb.deleteRecords(collectionName,"",function(){
             mongoDb.insertCollection(collectionName,activeOrder,function (){})
-        }) ;
+        });
         });
     }
     //var activeOrders = require('../data/activeOrders.json');
     // console.log(JSON.stringify(activeOrders)); 
 
         for (var i = 0; i < frame.length; i++) {
-            var queryUpdate = frame[i];
-            mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
+            var queryUpdate = {"clientOrderId" : frame[i].clientOrderId};
+			var newValue = frame[i];
+            mongoDb.updateCollection(collectionName, queryUpdate, newValue, function () {
             });
         }
     });

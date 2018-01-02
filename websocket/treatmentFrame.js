@@ -37,16 +37,25 @@ function splitFrame(jsonFrame) {
         }
         if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
             // console.log("###"+JSON.stringify(jsonFrame));
-            var activeOrderParams = jsonFrame.params;
-            if (activeOrderParams != "undefined") {
+            var reportsParams = jsonFrame.params;
+            if (reportsParams != "undefined") {
                 // console.log("##########"+JSON.stringify(activeOrderParams));
-                updtOrders.newActiveOrders(activeOrderParams);
+                updtOrders.newActiveOrders(reportsParams);
+                // console.log(JSON.stringify(activeOrderParams[i]));
+            }
+        }
+		if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
+            // console.log("###"+JSON.stringify(jsonFrame));
+            var reportsParams = jsonFrame.params;
+            if (reportsParams != "undefined") {
+                // console.log("##########"+JSON.stringify(activeOrderParams));
+                updtOrders.newActiveOrders(reportsParams);
                 // console.log(JSON.stringify(activeOrderParams[i]));
             }
         }
         if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook") {
-            var activeOrderParams = jsonFrame.params;
-            orderBook.updateOrderBook(activeOrderParams, jsonFrame.method, function (termine) {
+            var orderBookParams = jsonFrame.params;
+            orderBook.updateOrderBook(orderBookParams, jsonFrame.method, function (termine) {
                 console.log(termine)
             });
         }

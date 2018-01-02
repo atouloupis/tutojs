@@ -3,6 +3,7 @@ module.exports.cancelOrder = cancelOrder;
 module.exports.placeOrder = placeNewOrder;
 module.exports.replaceOrder = cancelReplaceOrder;
 module.exports.tradingBalance = getTradingBalance;
+module.exports.activeOrders = getActiveOrders;
 
 function cancelOrder(id) {
     var query = {
@@ -50,8 +51,17 @@ function getTradingBalance() {
     var query = {
         "method": "getTradingBalance",
         "params": {},
-        "id": 123
+        "id": "tradingBalance"
     };
+    wsConnection.ws.send(query);
+}
+
+function getActiveOrders() {
+    var query = { 
+	"method": "getOrders", 
+	"params": {}, 
+	"id": "activeOrders" 
+	};
     wsConnection.ws.send(query);
 }
 

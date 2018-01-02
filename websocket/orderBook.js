@@ -123,7 +123,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             }
             ioSource.io.emit('bid message', bid);
             ioSource.io.emit('ask message', ask);
-
         });
     }
 

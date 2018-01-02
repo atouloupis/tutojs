@@ -1,23 +1,16 @@
 module.exports.hasAnOrder = hasAnOrder;
 var treatmentOnOrder=require('./treatmentOnOrder');
-var mongoDb = require('./mongoDb');
+var get=require('./getReportsActiveOrders');
 var eligibility = require('./eligibility');
 
 
 function hasAnOrder(tickerFrame) {
-    var collectionName="activeOrders";
-    mongoDb.findRecords(collectionName,"",function(activeOrders){
-    var k = 0;
+	get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
     // console.log("#"+JSON.stringify(tickerFrame));
-    for (var j = 0; j < activeOrders.length; j++) {
-        // console.log("##"+JSON.stringify(activeOrders[j]));
-        if (activeOrders[j].symbol == tickerFrame.params.symbol) {
-            activeSellOrBuy(activeOrders[j], tickerFrame);
-            k++;
-            // console.log("###"+JSON.stringify(tickerFrame));
-        }
+	if (activeOrder.status != "undefined") {  
+            activeSellOrBuy(activeOrder, tickerFrame);
     }
-    if (k == 0) eligibility.eligibilityBuy(tickerFrame,function(){}); //vérifier si on lance un ordre d'achat sur cette monnaie
+    else eligibility.eligibilityBuy(tickerFrame,function(){}); //vérifier si on lance un ordre d'achat sur cette monnaie
     });
 }
 
@@ -38,7 +31,7 @@ function activeSellOrBuy(order, ticker) {
         } else if ((volume.inf+volume.equal)>10*order.quantity) {
         //Si oui on annule l'ordre et on appelle l'eligibilité
             treatmentOnOrder.cancelOrder(order.id);
-            eligibility.eligibilitySell(order,ticker,function(){}); //vérifier si on lance un ordre de vente sur cette monnaie
+            eligibility.eligibilitySell(ticker,function(){}); //vérifier si on lance un ordre de vente sur cette monnaie
             //Si non, on continue
         } else {}
         });
@@ -94,10 +87,10 @@ function orderBookVolumes(order, marketSide, callback) {
                 }
         }
         callback({
-            total : totalVolume,
-            inf : volInfOrder,
-            equal : volEqualOrder,
-            sup : volSupOrder
+            "total" : totalVolume,
+            "inf" : volInfOrder,
+            "equal" : volEqualOrder,
+            "sup" : volSupOrder
         });
     });
 
