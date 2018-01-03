@@ -25,7 +25,8 @@ function createMongoCollection(collectionName, callback) {
 }
 
 function insertMongoCollection(collectionName, myObj, callback) {
-    connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
+    console.log(myObj);
+	connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
         if (err) throw err;
         callback();
     });
@@ -40,7 +41,8 @@ function deleteMany(collectioName, query, callback) {
 }
 
 function find(collectionName, query, callback) {
-    connectDbaseSource.dbase.collection(collectionName).find(query).sort({
+    console.log(query);
+	connectDbaseSource.dbase.collection(collectionName).find(query).sort({
         _id: -1
     }).toArray(function(err, result) {
         if (err) throw err;
@@ -50,7 +52,8 @@ function find(collectionName, query, callback) {
 
 
 function update(collectionName, query, newValues, callback) {
-    connectDbaseSource.dbase.collection(collectionName).updateOne(query, newValues, {upsert:true}, function(err, res) {
+    console.log(query);
+	connectDbaseSource.dbase.collection(collectionName).updateOne(query, newValues, {upsert:true}, function(err, res) {
         if (err) throw err;
         callback();
     });
