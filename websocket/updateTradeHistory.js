@@ -13,7 +13,7 @@ function newTradeHistory(frame) {
 		var side=frame.data[i].side;
 		var timestamp=frame.data[i].timestamp;
 		var symbol=frame.symbol;
-            var queryUpdate = JSON.parse("{id:"+id+", price:"+price+", quantity:"+quantity+", side:"+side+", timestamp:"+timestamp+", symbol:"+symbol+"}");
+            var queryUpdate = JSON.parse('{"id":"'+id+'", "price":"'+price+'", "quantity":"'+quantity+'", "side":"'+side+'", "timestamp":"'+timestamp+'", "symbol":"'+symbol+'"}');
 			//console.log("NewTradeHistory");
 			console.log(queryUpdate);
             mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
