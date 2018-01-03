@@ -7,8 +7,8 @@ function newTradeHistory(frame) {
 				// console.log("NewTradeHistory");
 			// console.log(frame);
         for (var i = 0; i < frame.data.length; i++) {
-		var id=frame.data[i].id;
-		var price=frame.data[i].price;
+		var id=JSON.parse(frame.data[i].id);
+		var price=JSON.parse(frame.data[i].price);
 		var quantity=frame.data[i].quantity;
 		var side=frame.data[i].side;
 		var timestamp=frame.data[i].timestamp;
