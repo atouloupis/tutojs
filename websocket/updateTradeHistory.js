@@ -16,6 +16,7 @@ function newTradeHistory(frame) {
                 "timestamp":  frame.data[i].timestamp,
                 "symbol":frame.symbol
             };
+			JSON.parse(queryUpdate);
 			console.log("NewTradeHistory");
 			console.log(queryUpdate);
             mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
