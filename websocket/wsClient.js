@@ -21,7 +21,7 @@ http.listen(port, function () {
 var rqstTicker = {
     "method": "subscribeTicker",
     "params": {
-        "symbol": "IXTETH"
+        "symbol": "DASHETH"
     },
     "id": 123
 };
@@ -47,7 +47,7 @@ var rqstReport = {
 var rqstOrderBook = {
     "method": "subscribeOrderbook",
     "params": {
-        "symbol": "BCHETH"
+        "symbol": "DASHETH"
     },
     "id": 123
 };
@@ -55,7 +55,7 @@ var rqstOrderBook = {
 var rqstSnapshotTrades = {
   "method": "subscribeTrades",
   "params": {
-    "symbol": "ETHBTC"
+    "symbol": "DASHETH"
   },
   "id": 123
 };
@@ -89,7 +89,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
             ws.send(JSON.stringify(message));
         }
 
-        // sendRequest(rqstTicker);
+        sendRequest(rqstTicker);
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
@@ -102,5 +102,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		sendRequest(rqstReport);
 		sendRequest(rqstSnapshotTrades);
 		});
+		
     };
 });
