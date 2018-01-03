@@ -7,14 +7,14 @@ function newTradeHistory(frame) {
 				console.log("NewTradeHistory");
 			console.log(frame.data.length);
         for (var i = 0; i < frame.data.length; i++) {
-
+		
             var queryUpdate = {
-                "id":  frame.params.data[i].id,
-                "price":  frame.params.data[i].price,
-                "quantity":  frame.params.data[i].quantity,
-                "side":  frame.params.data[i].side,
-                "timestamp":  frame.params.data[i].timestamp,
-                "symbol":frame.params.symbol
+                "id":  frame.data[i].id,
+                "price":  frame.data[i].price,
+                "quantity":  frame.data[i].quantity,
+                "side":  frame.data[i].side,
+                "timestamp":  frame.data[i].timestamp,
+                "symbol":frame.symbol
             };
 			console.log("NewTradeHistory");
 			console.log(queryUpdate);
