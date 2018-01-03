@@ -9,7 +9,7 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
 var rule = new schedule.RecurrenceRule();
-rule.second = 1;
+rule.second = 2;
 var intMail = schedule.scheduleJob(rule, function(){
       console.log('its run');
 });
