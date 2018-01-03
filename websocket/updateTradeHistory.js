@@ -5,8 +5,8 @@ function newTradeHistory(frame) {
     var collectionName = "tradeHistory";
     mongoDb.createCollection(collectionName, function () {
 				console.log("NewTradeHistory");
-			console.log(frame);
-        for (var i = 0; i < frame.params.data.length; i++) {
+			console.log(frame.data.length);
+        for (var i = 0; i < frame.data.length; i++) {
 
             var queryUpdate = {
                 "id":  frame.params.data[i].id,
