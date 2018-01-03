@@ -9,12 +9,12 @@ function newTradeHistory(frame) {
         for (var i = 0; i < frame.data.length; i++) {
 		
             var queryUpdate = {
-                "id":  frame.data[i].id,
-                "price":  frame.data[i].price,
-                "quantity":  frame.data[i].quantity,
-                "side":  frame.data[i].side,
-                "timestamp":  frame.data[i].timestamp,
-                "symbol":frame.symbol
+                "id":  toString(frame.data[i].id),
+                "price":  toString(frame.data[i].price),
+                "quantity":  toString(frame.data[i].quantity),
+                "side":  toString(frame.data[i].side),
+                "timestamp":  toString(frame.data[i].timestamp),
+                "symbol": toString(frame.symbol)
             };
 			JSON.parse(queryUpdate);
 			console.log("NewTradeHistory");
