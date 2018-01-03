@@ -47,7 +47,7 @@ var rqstReport = {
 var rqstOrderBook = {
     "method": "subscribeOrderbook",
     "params": {
-        "symbol": "ATSETH"
+        "symbol": "BCHETH"
     },
     "id": 123
 };
@@ -84,6 +84,8 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
+		
+		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/10 * * * * *', function(){
 		sendRequest(rqstOrderBook);
 		});
