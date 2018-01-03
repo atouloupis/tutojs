@@ -14,6 +14,7 @@ function getHitBTC(path,method,callback) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             callback(chunk);
+			console.log(chunk);
         });
     }).end();
 }
