@@ -90,14 +90,14 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
-		
+		sendRequest(rqstSnapshotTrades);
 		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/10 * * * * *', function(){
 		sendRequest(rqstOrderBook);
 		});
 		var k = schedule.scheduleJob('*/30 * * * * *', function(){
 		sendRequest(rqstReport);
-		sendRequest(rqstSnapshotTrades);
+		
 		});
 		
     };
