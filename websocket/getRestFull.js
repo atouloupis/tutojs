@@ -1,9 +1,9 @@
 module.exports.getHitBTC=getHitBTC;
-
+var https = require('https');
 
 function getHitBTC(path,method,callback) {
     var options = {
-        host: "https://api.hitbtc.com/",
+        host: "api.hitbtc.com/",
         port: 80,
         path: path,
         method: method,
