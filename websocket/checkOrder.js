@@ -99,4 +99,4 @@ function orderBookVolumes(order, marketSide, callback) {
             "sup" : volSupOrder
         });
     });
-	
+}
