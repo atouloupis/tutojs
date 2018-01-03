@@ -11,10 +11,8 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     mongoDb.createCollection(collectionName, function() {
         //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
-            count(15);
             deleteQuery = JSON.parse('{ "symbol" : "' + symbol + '" }');
             mongoDb.deleteRecords(collectionName, deleteQuery, function() {
-                count(18);
                 //D�couper la trame pour respecter format
                 //D�coupe de ask et enregistrement
                 //Appel de la fonction d'ajout des ASK à partir d'un snapshot
@@ -57,10 +55,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 params: orderBookAskArray[i]
             });
         }
-        count(72);
-
         mongoDb.insertCollection(collectionName, objAdd, function() {
-            count(75);
             callback("snapshotFinish2");
         });
 
@@ -76,9 +71,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 params: orderBookBidArray[i]
             });
         }
-        count(91);
         mongoDb.insertCollection(collectionName, objAdd, function() {
-            count(93);
             callback();
         });
     }

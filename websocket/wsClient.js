@@ -36,8 +36,8 @@ var rqstAuth = {
     "method": "login",
     "params": {
         "algo": "BASIC",
-        "pKey": "75ea4dceeb285ee86c026d62700df14f",
-        "sKey": "919c86f1a996fa98ba4fc74ebb1a364d"
+        "pKey": "c400a7328769d4b0582a80365b2d8f98",
+        "sKey": "1b3fde82887787cccf3c56a264a1ee5e"
     }
 };
 var rqstReport = {
@@ -51,6 +51,15 @@ var rqstOrderBook = {
     },
     "id": 123
 };
+
+var rqstSnapshotTrades = {
+  "method": "subscribeTrades",
+  "params": {
+    "symbol": "ETHBTC"
+  },
+  "id": 123
+};
+
 var rqstTradingBalance = { "method": "getTradingBalance", "params": {}, "id": "tradingBalance" };
 
 var WebSocket = require('ws');
@@ -88,6 +97,10 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/10 * * * * *', function(){
 		sendRequest(rqstOrderBook);
+		});
+		var k = schedule.scheduleJob('*/30 * * * * *', function(){
+		sendRequest(rqstReport);
+		sendRequest(rqstSnapshotTrades);
 		});
     };
 });

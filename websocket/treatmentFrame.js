@@ -12,7 +12,7 @@ function splitFrame(jsonFrame) {
     var date = new Date;
     var collectionName = "symbol";
     mongoDb.createCollection(collectionName, function () {
-        if (date.getHours() == 0) {
+        if (date.getSeconds() == 1) {
             api.getHitBTC("/api/2/symbol","GET", function (symbol) {
                 mongoDb.deleteRecords(collectionName, "", function () {
                     mongoDb.insertCollection(collectionName, symbol, function () {
@@ -20,7 +20,7 @@ function splitFrame(jsonFrame) {
                 });
             });
         }
-        console.log(jsonFrame);
+        //console.log(jsonFrame);
         jsonFrame = JSON.parse(jsonFrame);
         //console.log("0"+JSON.stringify(jsonFrame));
         if (jsonFrame.method == "ticker") {
@@ -42,7 +42,6 @@ function splitFrame(jsonFrame) {
             if (reportsParams != "undefined") {
                 // console.log("##########"+JSON.stringify(activeOrderParams));
                 updtOrders.newActiveOrders(reportsParams);
-                // console.log(JSON.stringify(activeOrderParams[i]));
             }
         }
         if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook") {

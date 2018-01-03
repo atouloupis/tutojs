@@ -7,7 +7,7 @@ function newActiveOrders(frame) {
     var collectionName = "activeOrders";
     mongoDb.createCollection(collectionName, function () {
 
-    if (date.getHours()==0)
+    if (date.getSeconds()==1)
     {
         get.getHitBTC("/api/2/order",function(activeOrder){
         mongoDb.deleteRecords(collectionName,"",function(){
@@ -15,8 +15,6 @@ function newActiveOrders(frame) {
         });
         });
     }
-    //var activeOrders = require('../data/activeOrders.json');
-    // console.log(JSON.stringify(activeOrders)); 
 
         for (var i = 0; i < frame.length; i++) {
             var queryUpdate = {"clientOrderId" : frame[i].clientOrderId};

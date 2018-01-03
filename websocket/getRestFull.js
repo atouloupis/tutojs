@@ -7,7 +7,7 @@ function getHitBTC(path,method,callback) {
         port: 80,
         path: path,
         method: method,
-        //authorization : 'Basic ' + new Buffer('75ea4dceeb285ee86c026d62700df14f:919c86f1a996fa98ba4fc74ebb1a364d').toString('base64')
+        //authorization : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
     };
 
     http.request(options, function (res) {
