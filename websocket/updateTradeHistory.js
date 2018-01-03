@@ -8,7 +8,7 @@ function newTradeHistory(frame) {
 			console.log(frame.data.length);
         for (var i = 0; i < frame.data.length; i++) {
 		
-            var queryUpdate = {id:frame.data[i].id, price:frame.data[i].price, quantity:frame.data[i].quantity, side:123, timestamp:123, symbol:123};
+            var queryUpdate = {id:frame.data[i].id, price:123, quantity:123, side:123, timestamp:123, symbol:123};
 			console.log("NewTradeHistory");
 			console.log(queryUpdate);
             mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
