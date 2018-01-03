@@ -8,15 +8,7 @@ function newTradeHistory(frame) {
 			console.log(frame.data.length);
         for (var i = 0; i < frame.data.length; i++) {
 		
-            var queryUpdate = {
-                "id":  toString(frame.data[i].id),
-                "price":  toString(frame.data[i].price),
-                "quantity":  toString(frame.data[i].quantity),
-                "side":  toString(frame.data[i].side),
-                "timestamp":  toString(frame.data[i].timestamp),
-                "symbol": toString(frame.symbol)
-            };
-			JSON.parse(queryUpdate);
+            var queryUpdate = {id:frame.data[i].id, price:frame.data[i].price, quantity:frame.data[i].quantity, side:frame.data[i].side, timestamp:frame.data[i].timestamp, symbol:frame.symbol};
 			console.log("NewTradeHistory");
 			console.log(queryUpdate);
             mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
