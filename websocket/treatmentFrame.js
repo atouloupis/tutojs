@@ -20,7 +20,8 @@ function splitFrame(jsonFrame) {
                 });
             });
         }
-        var jsonFrame = JSON.parse(jsonFrame);
+        console.log(jsonFrame);
+        jsonFrame = JSON.parse(jsonFrame);
         //console.log("0"+JSON.stringify(jsonFrame));
         if (jsonFrame.method == "ticker") {
             //console.log(JSON.stringify(jsonFrame.params));
@@ -44,15 +45,6 @@ function splitFrame(jsonFrame) {
                 // console.log(JSON.stringify(activeOrderParams[i]));
             }
         }
-		if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
-            // console.log("###"+JSON.stringify(jsonFrame));
-            var reportsParams = jsonFrame.params;
-            if (reportsParams != "undefined") {
-                // console.log("##########"+JSON.stringify(activeOrderParams));
-                updtOrders.newActiveOrders(reportsParams);
-                // console.log(JSON.stringify(activeOrderParams[i]));
-            }
-        }
         if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook") {
             var orderBookParams = jsonFrame.params;
             orderBook.updateOrderBook(orderBookParams, jsonFrame.method, function (termine) {
@@ -61,6 +53,8 @@ function splitFrame(jsonFrame) {
         }
         if (jsonFrame.id == "tradingBalance") {
             var tradingBalanceResult = jsonFrame.result;
-            transfer.checkCoinWithdraw(tradingBalanceResult, function () {});
+            transfer.checkCoinWithdraw(tradingBalanceResult, function () {
+            });
+        }
     });
 }

@@ -116,9 +116,9 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             for (var i = 0; i < message.length; i++) {
 
                 if (message[i].way == "bid") {
-                    if (message[i].params.size!=0.00)bid.push(message[i].params.price);
+                    if (message[i].params.size!=0)bid.push(message[i].params.price);
                 } else {
-                    if (message[i].params.size!=0.00)ask.push(message[i].params.price);
+                    if (message[i].params.size!=0)ask.push(message[i].params.price);
                 }
             }
             ioSource.io.emit('bid message', bid);

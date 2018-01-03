@@ -45,7 +45,7 @@ var rqstReport = {
 var rqstOrderBook = {
     "method": "subscribeOrderbook",
     "params": {
-        "symbol": "BCHETH"
+        "symbol": "ATSETH"
     },
     "id": 123
 };
@@ -82,6 +82,9 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
+        sendRequest(rqstOrderBook);
+        sendRequest(rqstOrderBook);
+        sendRequest(rqstOrderBook);
         sendRequest(rqstOrderBook);
     };
 });

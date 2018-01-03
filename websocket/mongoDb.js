@@ -10,18 +10,19 @@ var connectDbaseSource = require('./wsClient.js');
 
 function createMongoCollection(collectionName, callback) {
     var k = 0;
+    console.log(collectionName);
     connectDbaseSource.dbase.listCollections().toArray(function(err, collections) {
         if (err) throw err;
         for (var i = 0; i < collections.length; i++) {
             if (collections[i].name == collectionName) k++;
         }
         if (k == 0) {
-            connectDbaseSource.dbase.createCollection(collectionName, function(err, res) {
+            //connectDbaseSource.dbase.createCollection(collectionName, function(err, res) {
                 if (err) throw err;
                 console.log("Collection created!");
 
                 callback();
-            });
+            //});
         } else {
 
             callback();

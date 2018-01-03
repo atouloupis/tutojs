@@ -39,7 +39,7 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},function(allOrders){
 
 function getLastTrades (symbol,number,callback)
 {
-var lastTrades[];
+var lastTrades=[];
 var collectionName = "tradeHistory";
 var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
