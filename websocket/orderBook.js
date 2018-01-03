@@ -7,7 +7,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     var collectionName = "orderBookFrame";
     var symbol = orderBookFrame.symbol;
     // Cr�er la collection
-    //count(11);
     mongoDb.createCollection(collectionName, function() {
         //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
@@ -30,9 +29,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             // R�cup�rer donn�es dans Mongo
 
             /////////////////////////////Pour les Bid/ask ////////////////
-      //      count(42);
             insertOrReplace(orderBookFrame, function() {
-        //        count(63);
                 sendToWeb();
                 callbackMain("FINISH2");
             });
@@ -82,19 +79,14 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             var queryBid = {symbol: symbol,way: "bid","params.price": orderBookFrame.bid[0].price};
 
             var newEntryBid = { $set:{symbol: symbol,way: "bid",params: {price: orderBookFrame.bid[0].price,size: orderBookFrame.bid[0].size}}};
-            //count(140);
             mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
-                //count(142);
             });
         }
 
         if (typeof orderBookFrame.ask[0] != "undefined") {
             var queryAsk = {symbol: symbol,way: "ask","params.price": orderBookFrame.ask[0].price};
             var newEntryAsk = {$set:{symbol: symbol,way: "ask",params: {price: orderBookFrame.ask[0].price,size: orderBookFrame.ask[0].size}}};
-            //console.log(queryAsk);
-            //console.log(newEntryAsk);
             mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
-               // count(179);
             });
 
         }

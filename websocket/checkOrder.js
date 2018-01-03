@@ -6,7 +6,6 @@ var eligibility = require('./eligibility');
 
 function hasAnOrder(tickerFrame) {
 	get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
-    // console.log("#"+JSON.stringify(tickerFrame));
 	if (activeOrder.status != "undefined") {  
             activeSellOrBuy(activeOrder, tickerFrame);
 			console.log("activeOrder status undefined");
@@ -16,7 +15,6 @@ function hasAnOrder(tickerFrame) {
 }
 
 function activeSellOrBuy(order, ticker) {
-    //console.log("ORDER : "+JSON.stringify(order));
     if (order.side == "sell") {
         var diff = orderThanMarket(order, ticker, "bid");
         orderBookVolumes(order, "ask", function (volume) {
@@ -65,7 +63,6 @@ function activeSellOrBuy(order, ticker) {
             else {
             }
         });
-        console.log("TICKER : " + JSON.stringify(ticker));
     }
 }
 
@@ -102,6 +99,4 @@ function orderBookVolumes(order, marketSide, callback) {
             "sup" : volSupOrder
         });
     });
-
-
-} //console.log("#####"+JSON.stringify(order));
+	

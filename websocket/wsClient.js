@@ -76,16 +76,13 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         console.log("CONNECTED");
 
         ws.onerror = function (evt) {
-            // console.log("ERROR: " + evt.data);
         };
 
         ws.onmessage = function (evt) {
-            // console.log(" RESPONSE: " + evt.data);
             treatment.splitFrame(evt.data);
         };
 
         function sendRequest(message) {
-            // console.log("SENT: " + JSON.stringify(message));
             ws.send(JSON.stringify(message));
         }
 

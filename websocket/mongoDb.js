@@ -41,7 +41,6 @@ function deleteMany(collectioName, query, callback) {
 }
 
 function find(collectionName, query, callback) {
-    console.log(collectionName);
 	connectDbaseSource.dbase.collection(collectionName).find(query).sort({
         _id: -1
     }).toArray(function(err, result) {
@@ -52,7 +51,6 @@ function find(collectionName, query, callback) {
 
 
 function update(collectionName, query, newValues, callback) {
-    console.log(collectionName);
 	connectDbaseSource.dbase.collection(collectionName).updateOne(query, newValues, {upsert:true}, function(err, res) {
         if (err) throw err;
         callback();

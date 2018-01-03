@@ -4,6 +4,8 @@ var mongoDb = require('./mongoDb');
 function newTradeHistory(frame) {
     var collectionName = "tradeHistory";
     mongoDb.createCollection(collectionName, function () {
+				console.log("NewTradeHistory");
+			console.log(frame);
         for (var i = 0; i < frame.params.data.length; i++) {
 
             var queryUpdate = {
@@ -14,6 +16,8 @@ function newTradeHistory(frame) {
                 "timestamp":  frame.params.data[i].timestamp,
                 "symbol":frame.params.symbol
             };
+			console.log("NewTradeHistory");
+			console.log(queryUpdate);
             mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
             });
         }

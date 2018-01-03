@@ -20,34 +20,25 @@ function splitFrame(jsonFrame) {
                 });
             });
         }
-        //console.log(jsonFrame);
         jsonFrame = JSON.parse(jsonFrame);
-        //console.log("0"+JSON.stringify(jsonFrame));
         if (jsonFrame.method == "ticker") {
-            //console.log(JSON.stringify(jsonFrame.params));
             checkOrder.hasAnOrder(jsonFrame);
         }
         if (jsonFrame.method == "snapshotTrades" | jsonFrame.method == "updateTrades") {
-            // console.log("###"+JSON.stringify(jsonFrame));
             var tradeHistoryParams = jsonFrame.params;
             if (tradeHistoryParams != "undefined") {
-                // console.log("##########"+JSON.stringify(activeOrderParams));
                 updateTradeHistory.newTradeHistory(tradeHistoryParams);
-                // console.log(JSON.stringify(activeOrderParams[i]));
             }
         }
         if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
-            // console.log("###"+JSON.stringify(jsonFrame));
             var reportsParams = jsonFrame.params;
             if (reportsParams != "undefined") {
-                // console.log("##########"+JSON.stringify(activeOrderParams));
                 updtOrders.newActiveOrders(reportsParams);
             }
         }
         if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook") {
             var orderBookParams = jsonFrame.params;
             orderBook.updateOrderBook(orderBookParams, jsonFrame.method, function (termine) {
-                console.log(termine)
             });
         }
         if (jsonFrame.id == "tradingBalance") {
