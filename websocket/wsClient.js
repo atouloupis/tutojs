@@ -8,10 +8,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
-var rule = new schedule.RecurrenceRule();
-rule.second = 2;
-var intMail = schedule.scheduleJob(rule, function(){
-      console.log('its run');
+var j = schedule.scheduleJob('/2 * * * * *', function(){
+  console.log('The answer to life, the universe, and everything!');
 });
 exports.io = io;
 app.get('/', function (req, res) {
