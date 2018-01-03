@@ -9,10 +9,10 @@ function newTradeHistory(frame) {
         for (var i = 0; i < frame.data.length; i++) {
 		var id=JSON.parse(frame.data[i].id);
 		var price=JSON.parse(frame.data[i].price);
-		var quantity=frame.data[i].quantity;
-		var side=frame.data[i].side;
-		var timestamp=frame.data[i].timestamp;
-		var symbol=frame.symbol;
+		var quantity=JSON.parse(frame.data[i].quantity);
+		var side=JSON.parse(frame.data[i].side);
+		var timestamp=JSON.parse(frame.data[i].timestamp);
+		var symbol=JSON.parse(frame.symbol);
             var queryUpdate = {"id":id, "price":price, "quantity":quantity, "side":side, "timestamp":timestamp, "symbol":symbol};
 			//console.log("NewTradeHistory");
 			console.log(queryUpdate);
