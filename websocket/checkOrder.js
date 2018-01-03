@@ -19,8 +19,8 @@ function activeSellOrBuy(order, ticker) {
         var diff = orderThanMarket(order, ticker, "bid");
         orderBookVolumes(order, "ask", function (volume) {
 		console.log("orderBookVolumes");
-		console.log(order);
-		console.log(volume);
+		//console.log(order);
+		//console.log(volume);
             //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 5% alors vendre au prix
             if (diff < -5) {
                 treatmentOnOrder.cancelOrder(order.id);
