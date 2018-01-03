@@ -7,6 +7,12 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+var schedule = require('node-schedule');
+var rule = new schedule.RecurrenceRule();
+rule.second = 1;
+var intMail = schedule.scheduleJob(rule, function(){
+      console.log('its run');
+});
 exports.io = io;
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -82,9 +88,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
-        sendRequest(rqstOrderBook);
-        sendRequest(rqstOrderBook);
-        sendRequest(rqstOrderBook);
-        sendRequest(rqstOrderBook);
+        //sendRequest(rqstOrderBook);
     };
 });
