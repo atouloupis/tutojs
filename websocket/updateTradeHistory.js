@@ -12,7 +12,7 @@ function newTradeHistory(frame) {
 			// console.log("NewTradeHistory");
 			// console.log(queryUpdate);
             // mongoDb.updateCollection(collectionName, queryUpdate, queryUpdate, function () {
-            });
+            // });
         }
     });
 }
