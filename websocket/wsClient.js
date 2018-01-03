@@ -8,9 +8,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
-var j = schedule.scheduleJob('*/1 * * * * *', function(){
-  console.log('The answer to life, the universe, and everything!');
-});
+
 exports.io = io;
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -86,6 +84,8 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
-        //sendRequest(rqstOrderBook);
+		var j = schedule.scheduleJob('*/10 * * * * *', function(){
+		sendRequest(rqstOrderBook);
+		});
     };
 });
