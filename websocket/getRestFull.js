@@ -9,10 +9,11 @@ function getHitBTC(path,method,callback) {
         method: method,
         //authorization : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
     };
-
+console.log(options);
     http.request(options, function (res) {
         res.setEncoding('utf8');
-        res.on('data', function (chunk) {
+        console.log("test");
+		res.on('data', function (chunk) {
             callback(chunk);
 			console.log(chunk);
         });
