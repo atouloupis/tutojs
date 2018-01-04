@@ -44,6 +44,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
 	
-	dbOrderBook.collectionName.updateOne({ symbol: 'BCHETH', way: 'ask', 'params.price': '3.895362' },{'$set':{ symbol: 'BCHETH',way: 'ask', params:{ price: '3.895362', size: '0.00' } } });
+	dbOrderBook.collectionName.updateOne({ symbol: 'BCHETH', way: 'ask', 'params.price': '3.895362' },{'$set':{ symbol: 'BCHETH',way: 'ask', params:{ price: '3.895362', size: '0.00' } } },{upsert:true});
 	
 	});
