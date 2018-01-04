@@ -5,7 +5,6 @@ module.exports.findRecords = find;
 module.exports.updateCollection = update;
 module.exports.count = count;
 
-var mongo = require('mongodb');
 var connectDbaseSource = require('./wsClient.js');
 
 function createMongoCollection(collectionName, callback) {
@@ -51,7 +50,8 @@ function find(collectionName, query, callback) {
 
 
 function update(collectionName, query, newValues, callback) {
-	connectDbaseSource.dbase.collection(collectionName).updateOne(query, newValues, {upsert:true}, function(err, res) {
+	
+	connectDbaseSource.dbase.collection(collectionName).updateMany(query, newValues, {upsert:true}, function(err, res) {
         if (err) throw err;
         callback();
     });
