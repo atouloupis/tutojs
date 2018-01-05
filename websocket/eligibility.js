@@ -9,14 +9,14 @@ function sell (ticker,callback)
 {
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
-    api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"DELETE",function () {});
+    api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function () {});
 
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
 	getReports.getLastBuyTrade(ticker.symbol,function(lastBuyTrade){
 	});
 	
 // il faut vérifier combien il y a sur le compte pour cette monnaie
-	api.getHitBTC("/api/2/trading/balance","GET",function(tradingBalance){
+	api.getHitBTC("/api/2/trading/balance","get",function(tradingBalance){
 	for (var i=0;i<tradingBalance.length;i++) {
 		if (tradingBalance.currency == ticker.symbol.substr(0,ticker.symbol.length-3))balanceAvailable=tradingBalance.available;
 		}
@@ -65,7 +65,7 @@ function buy (ticker,callback) {
     var balanceAvailable = 0;
     var ethAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
-    api.getHitBTC("/api/2/trading/balance", "GET", function (tradingBalance) {
+    api.getHitBTC("/api/2/trading/balance", "get", function (tradingBalance) {
         for (var i = 0; i < tradingBalance.length; i++) {
             if (tradingBalance[i].currency == ticker.symbol.substr(0, ticker.symbol.length - 3)) balanceAvailable = tradingBalance[i].available;
         }
