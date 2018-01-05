@@ -110,17 +110,13 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     mongoDb.createCollection(collectionName, function () {
 
 		            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
-					var objAdd = [];
-					objAdd=JSON.parse(symbol);
-					consolge.log("symbol");
+					console.log("symbol");
 					console.log(symbol);
-					console.log(objAdd);
-
 				//console.log(objAdd);	
-                mongoDb.deleteRecords(collectionName, {}, function () {
-					mongoDb.insertCollection(collectionName, symbol, function () {
-                    })
-                });
+                // mongoDb.deleteRecords(collectionName, {}, function () {
+					// mongoDb.insertCollection(collectionName, symbol, function () {
+                    // })
+                // });
             });
 			var l = schedule.scheduleJob('* * */12 * * *', function(){
 				            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
