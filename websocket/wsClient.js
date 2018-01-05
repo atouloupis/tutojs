@@ -110,6 +110,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     mongoDb.createCollection(collectionName, function () {
 
 		            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
+					console.log(symbol.length);
 					
 						        var objAdd = [];
         for (var i = 0; i < symbol.length; i++) {
