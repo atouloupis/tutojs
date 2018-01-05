@@ -24,6 +24,7 @@ function createMongoCollection(collectionName, callback) {
 }
 
 function insertMongoCollection(collectionName, myObj, callback) {
+console.log(myObj);
 	connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
         if (err) throw err;
         callback();
