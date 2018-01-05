@@ -12,11 +12,36 @@ function getHitBTC(path,method,callback) {
 			
         },
     };
-
-    https.request(options, function (res) {
+    var req = https.request(options, function (res) {
         res.setEncoding('utf8');
-		res.on('data', function (chunk) {
-            callback(chunk);
+        var buffer = '';
+        res.on('data', function (data) {
+            buffer += data;
         });
-    }).end();
+
+        res.on('end', function () {
+            try {
+                var json = JSON.parse(buffer);
+            } catch (err) {
+                return callback(err);
+            }
+            callback(null, json);
+        });
+    });
+
+    req.on('error', function (err) {
+        callback(err);
+    });
+
+    req.on('socket', function (socket) {
+        socket.setTimeout(5000);
+        socket.on('timeout', function() {
+            req.abort();
+        });
+    });
+
+    req.end();
+
 }
+
+

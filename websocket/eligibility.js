@@ -16,7 +16,7 @@ var balanceAvailable=0;
 	});
 	
 // il faut vérifier combien il y a sur le compte pour cette monnaie
-	api.getHitBTC("/api/2/trading/balance","get",function(tradingBalance){
+	api.getHitBTC("/api/2/trading/balance","get",function(err,tradingBalance){
 	for (var i=0;i<tradingBalance.length;i++) {
 		if (tradingBalance.currency == ticker.symbol.substr(0,ticker.symbol.length-3))balanceAvailable=tradingBalance.available;
 		}
@@ -65,7 +65,7 @@ function buy (ticker,callback) {
     var balanceAvailable = 0;
     var ethAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
-    api.getHitBTC("/api/2/trading/balance", "get", function (tradingBalance) {
+    api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
         for (var i = 0; i < tradingBalance.length; i++) {
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
@@ -81,29 +81,34 @@ function buy (ticker,callback) {
         });
     }
     else {
-console.log ("most value order");
+console.log ("no value order");
         //récupérer order achat le plus elevé et order vente le plus faible
         var collectionName = "orderBookFrame";
         var query = {"symbol": ticker.symbol};
-        var askLowestPrice = 100000000;
-        var bidHighestPrice = 0.00;
+        var askLowestPrice;
+        var bidHighestPrice;
+        var bidarr = [];
+        var askarr = [];
 
         mongoDb.findRecords(collectionName, query, function (message) {
-            console.log("orderBookFrame de BCH");
-			console.log(message);
 			for (var i = 0; i < message.length; i++) {
-                if (message[i].params.size != 0.00 && message[i].params.price > bidHighestPrice && message[i].way == "bid") {
-                    bidHighestPrice = message[i].params.price;
+                if (message[i].params.size != 0.00 && message[i].way == "bid") {
+                    bidarr.push(message[i].params.price);
                 }
-                if (message[i].params.size != 0.00 && message[i].params.price < askLowestPrice && message[i].way == "ask") {
-                    askLowestPrice = message[i].params.price;
+                if (message[i].params.size != 0.00 &&  message[i].way == "ask") {
+                    askarr.push(message[i].params.price);
                 }
             }
+//console.log(getTop(bidarr, "price", "max"));
+            bidHighestPrice =getTop(bidarr, "price", "max");
 
 
+console.log ("bidHighestPrice");
+            console.log(bidHighestPrice);
+            askLowestPrice = getTop(askarr, "price", "min");
 
-console.log ("bidHighestPrice"+bidHighestPrice);
-console.log ("askLowestPrice"+askLowestPrice);
+console.log ("askLowestPrice");
+            console.log(askLowestPrice);
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
         var orderDiff=askLowestPrice-bidHighestPrice;
@@ -163,4 +168,25 @@ function averageTradeVolume(symbol,callback)
 	
 	});
     
+}
+
+function getTop(arr, prop,maxmin) {
+    var clone = arr.slice(0);
+    // sort descending
+	var tab;
+    clone.sort(function(x, y) {
+    	if (maxmin=="max")
+    	{
+    		if (x[prop] == y[prop]) return 0;
+    		else if (parseInt(x[prop]) < parseInt(y[prop])) return 1;
+    		else return -1;
+        }
+        else{
+            if (x[prop] == y[prop]) return 0;
+            else if (parseInt(x[prop]) < parseInt(y[prop])) return -1;
+            else return 1;
+		}
+    });
+    tab=clone.slice(0, 1);
+    return tab[0];
 }
