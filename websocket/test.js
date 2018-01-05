@@ -84,7 +84,7 @@ function getHitBTC(path,method,callback) {
             'User-Agent': 'Mozilla/4.0 (compatible; HitBTC node.js client)'
         },
 		
-        authorization : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
+        authorization : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98':'1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
     };
 console.log(options);
     https.request(options, function (res) {
