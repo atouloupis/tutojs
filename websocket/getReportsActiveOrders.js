@@ -48,7 +48,7 @@ var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
 	console.log(allTrades);
 	console.log(number);
-	if (number>allTrades.length)callback(
+	if (number>allTrades.length)callback(lastTrades);
 	for (i=0;i<number;i++)
 		{
 		if (allTrades[i].side == "sell") 
