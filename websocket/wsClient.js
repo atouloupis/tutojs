@@ -112,6 +112,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 					var query = [];
 					for (var i=0;i<symbol.length;i++)query[i] = symbol[i];
                 mongoDb.deleteRecords(collectionName, {}, function () {
+				console.log(query);
                     mongoDb.insertCollection(collectionName, query, function () {
                     })
                 });
