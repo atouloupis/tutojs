@@ -49,6 +49,7 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
 	console.log(allTrades);
 	console.log(number);
 	if (number>allTrades.length)callback(lastTrades);
+	else{
 	for (i=0;i<number;i++)
 		{
 		if (allTrades[i].side == "sell") 
@@ -57,5 +58,6 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
 			}
 		}
 	if (i==number)callback(lastTrades);
+	}
 	});
 }
