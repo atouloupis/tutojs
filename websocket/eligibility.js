@@ -67,7 +67,10 @@ function buy (ticker,callback) {
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (tradingBalance) {
         for (var i = 0; i < tradingBalance.length; i++) {
-            if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) balanceAvailable = tradingBalance[i].available;
+            if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
+			{ balanceAvailable = tradingBalance[i].available;
+			console.log(balanceAvailable);
+			}
         }
     });
 
@@ -86,7 +89,9 @@ console.log ("most value order");
         var bidHighestPrice = 0.00;
 
         mongoDb.findRecords(collectionName, query, function (message) {
-            for (var i = 0; i < message.length; i++) {
+            console.log("orderBookFrame de BCH");
+			console.log(message);
+			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].params.price > bidHighestPrice && message[i].way == "bid") {
                     bidHighestPrice = message[i].params.price;
                 }
@@ -97,7 +102,8 @@ console.log ("most value order");
 
 
         });
-
+console.log ("bidHighestPrice"+bidHighestPrice);
+console.log ("askLowestPrice"+askLowestPrice);
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
         var orderDiff=askLowestPrice-bidHighestPrice;
