@@ -3,7 +3,6 @@ var mongoDb = require('./mongoDb');
 var get = require('./getRestFull')
 
 function newActiveOrders(frame) {
-    //console.log(frame);
     var date = new Date;
     var collectionName = "activeOrders";
     mongoDb.createCollection(collectionName, function () {

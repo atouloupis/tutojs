@@ -12,13 +12,11 @@ function getHitBTC(path,method,callback) {
 			
         },
     };
-console.log(options);
+
     https.request(options, function (res) {
         res.setEncoding('utf8');
-        console.log("test");
 		res.on('data', function (chunk) {
             callback(chunk);
-			console.log(chunk);
         });
     }).end();
 }
