@@ -130,7 +130,7 @@ HitBTCClient.prototype._get = function (endpoint, destination, params, callback)
     else if (Object.keys(params).length) {
         options.path = options.path + '?' + querystring.stringify(params);
     }
-
+console.log(options);
     var req = https.request(options, function (res) {
         res.setEncoding('utf8');
         var buffer = '';
