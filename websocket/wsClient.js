@@ -114,10 +114,9 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 					
 						        var objAdd = [];
         for (var i = 0; i < symbol.length; i++) {
-            objAdd.push({symbol[i]
-            });	
+            objAdd.push({symbol});	
         }
-				console.log(objAdd);	
+				//console.log(objAdd);	
                 mongoDb.deleteRecords(collectionName, {}, function () {
 					mongoDb.insertCollection(collectionName, symbol, function () {
                     })
