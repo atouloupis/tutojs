@@ -120,8 +120,10 @@ HitBTCClient.prototype._get = function (endpoint, destination, params, callback)
         path: '/api/' + this.APIVersion + '/' + destination + '/' + endpoint,
         method: 'get',
         headers: {
-            'User-Agent': 'Mozilla/4.0 (compatible; HitBTC node.js client)'
+            'User-Agent': 'Mozilla/4.0 (compatible; HitBTC node.js client)',
+			'Accept': 'application/json'
         }
+		
     };
 
     if (destination !== 'public') {
