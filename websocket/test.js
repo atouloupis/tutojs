@@ -241,11 +241,11 @@ HitBTCClient.prototype.pairs = function (callback) {
 };
 
 HitBTCClient.prototype.ticker = function (pair, callback) {
-    this._get('/ticker'+pair, 'public', {}, callback);
+    this._get('ticker/'+pair, 'public', {}, callback);
 };
 
 HitBTCClient.prototype.orderbook = function (pair, callback) {
-    this._get(pair + '/orderbook', 'public', {}, callback);
+    this._get('orderbook/'+pair , 'public', {}, callback);
 };
 
 HitBTCClient.prototype.trades = function () {
