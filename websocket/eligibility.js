@@ -137,6 +137,7 @@ function averageTradeVolume(symbol,callback)
 	var somme = 0;
 	getReports.getLastTrades (symbol,50,function(lastTrades){
 	//calcul moyenne temps de trade en vente
+	if (lastTrades.length == 50) {
 	for (var i=0; i<lastTrades.length;i++)
 		{
 		somme += Date.parse(lastTrades[i].timestamp);
@@ -145,6 +146,9 @@ function averageTradeVolume(symbol,callback)
 	//Si entre la date d'aujourd'hui et le dernier trade < 10 min et la moyenne des trades < 5 min.
 	if (date-Date.parse(lastTrades[0].timestamp)<600000 & moyenne < 300000)callback(true);
 	else callback(false);
+	}
+	else callback(false);
+	
 	});
     
 }

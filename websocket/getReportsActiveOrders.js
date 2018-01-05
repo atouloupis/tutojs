@@ -28,7 +28,7 @@ function getLastBuyTrade (symbol,callback)
 var collectionName="activeOrders";
 var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},function(allOrders){
-	for (i=0;i<allOrders.lenght;i++)
+	for (i=0;i<allOrders.length;i++)
 		{
 		if (allOrders[i].status == "filled" & allOrders[i].side == "buy") 
 			{
@@ -36,7 +36,7 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},function(allOrders){
 			break;
 			}
 		}
-	if (i==allOrders.lenght)callback();
+	if (i==allOrders.length)callback();
 	});
 }
 
@@ -47,6 +47,8 @@ var collectionName = "tradeHistory";
 var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
 	console.log(allTrades);
+	console.log(number);
+	if (number>allTrades.length)callback(
 	for (i=0;i<number;i++)
 		{
 		if (allTrades[i].side == "sell") 
