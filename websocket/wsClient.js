@@ -111,7 +111,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
 					console.log(symbol);
                 mongoDb.deleteRecords(collectionName, {}, function () {
-				console.log(query);
                     mongoDb.insertCollection(collectionName, symbol, function () {
                     })
                 });
