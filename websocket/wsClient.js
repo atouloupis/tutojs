@@ -111,7 +111,8 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 
 		            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
 					symbol=JSON.parse(symbol);
-					console.log(symbol.length);
+					
+					console.log(symbol);
 					
 						        var objAdd = [];
         for (var i = 0; i < symbol.length; i++) {
