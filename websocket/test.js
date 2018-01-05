@@ -125,7 +125,7 @@ HitBTCClient.prototype._get = function (endpoint, destination, params, callback)
         }
 		
     };
-
+console.log(options);
     if (destination !== 'public') {
         this._authorize('get', options, params);
     }
@@ -134,7 +134,8 @@ HitBTCClient.prototype._get = function (endpoint, destination, params, callback)
     }
 
     var req = https.request(options, function (res) {
-        res.setEncoding('utf8');
+        console.log(options);
+		res.setEncoding('utf8');
         var buffer = '';
         res.on('data', function (data) {
             buffer += data;
@@ -224,7 +225,7 @@ HitBTCClient.prototype._authorize = function (requestType, options, params) {
 
         message = options.path + querystring.stringify(params);
     }
-
+console.log(crypto.createHmac('sha512', this.APISecret).update(message).digest('hex'));
     options.headers['X-Signature'] = crypto.createHmac('sha512', this.APISecret).update(message).digest('hex');
 };
 
