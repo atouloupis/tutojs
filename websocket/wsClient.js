@@ -109,7 +109,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		var collectionName = "symbol";
     mongoDb.createCollection(collectionName, function () {
 		            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
-					var symbol=[{"id":"BCNBTC","baseCurrency":"BCN","quoteCurrency":"BTC","quantityIncrement":"100","tickSize":"0.0000000001","takeLiquidityRate":"0.001","provideLiquidityRate":"-0.0001","feeCurrency":"BTC"},{"id":"BTCUSD","baseCurrency":"BTC","quoteCurrency":"USD","quantityIncrement":"0.01","tickSize":"0.01","takeLiquidityRate":"0.001","provideLiquidityRate":"-0.0001","feeCurrency":"USD"},{"id":"DASHBTC","baseCurrency":"DASH","quoteCurrency":"BTC","quantityIncrement":"0.001","tickSize":"0.000001","takeLiquidityRate":"0.001","provideLiquidityRate":"-0.0001","feeCurrency":"BTC"}];
+					var symbol=symbol;
                 mongoDb.deleteRecords(collectionName, {}, function () {
 					mongoDb.insertCollection(collectionName, symbol, function () {
                     })
