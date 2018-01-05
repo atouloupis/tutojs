@@ -120,7 +120,7 @@ HitBTCClient.prototype._get = function (endpoint, destination, params, callback)
         path: '/api/' + this.APIVersion + '/' + destination + '/' + endpoint,
         method: 'get',
         headers: {
-            'User-Agent': 'Mozilla/4.0 (compatible; HitBTC node.js client)',
+            //'User-Agent': 'Mozilla/4.0 (compatible; HitBTC node.js client)',
 			'Accept': 'application/json'
         }
 		
@@ -241,7 +241,7 @@ HitBTCClient.prototype.pairs = function (callback) {
 };
 
 HitBTCClient.prototype.ticker = function (pair, callback) {
-    this._get(pair + '/ticker', 'public', {}, callback);
+    this._get('/ticker'+pair, 'public', {}, callback);
 };
 
 HitBTCClient.prototype.orderbook = function (pair, callback) {
