@@ -30,7 +30,7 @@ function activeSellOrBuy(order, ticker) {
                 treatmentOnOrder.cancelOrder(order.id);
                 treatmentOnOrder.placeOrder(order.symbol, "sell", "market", "", order.quantity);
             }
-            else if (ticker.params.ask > order.price) {
+            else if (ticker.ask > order.price) {
                 //stopScript, on continue;
 
                 //sinon est ce que le volume de l'orderbook ask inf+orderbook égal a mon ordre est supérieur de 10 fois la quantité de mon ordre
@@ -54,7 +54,7 @@ function activeSellOrBuy(order, ticker) {
                 //});//vérifier si on lance un ordre de vente sur cette monnaie
             }
             //Sinon est ce que le ticker d'achat bid est inférieur à mon ordre d'achat
-            else if (ticker.params.bid < order.price) {
+            else if (ticker.bid < order.price) {
             }//Si oui on continue
             //Sinon est ce que le volume de l'orderbook bid inf a mon ordre est supérieur de X% au volume total
             else if ((volume.inf + volume.equal) > 10 * order.quantity) {
@@ -73,8 +73,8 @@ function activeSellOrBuy(order, ticker) {
 //Actual order compared to the market, higher or lower than a specified X%age.
 //orderSide = buy or sell, marketSide= ask or bid, gapSide = positive or negative
 function orderThanMarket(order, ticker, marketSide) {
-    if (marketSide == "bid") var diff = ((ticker.params.bid / order.price) - 1) * 100;
-    if (marketSide == "ask") var diff = ((ticker.params.ask / order.price) - 1) * 100;
+    if (marketSide == "bid") var diff = ((ticker.bid / order.price) - 1) * 100;
+    if (marketSide == "ask") var diff = ((ticker.ask / order.price) - 1) * 100;
     console.log("DIFF : " + marketSide + JSON.stringify(diff));
     return diff;
 }
