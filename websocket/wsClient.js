@@ -113,7 +113,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 					
 						        var objAdd = [];
         for (var i = 0; i < symbol.length; i++) {
-            objAdd.push({symbol
+            objAdd.push({symbol[i]
             });	
         }
 				console.log(objAdd);	
