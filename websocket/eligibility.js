@@ -72,12 +72,13 @@ function buy (ticker,callback) {
     });
 
     if (balanceAvailable != 0) {
+	console.log ("balance available");
         sell(ticker, function () {
             callback();
         });
     }
     else {
-
+console.log ("most value order");
         //récupérer order achat le plus elevé et order vente le plus faible
         var collectionName = "orderBookFrame";
         var query = {"symbol": ticker.symbol};
@@ -100,7 +101,8 @@ function buy (ticker,callback) {
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
         var orderDiff=askLowestPrice-bidHighestPrice;
-
+console.log ("orderDiffPerc"+orderDiffPerc);
+console.log ("orderDiff"+orderDiff);
         //récupérer le trade volume par minute
         var tickSize = 0;
         var quantityIncrement = 0;
@@ -137,12 +139,14 @@ function averageTradeVolume(symbol,callback)
 	var somme = 0;
 	getReports.getLastTrades (symbol,50,function(lastTrades){
 	//calcul moyenne temps de trade en vente
+	console.log("lastTrades.length"+lastTrades.length);
 	if (lastTrades.length == 50) {
 	for (var i=0; i<lastTrades.length;i++)
 		{
 		somme += Date.parse(lastTrades[i].timestamp);
 		}
 	var moyenne =  somme/lastTrades.length;// moyenne dates de trade
+	console.log ("moyenne"+moyenne);
 	//Si entre la date d'aujourd'hui et le dernier trade < 10 min et la moyenne des trades < 5 min.
 	if (date-Date.parse(lastTrades[0].timestamp)<600000 & moyenne < 300000)callback(true);
 	else callback(false);

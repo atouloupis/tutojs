@@ -2,24 +2,12 @@ var updtOrders = require('./updateActiveOrders');
 var updateTradeHistory = require('./updateTradeHistory');
 var checkOrder = require('./checkOrder');
 var orderBook = require('./orderBook');
-var mongoDb = require('./mongoDb');
-var api = require('./getRestFull');
 var transfer = require('./transferCoin');
 
 module.exports.splitFrame = splitFrame;
 
 function splitFrame(jsonFrame) {
-    var date = new Date;
-    var collectionName = "symbol";
-    mongoDb.createCollection(collectionName, function () {
-        if (date.getSeconds() == 1) {
-            api.getHitBTC("/api/2/symbol","GET", function (symbol) {
-                mongoDb.deleteRecords(collectionName, "", function () {
-                    mongoDb.insertCollection(collectionName, symbol, function () {
-                    })
-                });
-            });
-        }
+ 
         jsonFrame = JSON.parse(jsonFrame);
 
         if (jsonFrame.method == "ticker") {
@@ -47,5 +35,4 @@ function splitFrame(jsonFrame) {
             transfer.checkCoinWithdraw(tradingBalanceResult, function () {
             });
         }
-    });
 }

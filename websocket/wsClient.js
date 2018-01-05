@@ -8,6 +8,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
+var mongoDb = require('./mongoDb');
+var api = require('./getRestFull');
 
 var symbol = 'BCHETH';
 
@@ -102,8 +104,25 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		var k = schedule.scheduleJob('*/30 * * * * *', function(){
 		sendRequest(rqstReport);
 		sendRequest(rqstSnapshotTrades);
-		
 		});
+
+		var collectionName = "symbol";
+    mongoDb.createCollection(collectionName, function () {
+		            api.getHitBTC("/api/2/symbol","GET", function (symbol) {
+                mongoDb.deleteRecords(collectionName, "", function () {
+                    mongoDb.insertCollection(collectionName, symbol, function () {
+                    })
+                });
+            });
+			var l = schedule.scheduleJob('* * */12 * * *', function(){
+				            api.getHitBTC("/api/2/symbol","GET", function (symbol) {
+                mongoDb.deleteRecords(collectionName, "", function () {
+                    mongoDb.insertCollection(collectionName, symbol, function () {
+                    })
+                });
+            });
+		});	
+			});
 		
     };
 });
