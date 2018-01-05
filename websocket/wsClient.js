@@ -109,11 +109,10 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		var collectionName = "symbol";
     mongoDb.createCollection(collectionName, function () {
 		            api.getHitBTC("/api/2/public/symbol","GET", function (symbol) {
-					var query = toArray(symbol);
 					console.log(symbol);
                 mongoDb.deleteRecords(collectionName, {}, function () {
 				console.log(query);
-                    mongoDb.insertCollection(collectionName, query, function () {
+                    mongoDb.insertCollection(collectionName, symbol, function () {
                     })
                 });
             });
