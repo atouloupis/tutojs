@@ -75,8 +75,8 @@
 getHitBTC(1,2,function(chunk){});
 function getHitBTC(path,method,callback) {
     var options = {
-        host: "httpbin.org",
-        path: "/get",
+        host: "api.hitbtc.com",
+        path: "/api/2/trading/balance",
         method: "get",
 		ciphers: 'ALL',
 		secureProtocol: 'TLSv1_method',
