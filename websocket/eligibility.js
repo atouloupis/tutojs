@@ -67,7 +67,7 @@ function buy (ticker,callback) {
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (tradingBalance) {
         for (var i = 0; i < tradingBalance.length; i++) {
-            if (tradingBalance[i].currency == ticker.symbol.substr(0, ticker.symbol.length - 3)) balanceAvailable = tradingBalance[i].available;
+            if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, ticker.symbol.length - 3)) balanceAvailable = tradingBalance[i].available;
         }
     });
 
