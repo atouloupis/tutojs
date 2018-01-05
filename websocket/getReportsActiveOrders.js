@@ -45,6 +45,7 @@ function getLastTrades (symbol,number,callback)
 var lastTrades=[];
 var collectionName = "tradeHistory";
 var i=0;
+console.log(symbol);
 mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
 	console.log(allTrades);
 	console.log(number);
