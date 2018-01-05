@@ -71,31 +71,29 @@
 	
 	// });
 
- // var https = require('https');
-// getHitBTC(1,2,function(chunk){});
-// function getHitBTC(path,method,callback) {
-    // var options = {
-        // host: "api.hitbtc.com",
-        // path: "/api/2/trading/balance",
-        // method: "get",
-		// ciphers: 'ALL',
-		// secureProtocol: 'TLSv1_method',
-	    // headers: {
-            // 'User-Agent': 'Mozilla/4.0 (compatible; HitBTC node.js client)'
-        // },
-		
-        // authorization : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
-    // };
-// console.log(options);
-    // https.request(options, function (res) {
-        // res.setEncoding('utf8');
-        // console.log("test");
-		// res.on('data', function (chunk) {
-            // callback(chunk);
-			// console.log(chunk);
-        // });
-    // }).end();
-// }
+ var https = require('https');
+
+function getHitBTC(path,method,callback) {
+    var options = {
+        host: "api.hitbtc.com",
+        path: "/api/2/trading/balance",
+        method: "get",
+	    headers: {
+            'Accept': 'application/json'
+			'Authorization' : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
+		}    
+    };
+console.log(options);
+    https.request(options, function (res) {
+        res.setEncoding('utf8');
+        console.log("test");
+		res.on('data', function (chunk) {
+            callback(chunk);
+			console.log(chunk);
+        });
+    }).end();
+}
+getHitBTC(1,2,function(chunk){});
 
 var https = require('https');
 var querystring = require('querystring');
@@ -319,5 +317,5 @@ HitBTCClient.prototype.transactions = function (offset, limit, dir) {
     throw new Error('Not Implemented');
 };
 
-var client = new HitBTCClient('c400a7328769d4b0582a80365b2d8f98', '1b3fde82887787cccf3c56a264a1ee5e', 'live');
-client.tradingBalance(console.log);
+// var client = new HitBTCClient('c400a7328769d4b0582a80365b2d8f98', '1b3fde82887787cccf3c56a264a1ee5e', 'live');
+// client.tradingBalance(console.log);
