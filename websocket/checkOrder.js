@@ -5,7 +5,7 @@ var eligibility = require('./eligibility');
 
 
 function hasAnOrder(tickerFrame) {
-console.log(tickerFrame);
+
 	get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params);

@@ -86,7 +86,7 @@ function buy (ticker,callback) {
 
         mongoDb.findRecords(collectionName, query, function (message) {
             for (var i = 0; i < message.length; i++) {
-                if (message[i].params.size != 0.00 && message[i].params.price > bidLowestPrice && message[i].way == "bid") {
+                if (message[i].params.size != 0.00 && message[i].params.price > bidHighestPrice && message[i].way == "bid") {
                     bidHighestPrice = message[i].params.price;
                 }
                 if (message[i].params.size != 0.00 && message[i].params.price < askLowestPrice && message[i].way == "ask") {
