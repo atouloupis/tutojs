@@ -21,6 +21,7 @@ function splitFrame(jsonFrame) {
             });
         }
         jsonFrame = JSON.parse(jsonFrame);
+
         if (jsonFrame.method == "ticker") {
             checkOrder.hasAnOrder(jsonFrame);
         }

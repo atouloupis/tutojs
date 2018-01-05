@@ -9,6 +9,8 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
 
+var symbol = 'BCHETH';
+
 exports.io = io;
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -21,14 +23,14 @@ http.listen(port, function () {
 var rqstTicker = {
     "method": "subscribeTicker",
     "params": {
-        "symbol": "DASHETH"
+        "symbol": symbol
     },
     "id": 123
 };
 var rqstTicker1 = {
     "method": "subscribeTicker",
     "params": {
-        "symbol": "BQXETH"
+        "symbol": "BCHETH"
     },
     "id": 123
 };
@@ -47,7 +49,7 @@ var rqstReport = {
 var rqstOrderBook = {
     "method": "subscribeOrderbook",
     "params": {
-        "symbol": "DASHETH"
+        "symbol": symbol
     },
     "id": 123
 };
@@ -55,7 +57,7 @@ var rqstOrderBook = {
 var rqstSnapshotTrades = {
   "method": "subscribeTrades",
   "params": {
-    "symbol": "DASHETH"
+    "symbol": symbol
   },
   "id": 123
 };
@@ -85,18 +87,21 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         function sendRequest(message) {
             ws.send(JSON.stringify(message));
         }
-
+        sendRequest(rqstAuth);
+        sendRequest(rqstReport);
+        sendRequest(rqstSnapshotTrades);
+        sendRequest(rqstOrderBook);
         sendRequest(rqstTicker);
         //sendRequest(rqstTicker1);
         // sendRequest(rqstAuth);
         // sendRequest(rqstReport);
-		sendRequest(rqstSnapshotTrades);
 		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/10 * * * * *', function(){
 		sendRequest(rqstOrderBook);
 		});
 		var k = schedule.scheduleJob('*/30 * * * * *', function(){
 		sendRequest(rqstReport);
+		sendRequest(rqstSnapshotTrades);
 		
 		});
 		

@@ -9,9 +9,7 @@ function sell (ticker,callback)
 {
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
-    api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"DELETE",function () {
-
-	});
+    api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"DELETE",function () {});
 
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
 	getReports.getLastBuyTrade(ticker.symbol,function(lastBuyTrade){

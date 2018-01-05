@@ -1,6 +1,5 @@
 // var mongoDb = require ('./mongoDb');
 var dbName = "orderBook";
-var collectionName = "history";
 var mongoClient = require('mongodb').MongoClient;
 var urlOrderBook = "mongodb://localhost:27017/orderBook";
 
@@ -42,8 +41,33 @@ console.log(date.getHours());
 
 mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
+    var collectionName = "history";
     var dbOrderBook = db.db("orderBook");
-	
-	dbOrderBook.collectionName.updateOne({ symbol: 'BCHETH', way: 'ask', 'params.price': '3.895362' },{'$set':{ symbol: 'BCHETH',way: 'ask', params:{ price: '3.895362', size: '0.00' } } },{upsert:true});
+
+	dbOrderBook.collection(collectionName).updateOne(
+
+        { id: 134584767,
+            price: '1.182255',
+            quantity: '0.01',
+            side: 'buy',
+            timestamp: '2018-01-04T18:06:53.824Z',
+            symbol: 'DASHETH' }
+        ,
+
+        {$set:       { id: 134584767,
+                price: '1.182255',
+                quantity: '0.01',
+                side: 'buy',
+                timestamp: '2018-01-04T18:06:53.824Z',
+                symbol: 'DASHETH' }}
+
+
+
+
+        ,{upsert:true}, function(err, res) {
+        if (err) throw err;
+        console.log("test");
+    });
 	
 	});
+

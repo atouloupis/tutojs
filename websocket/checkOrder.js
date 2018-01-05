@@ -6,11 +6,11 @@ var eligibility = require('./eligibility');
 
 function hasAnOrder(tickerFrame) {
 	get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
-	if (activeOrder.status != "undefined") {  
+	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame);
 			console.log("activeOrder status undefined");
     }
-    else console.log("activeorder status defined");//eligibility.eligibilityBuy(tickerFrame,function(){}); //vérifier si on lance un ordre d'achat sur cette monnaie
+    else eligibility.eligibilityBuy(tickerFrame,function(){}); //vérifier si on lance un ordre d'achat sur cette monnaie
     });
 }
 

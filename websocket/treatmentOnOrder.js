@@ -14,7 +14,7 @@ function cancelOrder(id) {
         "id": 123
     };
 
-    wsConnection.ws.send(query);
+    //wsConnection.ws.send(query);
 }
 
 function placeNewOrder(symbol,side,type,price,quantity) {
@@ -30,7 +30,7 @@ function placeNewOrder(symbol,side,type,price,quantity) {
         },
         "id": 123
     };
-    wsConnection.ws.send(query);
+    //wsConnection.ws.send(query);
 }
 
 function cancelReplaceOrder(clientId,requestId,quantity,price) {
@@ -44,7 +44,7 @@ function cancelReplaceOrder(clientId,requestId,quantity,price) {
         },
         "id": 123
     };
-    wsConnection.ws.send(query);
+    //wsConnection.ws.send(query);
 }
 
 function getTradingBalance() {

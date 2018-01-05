@@ -3,13 +3,14 @@ var mongoDb = require('./mongoDb');
 var get = require('./getRestFull')
 
 function newActiveOrders(frame) {
+    //console.log(frame);
     var date = new Date;
     var collectionName = "activeOrders";
     mongoDb.createCollection(collectionName, function () {
 
     if (date.getSeconds()==1)
     {
-        get.getHitBTC("/api/2/order",function(activeOrder){
+        get.getHitBTC("/api/2/order","GET",function(activeOrder){
         mongoDb.deleteRecords(collectionName,"",function(){
             mongoDb.insertCollection(collectionName,activeOrder,function (){})
         });
@@ -19,7 +20,7 @@ function newActiveOrders(frame) {
         for (var i = 0; i < frame.length; i++) {
             var queryUpdate = {"clientOrderId" : frame[i].clientOrderId};
 			var newValue = frame[i];
-            mongoDb.updateCollection(collectionName, queryUpdate, newValue, function () {
+            mongoDb.updateCollection(collectionName, queryUpdate, {$set:newValue}, function () {
             });
         }
     });
