@@ -101,7 +101,7 @@ console.log ("most value order");
             }
 
 
-        });
+
 console.log ("bidHighestPrice"+bidHighestPrice);
 console.log ("askLowestPrice"+askLowestPrice);
         //quelle est la différence entre order achat et order vente
@@ -123,7 +123,7 @@ console.log ("orderDiff"+orderDiff);
                         quantityIncrement = message[i].quantityIncrement;
                     }
                 }
-            });
+     
             //si le volume échangé est bon  + la diff entre bid et ask > 5% +  diff entre ask et bid > 10 tick size
             if (possibleToTrade && orderDiffPerc > 5 && orderDiff > (10*tickSize)) {
 
@@ -134,8 +134,10 @@ console.log ("orderDiff"+orderDiff);
             else {
                 callback();
             }
+			       });
         });
-    }
+            });
+	}
 }
 
 function averageTradeVolume(symbol,callback)
