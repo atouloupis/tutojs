@@ -10,6 +10,7 @@ function newActiveOrders(frame) {
     if (date.getSeconds()==1)
     {
         get.getHitBTC("/api/2/order","GET",function(err,activeOrder){
+		if (err) throw err;
         mongoDb.deleteRecords(collectionName,{},function(){
             mongoDb.insertCollection(collectionName,activeOrder,function (){})
         });

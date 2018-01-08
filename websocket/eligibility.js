@@ -94,8 +94,9 @@ console.log ("no value order");
         var bidHighestPrice;
         var bidarr = [];
         var askarr = [];
-
+		var findrequest;
         mongoDb.findRecords(collectionName, query,{params:{price: -1}}, function (message) {
+		findrequest=message;
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
                     bidarr.push(message[i].params.price);
@@ -108,11 +109,10 @@ console.log ("no value order");
 bidHighestPrice = bidarr [bidarr.length-1];
 askLowestPrice = askarr[0];
 
-console.log ("bidHighestPrice");
-            console.log(bidHighestPrice);
+            console.log("bidHighestPrice"+bidHighestPrice);
 
-console.log ("askLowestPrice");
-            console.log(askLowestPrice);
+            console.log("askLowestPrice"+askLowestPrice);
+			if (askLowestPrice > 3) console.log(findrequest);
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
         var orderDiff=askLowestPrice-bidHighestPrice;
