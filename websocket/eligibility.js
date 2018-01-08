@@ -119,11 +119,13 @@ askLowestPrice=getTop (askarr,"min");
 
             // récupérer le tick minimum et la quantité minimum
             var collectionName = "symbol";
-            mongoDb.findRecords(collectionName, "",{_id: -1}, function (message) {
+			var query={id : ticker.symbol};
+            mongoDb.findRecords(collectionName, query,{_id: -1}, function (message) {
                 for (var i = 0; i < message.length; i++) {
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;
                         quantityIncrement = message[i].quantityIncrement;
+						console.log("symbol"+message[i].id);
 						console.log("ticksize"+tickSize);
 						console.log("quantityIncrement"+quantityIncrement);
                     }
