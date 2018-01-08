@@ -96,19 +96,18 @@ console.log ("no value order");
         var bidarr = [];
         var askarr = [];
 		var findrequest;
-        mongoDb.findRecords(collectionName, query,{params:{price: -1}}, function (message) {
+        mongoDb.findRecords(collectionName, query,{_id:-1}, function (message) {
 		findrequest=message;
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
-                    bidarr.push(message[i].params.price);
+                    bidarr.push(parseInt(message[i].params.price));
                 }
                 if (message[i].params.size != 0.00 &&  message[i].way == "ask") {
-                    askarr.push(message[i].params.price);
+                    askarr.push(parseInt(message[i].params.price));
                 }
             }
-
-bidHighestPrice = bidarr [bidarr.length-1];
-askLowestPrice = askarr[0];
+bidHighestPrice=getTop (bidarr,max);
+askLowestPrice=getTop (askarr,min);
 
             console.log("bidHighestPrice"+bidHighestPrice);
 
@@ -186,3 +185,21 @@ function averageTradeVolume(symbol,callback)
 	});
     
 }
+function getTop(arr,maxmin) {
+    // sort descending
+    arr.sort(function(x, y) {
+    	if (maxmin=="max")
+    	{
+    		if (x == y) return 0;
+    		else if (parseInt(x) < parseInt(y)) return 1;
+    		else return -1;
+        }
+        else{
+            if (x == y) return 0;
+            else if (parseInt(x) < parseInt(y)) return -1;
+            else return 1;
+		}
+    });
+    return arr[0];
+}
+
