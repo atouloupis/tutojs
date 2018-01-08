@@ -70,14 +70,15 @@ function buy (ticker,callback) {
     var ethAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
-        if (err) throw err;
+		if (err)console.log(err);
+		else {
 		for (var i = 0; i < tradingBalance.length; i++) {
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
 			console.log(balanceAvailable);
 			}
         }
-    });
+
 
     if (balanceAvailable != 0) {
 	console.log ("balance available");
@@ -157,7 +158,9 @@ console.log ("orderDiff"+orderDiff);
         });
             });
 	}
-}
+	}
+	});
+}    
 
 function averageTradeVolume(symbol,callback)
 {
