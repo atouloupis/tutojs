@@ -116,7 +116,7 @@ askLowestPrice = askarr[0];
 			{
 			for (var i = 0; i < findrequest.length; i++) {
 			if (findrequest[i].params.size != 0.00 &&  findrequest[i].way == "ask") {
-			console.log(findrequest[i];
+			console.log(findrequest[i]);
 			if (i=findrequest.length-1)console.log(w);
 			}
 				}
