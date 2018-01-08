@@ -100,10 +100,10 @@ console.log ("no value order");
 		findrequest=message;
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
-                    bidarr.push(parseInt(message[i].params.price));
+                    bidarr.push(parseFloat(message[i].params.price));
                 }
                 if (message[i].params.size != 0.00 &&  message[i].way == "ask") {
-                    askarr.push(parseInt(message[i].params.price));
+                    askarr.push(parseFloat(message[i].params.price));
                 }
             }
 bidHighestPrice=getTop (bidarr,"max");
@@ -191,12 +191,12 @@ function getTop(arr,maxmin) {
     	if (maxmin=="max")
     	{
     		if (x == y) return 0;
-    		else if (parseInt(x) < parseInt(y)) return 1;
+    		else if (parseFloat(x) < parseFloat(y)) return 1;
     		else return -1;
         }
         else{
             if (x == y) return 0;
-            else if (parseInt(x) < parseInt(y)) return -1;
+            else if (parseFloat(x) < parseFloat(y)) return -1;
             else return 1;
 		}
     });
