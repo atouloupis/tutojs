@@ -30,6 +30,8 @@ function placeNewOrder(symbol,side,type,price,quantity) {
         },
         "id": 123
     };
+	console.log("new order place");
+	console.log(query);
     //wsConnection.ws.send(query);
 }
 

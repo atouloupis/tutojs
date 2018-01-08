@@ -87,7 +87,6 @@ function buy (ticker,callback) {
         });
     }
     else {
-console.log ("no value order");
         //récupérer order achat le plus elevé et order vente le plus faible
         var collectionName = "orderBookFrame";
         var query = {"symbol": ticker.symbol};
@@ -109,25 +108,10 @@ console.log ("no value order");
 bidHighestPrice=getTop (bidarr,"max");
 askLowestPrice=getTop (askarr,"min");
 
-            console.log("bidHighestPrice"+bidHighestPrice);
-
-            console.log("askLowestPrice"+askLowestPrice);
-			if (askLowestPrice > 3) 
-			{
-			for (var i = 0; i < findrequest.length; i++) {
-			if (findrequest[i].params.size != 0.00 &&  findrequest[i].way == "ask") {
-			console.log(findrequest[i]);
-			if (i=findrequest.length-1)console.log(w);
-			}
-				}
-			
-			}
-			
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
         var orderDiff=askLowestPrice-bidHighestPrice;
-console.log ("orderDiffPerc"+orderDiffPerc);
-console.log ("orderDiff"+orderDiff);
+
         //récupérer le trade volume par minute
         var tickSize = 0;
         var quantityIncrement = 0;
@@ -140,12 +124,16 @@ console.log ("orderDiff"+orderDiff);
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;
                         quantityIncrement = message[i].quantityIncrement;
+						console.log("ticksize"+tickSize);
+						console.log("quantityIncrement"+quantityIncrement);
                     }
                 }
      
             //si le volume échangé est bon  + la diff entre bid et ask > 5% +  diff entre ask et bid > 10 tick size
+			console.log ("orderDiffPerc"+orderDiffPerc);
+			console.log ("orderDiff"+orderDiff);
+			console.log ("possibleToTrade"+possibleToTrade);
             if (possibleToTrade && orderDiffPerc > 5 && orderDiff > (10*tickSize)) {
-
                 //poser l'ordre d'achat
                 placeNewOrder(ticker.symbol, "buy", "limit", bidHighestPrice + tickSize, quantityIncrement)
                 callback();
