@@ -46,8 +46,7 @@ var lastTrades=[];
 var collectionName = "tradeHistory";
 var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allTrades){
-console.log("alltrades");
-console.log(allTrades);
+
 	if (number>allTrades.length)callback(lastTrades);
 	else{
 	for (i=0;i<number;i++)
