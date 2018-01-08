@@ -9,14 +9,18 @@ function sell (ticker,callback)
 {
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
-    api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function () {});
+    api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
+	if (err) throw err;
+	});
 
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
 	getReports.getLastBuyTrade(ticker.symbol,function(lastBuyTrade){
+	if (err) throw err;
 	});
 	
 // il faut vérifier combien il y a sur le compte pour cette monnaie
 	api.getHitBTC("/api/2/trading/balance","get",function(err,tradingBalance){
+	if (err) throw err;
 	for (var i=0;i<tradingBalance.length;i++) {
 		if (tradingBalance.currency == ticker.symbol.substr(0,ticker.symbol.length-3))balanceAvailable=tradingBalance.available;
 		}
@@ -66,7 +70,8 @@ function buy (ticker,callback) {
     var ethAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
-        for (var i = 0; i < tradingBalance.length; i++) {
+        if (err) throw err;
+		for (var i = 0; i < tradingBalance.length; i++) {
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
 			console.log(balanceAvailable);
@@ -99,15 +104,12 @@ console.log ("no value order");
                     askarr.push(message[i].params.price);
                 }
             }
-//console.log(getTop(bidarr, "price", "max"));
-            //bidHighestPrice =getTop(bidarr, "price", "max");
-			//askLowestPrice = getTop(askarr, "price", "min");
+
 bidHighestPrice = bidarr [bidarr.length-1];
 askLowestPrice = askarr[0];
 
 console.log ("bidHighestPrice");
             console.log(bidHighestPrice);
-            
 
 console.log ("askLowestPrice");
             console.log(askLowestPrice);
@@ -170,25 +172,4 @@ function averageTradeVolume(symbol,callback)
 	
 	});
     
-}
-
-function getTop(arr, prop,maxmin) {
-    var clone = arr.slice(0);
-    // sort descending
-	var tab;
-    clone.sort(function(x, y) {
-    	if (maxmin=="max")
-    	{
-    		if (x[prop] == y[prop]) return 0;
-    		else if (parseInt(x[prop]) < parseInt(y[prop])) return 1;
-    		else return -1;
-        }
-        else{
-            if (x[prop] == y[prop]) return 0;
-            else if (parseInt(x[prop]) < parseInt(y[prop])) return -1;
-            else return 1;
-		}
-    });
-    tab=clone.slice(0, 1);
-    return tab[0];
 }

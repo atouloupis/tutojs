@@ -25,7 +25,7 @@ function getHitBTC(path,method,callback) {
             } catch (err) {
                 return callback(err);
             }
-            callback(null, json);
+            callback(err, json);
         });
     });
 
