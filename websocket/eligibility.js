@@ -106,8 +106,8 @@ console.log ("no value order");
                     askarr.push(parseInt(message[i].params.price));
                 }
             }
-bidHighestPrice=getTop (bidarr,max);
-askLowestPrice=getTop (askarr,min);
+bidHighestPrice=getTop (bidarr,"max");
+askLowestPrice=getTop (askarr,"min");
 
             console.log("bidHighestPrice"+bidHighestPrice);
 
