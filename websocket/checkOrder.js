@@ -82,7 +82,7 @@ function orderThanMarket(order, ticker, marketSide) {
 function orderBookVolumes(order, marketSide, callback) {
     //volume orderbook ask devant le order sell superieur a x% du volume orderbook ask global alors cancel le order sell
     var query={symbol:order.symbol, way:marketSide};
-    mongoDb.findRecords("orderBookFrame", query, function(message) {
+    mongoDb.findRecords("orderBookFrame", query,{_id: -1}, function(message) {
         var totalVolume=0;
         var volInfOrder=0;
         var volSupOrder = 0;

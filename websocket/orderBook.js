@@ -94,7 +94,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
     function sendToWeb() {
         var query={symbol:symbol};
-        mongoDb.findRecords(collectionName, query, function(message) {
+        mongoDb.findRecords(collectionName, query,{_id: -1}, function(message) {
             var bid = [];
             var ask = [];
             for (var i = 0; i < message.length; i++) {

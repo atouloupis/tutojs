@@ -26,7 +26,7 @@ var balanceAvailable=0;
 var collectionName = "orderBookFrame";
 var query = {"symbol" : ticker.symbol,"way" : "ask"};
 var askLowestPrice=100000000;
-	mongoDb.findRecords(collectionName, query, function(message) {
+	mongoDb.findRecords(collectionName, query,{_id: -1}, function(message) {
 		for (var i = 0; i<message.length;i++)
 			{
 				if (message[i].params.size!=0.00 && message[i].params.price<askLowestPrice) 
@@ -38,7 +38,7 @@ var askLowestPrice=100000000;
 
  //recupérer l'unité prix minimum
 	var collectionName = "symbol";
-		mongoDb.findRecords(collectionName, "", function(message) {
+		mongoDb.findRecords(collectionName, "",{_id: -1}, function(message) {
 		for (var i = 0; i<message.length;i++)
 			{
 				if (message[i].id = ticker.symbol) var tickSize = message[i].tickSize;
@@ -90,7 +90,7 @@ console.log ("no value order");
         var bidarr = [];
         var askarr = [];
 
-        mongoDb.findRecords(collectionName, query, function (message) {
+        mongoDb.findRecords(collectionName, query,{params:{price: -1}}, function (message) {
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
                     bidarr.push(message[i].params.price);
@@ -100,12 +100,14 @@ console.log ("no value order");
                 }
             }
 //console.log(getTop(bidarr, "price", "max"));
-            bidHighestPrice =getTop(bidarr, "price", "max");
-
+            //bidHighestPrice =getTop(bidarr, "price", "max");
+			//askLowestPrice = getTop(askarr, "price", "min");
+bidHighestPrice = bidarr [bidarr.length-1];
+askLowestPrice = askarr[0];
 
 console.log ("bidHighestPrice");
             console.log(bidHighestPrice);
-            askLowestPrice = getTop(askarr, "price", "min");
+            
 
 console.log ("askLowestPrice");
             console.log(askLowestPrice);
@@ -121,7 +123,7 @@ console.log ("orderDiff"+orderDiff);
 
             // récupérer le tick minimum et la quantité minimum
             var collectionName = "symbol";
-            mongoDb.findRecords(collectionName, "", function (message) {
+            mongoDb.findRecords(collectionName, "",{_id: -1}, function (message) {
                 for (var i = 0; i < message.length; i++) {
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;

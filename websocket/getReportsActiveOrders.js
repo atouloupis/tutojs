@@ -7,7 +7,7 @@ function getActiveOrders (symbol,callback)
 {
 var collectionName="activeOrders";
 var i=0;
-mongoDb.findRecords(collectionName,{"symbol":symbol},function(allOrders){
+mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
 
 	for (i=0;i<allOrders.length;i++)
 		{
@@ -27,7 +27,7 @@ function getLastBuyTrade (symbol,callback)
 {
 var collectionName="activeOrders";
 var i=0;
-mongoDb.findRecords(collectionName,{"symbol":symbol},function(allOrders){
+mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
 	for (i=0;i<allOrders.length;i++)
 		{
 		if (allOrders[i].status == "filled" & allOrders[i].side == "buy") 
@@ -45,7 +45,7 @@ function getLastTrades (symbol,number,callback)
 var lastTrades=[];
 var collectionName = "tradeHistory";
 var i=0;
-mongoDb.findRecords(collectionName,{"symbol":symbol},function(allTrades){
+mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allTrades){
 	if (number>allTrades.length)callback(lastTrades);
 	else{
 	for (i=0;i<number;i++)

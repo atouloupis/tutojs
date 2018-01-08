@@ -38,7 +38,7 @@ function deleteMany(collectioName, query, callback) {
 
 }
 
-function find(collectionName, query, callback) {
+function find(collectionName, query, sort, callback) {
 	connectDbaseSource.dbase.collection(collectionName).find(query).sort({
         _id: -1
     }).toArray(function(err, result) {
