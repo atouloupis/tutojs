@@ -159,9 +159,9 @@ function averageTradeVolume(symbol,callback)
 	getReports.getLastTrades (symbol,50,function(lastTrades){
 	//calcul moyenne temps de trade en vente
 	console.log("lastTrades.length"+lastTrades.length);
-	for (var i=0; i<lastTrades.length;i++)
+	for (var i=0; i<lastTrades.length-1;i++)
 		{
-		somme += Date.parse(lastTrades[i].timestamp);
+		somme += Date.parse(lastTrades[i].timestamp)-Date.parse(lastTrades[i+1].timestamp);
 		}
 	var moyenne =  somme/lastTrades.length;// moyenne dates de trade
 	console.log ("moyenne"+moyenne);
