@@ -97,7 +97,7 @@ console.log ("no value order");
         var askarr = [];
 		var findrequest;
         mongoDb.findRecords(collectionName, query,{params:{price: -1}}, function (message) {
-		
+		findrequest=message;
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
                     bidarr.push(message[i].params.price);
