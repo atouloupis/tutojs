@@ -96,8 +96,6 @@ function orderBookVolumes(order, marketSide, callback) {
         var volEqualOrder = 0;
 		console.log("query orderBookFrame =");
 		console.log(query);
-		console.log("message");
-		console.log(message);
 		console.log("message length =" +message.length);
         for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00)
