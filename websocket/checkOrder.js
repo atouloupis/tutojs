@@ -2,6 +2,7 @@ module.exports.hasAnOrder = hasAnOrder;
 var treatmentOnOrder=require('./treatmentOnOrder');
 var get=require('./getReportsActiveOrders');
 var eligibility = require('./eligibility');
+var mongoDb = require('./mongoDb');
 
 
 function hasAnOrder(tickerFrame) {
