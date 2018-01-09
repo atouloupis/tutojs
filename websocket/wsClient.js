@@ -107,7 +107,7 @@ console.log("api Get symbol");
 
 
 function webSeocketCall(){
-
+console.log("call websocket");
     ws.onopen = function () {
 
         console.log("CONNECTED");
@@ -117,6 +117,7 @@ function webSeocketCall(){
 
         ws.onmessage = function (evt) {
             treatment.splitFrame(evt.data);
+			console.log("evt received");
         };
 
         function sendRequest(message) {
