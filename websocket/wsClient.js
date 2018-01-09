@@ -111,14 +111,14 @@ function webSocketCall(){
 
         ws.onmessage = function (evt) {
             treatment.splitFrame(evt.data);
-			if (JSON.parse(evt.data).method=="updateOrderbook" | JSON.parse(evt.data).method=="snapshotOrderbook")
+			if (JSON.parse(evt.data).method=="snapshotOrderbook")
 			{ 
 			sendRequest(rqstAuth);
 			sendRequest(rqstReport);
 			}
-			else if (JSON.parse(evt.data).method== "activeOrders" | JSON.parse(evt.data).method == "report") sendRequest(rqstSnapshotTrades);
-			else if (JSON.parse(evt.data).method=="snapshotTrades" |JSON.parse(evt.data).method == "updateTrades")sendRequest(rqstTicker);
-			else {console.log(evt.data)}
+			else if (JSON.parse(evt.data).method== "activeOrders") sendRequest(rqstSnapshotTrades);
+			else if (JSON.parse(evt.data).method=="snapshotTrades")sendRequest(rqstTicker);
+			else {}
         };
 
         function sendRequest(message) {
