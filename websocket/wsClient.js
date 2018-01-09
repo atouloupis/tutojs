@@ -75,6 +75,36 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     var dbOrderBook = db.db("orderBook");
     exports.dbase = dbOrderBook;
 
+		var collectionName = "symbol";
+    mongoDb.createCollection(collectionName, function () {
+
+		            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
+					if (err) throw err;
+                 mongoDb.deleteRecords(collectionName, {}, function () {
+					 mongoDb.insertCollection(collectionName, symbol, function () {
+					 webSeocketCall;
+                     });
+                 });
+            });
+			var l = schedule.scheduleJob('* * */12 * * *', function(){
+				            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
+							if (err) throw err;
+                mongoDb.deleteRecords(collectionName, {}, function () {
+                    mongoDb.insertCollection(collectionName, symbol, function () {
+                    })
+                });
+            });
+		});	
+
+
+});	
+	
+	
+});
+
+
+function webSeocketCall(){
+
     ws.onopen = function () {
 
         console.log("CONNECTED");
@@ -89,14 +119,11 @@ mongoClient.connect(urlOrderBook, function (err, db) {
         function sendRequest(message) {
             ws.send(JSON.stringify(message));
         }
+		sendRequest(rqstOrderBook);
         sendRequest(rqstAuth);
         sendRequest(rqstReport);
         sendRequest(rqstSnapshotTrades);
-        sendRequest(rqstOrderBook);
         sendRequest(rqstTicker);
-        //sendRequest(rqstTicker1);
-        // sendRequest(rqstAuth);
-        // sendRequest(rqstReport);
 		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/10 * * * * *', function(){
 		sendRequest(rqstOrderBook);
@@ -104,28 +131,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 		var k = schedule.scheduleJob('*/30 * * * * *', function(){
 		sendRequest(rqstReport);
 		sendRequest(rqstSnapshotTrades);
-		});
-
-		var collectionName = "symbol";
-    mongoDb.createCollection(collectionName, function () {
-
-		            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
-					if (err) throw err;
-                 mongoDb.deleteRecords(collectionName, {}, function () {
-					 mongoDb.insertCollection(collectionName, symbol, function () {
-                     });
-                 });
-            });
-			var l = schedule.scheduleJob('* * */12 * * *', function(){
-				            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
-							if (err) throw err;
-                mongoDb.deleteRecords(collectionName, {}, function () {
-                    mongoDb.insertCollection(collectionName, symbol, function () {
-                    })
-                });
-            });
 		});	
-			});
-		
     };
-});
+
+}

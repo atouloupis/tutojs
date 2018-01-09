@@ -105,7 +105,7 @@ function orderBookVolumes(order, marketSide, callback) {
         for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00)
                 {
-                    totalVolume=totalVolume+message[i].params.size;
+                    totalVolume=totalVolume+parseFloat(message[i].params.size);
                     if (message[i].params.price < order.price) volInfOrder+=message[i].params.size;
                         else if (message[i].params.price == order.price) volEqualOrder+=message[i].params.size;
                     else if (message[i].params.price > order.price) volSupOrder+=+message[i].params.size;
