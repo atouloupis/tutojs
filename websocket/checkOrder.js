@@ -95,15 +95,21 @@ function orderBookVolumes(order, marketSide, callback) {
         var volInfOrder=0;
         var volSupOrder = 0;
         var volEqualOrder = 0;
+		console.log("query orderBookFrame =");
+		console.log(query);
+		console.log("message");
+		console.log(message);
+		console.log("message length =" +message.length);
         for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00)
                 {
                     totalVolume=totalVolume+message[i].params.size;
-                    if (message[i].params.price < order.price) volInfOrder=volInfOrder+message[i].params.size;
-                        else if (message[i].params.price == order.price) volEqualOrder=volEqualOrder+message[i].params.size;
-                    else if (message[i].params.price > order.price) volSupOrder=volSupOrder+message[i].params.size;
+                    if (message[i].params.price < order.price) volInfOrder+=message[i].params.size;
+                        else if (message[i].params.price == order.price) volEqualOrder+=message[i].params.size;
+                    else if (message[i].params.price > order.price) volSupOrder+=+message[i].params.size;
                 }
         }
+		console.log("totalVolume =" +totalVolume+"volInfOrder"+volInfOrder+"volEqualOrder"+volEqualOrder+"volSupOrder"+volSupOrder);
         callback({
             "total" : totalVolume,
             "inf" : volInfOrder,
