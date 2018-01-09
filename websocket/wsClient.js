@@ -86,7 +86,7 @@ console.log("api Get symbol");
 					 mongoDb.insertCollection(collectionName, symbol, function () {
 					 console.log("mongo insert");
 					 		 
-					 webSocketCall();
+					
                      });
                  });
             });
@@ -100,7 +100,18 @@ console.log("api Get symbol");
             });
 		});	
 		
-							 ws.onopen = function () {
+	 webSocketCall();	
+
+
+});	
+	
+	
+});
+
+
+function webSocketCall(){
+console.log("call websocket");
+					 ws.onopen = function () {
 
         console.log("CONNECTED");
 
@@ -129,17 +140,6 @@ console.log("api Get symbol");
 		sendRequest(rqstSnapshotTrades);
 		});	
     };
-
-
-});	
-	
-	
-});
-
-
-function webSocketCall(){
-console.log("call websocket");
-
     
 
 }
