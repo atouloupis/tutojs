@@ -127,7 +127,7 @@ function webSocketCall(){
 		sendRequest(rqstOrderBook);
 
 		//update orderbook every 10 sec
-		var j = schedule.scheduleJob('*/1 * * * * *', function(){
+		var j = schedule.scheduleJob('*/20 * * * * *', function(){
 		sendRequest(rqstOrderBook);
 		});
 
