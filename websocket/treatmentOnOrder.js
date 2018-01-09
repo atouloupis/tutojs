@@ -13,7 +13,8 @@ function cancelOrder(id) {
         },
         "id": 123
     };
-
+		console.log("cancel order");
+	console.log(query);
     //wsConnection.ws.send(query);
 }
 
@@ -47,6 +48,8 @@ function cancelReplaceOrder(clientId,requestId,quantity,price) {
         "id": 123
     };
     //wsConnection.ws.send(query);
+		console.log("cancel or replace order");
+	console.log(query);
 }
 
 function getTradingBalance() {
@@ -56,6 +59,9 @@ function getTradingBalance() {
         "id": "tradingBalance"
     };
     wsConnection.ws.send(query);
+			console.log("getTradingBalance");
+	console.log(query);
+	
 }
 
 function getActiveOrders() {
@@ -64,6 +70,8 @@ function getActiveOrders() {
 	"params": {}, 
 	"id": "activeOrders" 
 	};
+			console.log("getActiveOrders");
+	console.log(query);
     wsConnection.ws.send(query);
 }
 

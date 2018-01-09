@@ -135,7 +135,7 @@ askLowestPrice=getTop (askarr,"min");
 			console.log ("orderDiffPerc"+orderDiffPerc);
 			console.log ("orderDiff"+orderDiff);
 			console.log ("possibleToTrade"+possibleToTrade);
-            if (possibleToTrade && orderDiffPerc > 5 && orderDiff > (10*tickSize)) {
+            if (possibleToTrade && orderDiffPerc > 1 && orderDiff > (10*tickSize)) {
                 //poser l'ordre d'achat
                 placeNewOrder(ticker.symbol, "buy", "limit", bidHighestPrice + tickSize, quantityIncrement)
                 callback();
@@ -166,7 +166,7 @@ function averageTradeVolume(symbol,callback)
 	var moyenne =  somme/lastTrades.length;// moyenne dates de trade
 	console.log ("moyenne"+moyenne);
 	//Si entre la date d'aujourd'hui et le dernier trade < 10 min et la moyenne des trades < 5 min.
-	if (date-Date.parse(lastTrades[0].timestamp)<600000 & moyenne < 300000)callback(true);
+	if (Date.parse(date)-Date.parse(lastTrades[0].timestamp)<600000 && moyenne < 300000)callback(true);
 	else callback(false);
 	});
     
