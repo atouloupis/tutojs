@@ -85,7 +85,7 @@ console.log("api Get symbol");
 				 console.log("mongo delete");
 					 mongoDb.insertCollection(collectionName, symbol, function () {
 					 console.log("mongo insert");
-					 webSeocketCall;
+					 webSocketCall();
                      });
                  });
             });
@@ -106,7 +106,7 @@ console.log("api Get symbol");
 });
 
 
-function webSeocketCall(){
+function webSocketCall(){
 console.log("call websocket");
     ws.onopen = function () {
 
