@@ -7,8 +7,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
     var collectionName = "orderBookFrame";
     var symbol = orderBookFrame.symbol;
     // Cr�er la collection
-	console.log("orderBookFrame");
-	console.log(orderBookFrame);
+
     mongoDb.createCollection(collectionName, function() {
         //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
