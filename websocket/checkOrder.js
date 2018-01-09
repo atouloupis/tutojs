@@ -51,17 +51,18 @@ function activeSellOrBuy(order, ticker) {
 		console.log("volume =");
 		console.log(volume);
             //SI diff entre notre ordre d'achat et le ticker de vente ask  inf 1% alors annuler l'ordre
+			console.log ("tick bid"+ticker.bid+"order price"+order.price);
+			console.log("volume inf ="+volume.inf+" volume equal ="+volume.equal+" order quantity ="+order.quantity);
             if (diff < 1) {
                 treatmentOnOrder.cancelOrder(order.id);
                 //eligibility.eligibilityBuy(ticker, function () {
                 //});//vérifier si on lance un ordre de vente sur cette monnaie
             }
             //Sinon est ce que le ticker d'achat bid est inférieur à mon ordre d'achat
-			console.log ("tick bid"+ticker.bid+"order price"+order.price);
             else if (ticker.bid < order.price) {
             }//Si oui on continue
             //Sinon est ce que le volume de l'orderbook bid inf a mon ordre est supérieur de X% au volume total
-			console.log("volume inf ="+volume.inf+" volume equal ="+volume.equal+" order quantity ="+order.quantity);
+			
             else if ((volume.inf + volume.equal) > 10 * order.quantity) {
                 //Si oui on annule mon ordre
                 treatmentOnOrder.cancelOrder(order.id);
