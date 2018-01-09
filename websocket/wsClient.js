@@ -74,14 +74,17 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
     exports.dbase = dbOrderBook;
-
+console.log("mongo connected");
 		var collectionName = "symbol";
     mongoDb.createCollection(collectionName, function () {
-
+console.log("coll created");
 		            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
+console.log("api Get symbol");
 					if (err) throw err;
                  mongoDb.deleteRecords(collectionName, {}, function () {
+				 console.log("mongo delete");
 					 mongoDb.insertCollection(collectionName, symbol, function () {
+					 console.log("mongo insert");
 					 webSeocketCall;
                      });
                  });
