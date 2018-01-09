@@ -82,6 +82,7 @@ function activeSellOrBuy(order, ticker) {
 function orderThanMarket(order, ticker, marketSide) {
     if (marketSide == "bid") var diff = ((ticker.bid / order.price) - 1) * 100;
     if (marketSide == "ask") var diff = ((ticker.ask / order.price) - 1) * 100;
+	console.log("diff ask =" + ticker.ask+"/"+order.price);
     console.log("DIFF : " + marketSide + JSON.stringify(diff));
     return diff;
 }
