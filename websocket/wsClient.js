@@ -74,20 +74,14 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
     exports.dbase = dbOrderBook;
-console.log("mongo connected");
 		var collectionName = "symbol";
     mongoDb.createCollection(collectionName, function () {
-console.log("coll created");
 		            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
-console.log("api Get symbol");
 					if (err) throw err;
                  mongoDb.deleteRecords(collectionName, {}, function () {
-				 console.log("mongo delete");
 					 mongoDb.insertCollection(collectionName, symbol, function () {
-					 console.log("mongo insert");
-					 		 
-					
-                     });
+
+				       });
                  });
             });
 			var l = schedule.scheduleJob('* * */12 * * *', function(){
@@ -101,8 +95,6 @@ console.log("api Get symbol");
 		});	
 		
 	 webSocketCall();	
-
-
 });	
 	
 	
@@ -110,7 +102,6 @@ console.log("api Get symbol");
 
 
 function webSocketCall(){
-console.log("call websocket");
 					 ws.onopen = function () {
 
         console.log("CONNECTED");
@@ -120,25 +111,29 @@ console.log("call websocket");
 
         ws.onmessage = function (evt) {
             treatment.splitFrame(evt.data);
-			console.log("evt received");
+			if (evt.data.method=="updateOrderbook" | evt.data.method=="snapshotOrderbook")
+			{ 
+			sendRequest(rqstAuth);
+			sendRequest(rqstReport);
+			}
+			else if (evt.data.method== "activeOrders" | evt.data.method == "report") sendRequest(rqstSnapshotTrades);
+			else if (evt.data.method=="updateOrderbook" | evt.data.method == "snapshotOrderbook")sendRequest(rqstTicker);
+			else {}
         };
 
         function sendRequest(message) {
             ws.send(JSON.stringify(message));
         }
 		sendRequest(rqstOrderBook);
-        sendRequest(rqstAuth);
-        sendRequest(rqstReport);
-        sendRequest(rqstSnapshotTrades);
-        sendRequest(rqstTicker);
+
 		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/10 * * * * *', function(){
 		sendRequest(rqstOrderBook);
 		});
-		var k = schedule.scheduleJob('*/30 * * * * *', function(){
-		sendRequest(rqstReport);
-		sendRequest(rqstSnapshotTrades);
-		});	
+		// var k = schedule.scheduleJob('*/30 * * * * *', function(){
+		// sendRequest(rqstReport);
+		// sendRequest(rqstSnapshotTrades);
+		// });	
     };
     
 
