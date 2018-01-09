@@ -111,7 +111,6 @@ function webSocketCall(){
 
         ws.onmessage = function (evt) {
             treatment.splitFrame(evt.data);
-			console.log(JSON.parse(evt.data).method);
 			if (JSON.parse(evt.data).method=="updateOrderbook" | JSON.parse(evt.data).method=="snapshotOrderbook")
 			{ 
 			sendRequest(rqstAuth);
@@ -119,7 +118,7 @@ function webSocketCall(){
 			}
 			else if (JSON.parse(evt.data).method== "activeOrders" | JSON.parse(evt.data).method == "report") sendRequest(rqstSnapshotTrades);
 			else if (JSON.parse(evt.data).method=="snapshotTrades" |JSON.parse(evt.data).method == "updateTrades")sendRequest(rqstTicker);
-			else {}
+			else {console.log(evt.data)}
         };
 
         function sendRequest(message) {
