@@ -33,7 +33,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
         }
     });
 
-    function snapshotAddAsk(orderBookFrame.ask,snapshotAddBid.bid, callback) {
+    function snapshotAddAsk(orderBookFrame, callback) {
         if (orderBookFrame.ask.length < 1 || orderBookFrame.bid.length <1) callback("snapshotFinish1");
         var objAdd = [];
 		
