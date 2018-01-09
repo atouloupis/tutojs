@@ -16,10 +16,13 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 //D�couper la trame pour respecter format
                 //D�coupe de ask et enregistrement
                 //Appel de la fonction d'ajout des ASK à partir d'un snapshot
+				console.log("deleted records orderbook");
                 snapshotAddAsk(orderBookFrame, function() {
+				console.log("updated records orderbook");
                     //D�coupe de bid et enregistrement
 					sendToWeb();
                     callbackMain("FINISH1");
+					console.log(w);
 					});
             });
         } else {
@@ -51,7 +54,8 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 params: orderBookFrame.bid[i]
             });
         }
-		
+		console.log("objAdd");
+		console.log(objAdd);
         mongoDb.insertCollection(collectionName, objAdd, function() {
             callback("snapshotFinish2");
         });

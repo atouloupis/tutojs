@@ -1,9 +1,9 @@
-var getRestFull = require('./getRestFull')
 module.exports.eligibilitySell = sell;
 module.exports.eligibilityBuy = buy;
 var mongoDb = require('./mongoDb');
 var api = require('./getRestFull');
 var getReports = require('./getReportsActiveOrders');
+var treatmentOnOrder=require('./treatmentOnOrder');
 
 function sell (ticker,callback)
 {
@@ -52,13 +52,13 @@ var askLowestPrice=100000000;
 	//si le ticker ask.price est > trade buy, on vent au prix du marché
 	if (askLowestPrice > lastBuyTrade) 
 		{ 
-		placeNewOrder(ticker.symbol,"sell","market","",balanceAvailable);
+		treatmentOnOrder.placeOrder(ticker.symbol,"sell","market","",balanceAvailable);
 		callback();
 		}
     //poser un ordre sur le prix du ticker ask moins 1 unité avec toute la quantité dispo
 	else 
 		{
-		placeNewOrder(ticker.symbol,"sell","limit",askLowestPrice-tickSize,balanceAvailable);
+		treatmentOnOrder.placeOrder(ticker.symbol,"sell","limit",askLowestPrice-tickSize,balanceAvailable);
 		callback();
 
 		}
@@ -137,7 +137,7 @@ askLowestPrice=getTop (askarr,"min");
 			console.log ("possibleToTrade"+possibleToTrade);
             if (possibleToTrade && orderDiffPerc > 1 && orderDiff > (10*tickSize)) {
                 //poser l'ordre d'achat
-                placeNewOrder(ticker.symbol, "buy", "limit", bidHighestPrice + tickSize, quantityIncrement)
+                treatmentOnOrder.placeOrder(ticker.symbol, "buy", "limit", bidHighestPrice + tickSize, quantityIncrement);
                 callback();
             }
             else {
