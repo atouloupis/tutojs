@@ -16,7 +16,8 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 //D�couper la trame pour respecter format
                 //D�coupe de ask et enregistrement
                 //Appel de la fonction d'ajout des ASK à partir d'un snapshot
-                snapshotAddAsk(orderBookFrame, function() {
+                snapshotAddAsk(orderBookFrame, function(log) {
+                    console.log(log);
                     //D�coupe de bid et enregistrement
 					sendToWeb();
                     callbackMain("FINISH1");
@@ -82,6 +83,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
         mongoDb.findRecords(collectionName, query,{_id: -1}, function(message) {
             var bid = [];
             var ask = [];
+
             for (var i = 0; i < message.length; i++) {
 
                 if (message[i].way == "bid") {
@@ -90,6 +92,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                     if (message[i].params.size!=0)ask.push(message[i].params.price);
                 }
             }
+
             ioSource.io.emit('bid message', bid);
             ioSource.io.emit('ask message', ask);
         });

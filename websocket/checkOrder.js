@@ -27,8 +27,8 @@ function activeSellOrBuy(order, ticker) {
 		//console.log(order);
 		//console.log(volume);
             //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 5% alors vendre au prix
-            if (diff < -5) {
-                treatmentOnOrder.cancelOrder(order.id);
+            if (diff < -1) {
+                treatmentOnOrder.cancelOrder(order.clientOrderId);
                 treatmentOnOrder.placeOrder(order.symbol, "sell", "market", "", order.quantity);
             }
             else if (ticker.ask > order.price) {
@@ -37,7 +37,7 @@ function activeSellOrBuy(order, ticker) {
                 //sinon est ce que le volume de l'orderbook ask inf+orderbook égal a mon ordre est supérieur de 10 fois la quantité de mon ordre
             } else if ((volume.inf + volume.equal) > 10 * order.quantity) {
                 //Si oui on annule l'ordre et on appelle l'eligibilité
-                treatmentOnOrder.cancelOrder(order.id);
+                treatmentOnOrder.cancelOrder(order.clientOrderId);
                 //eligibility.eligibilitySell(ticker, function () {
                 //}); //vérifier si on lance un ordre de vente sur cette monnaie
                 //Si non, on continue
@@ -47,15 +47,12 @@ function activeSellOrBuy(order, ticker) {
     }
     if (order.side == "buy") {
         var diff = orderThanMarket(order, ticker, "ask");
-		console.log("diff"+diff);
         orderBookVolumes(order, "bid", function (volume) {
-		console.log("volume =");
-		console.log(volume);
             //SI diff entre notre ordre d'achat et le ticker de vente ask  inf 1% alors annuler l'ordre
-			console.log ("tick bid"+ticker.bid+"order price"+order.price);
-			console.log("volume inf ="+volume.inf+" volume equal ="+volume.equal+" order quantity ="+order.quantity);
+			//console.log ("tick bid"+ticker.bid+"order price"+order.price);
+			//console.log("volume inf ="+volume.inf+" volume equal ="+volume.equal+" order quantity ="+order.quantity);
             if (diff < 1) {
-                treatmentOnOrder.cancelOrder(order.id);
+                treatmentOnOrder.cancelOrder(order.clientOrderId);
                 eligibility.eligibilityBuy(ticker, function () {
                 });//vérifier si on lance un ordre de vente sur cette monnaie
             }
@@ -65,12 +62,12 @@ function activeSellOrBuy(order, ticker) {
 			
             else if ((volume.inf + volume.equal) > 10 * order.quantity) {
                 //Si oui on annule mon ordre
-                treatmentOnOrder.cancelOrder(order.id);
+                treatmentOnOrder.cancelOrder(order.clientOrderId);
                 eligibility.eligibilityBuy(ticker, function () {
                 });//vérifier si on lance un ordre de vente sur cette monnaie
             }
             //Si non, on continue
-            else {console.log(w);
+            else {
             }
         });
     }
@@ -81,8 +78,7 @@ function activeSellOrBuy(order, ticker) {
 function orderThanMarket(order, ticker, marketSide) {
     if (marketSide == "bid") var diff = ((ticker.bid / order.price) - 1) * 100;
     if (marketSide == "ask") var diff = ((ticker.ask / order.price) - 1) * 100;
-	console.log("diff ask =" + ticker.ask+"/"+order.price);
-    console.log("DIFF : " + marketSide + JSON.stringify(diff));
+	//console.log("diff ask =" + ticker.ask+"/"+order.price);
     return diff;
 }
 
@@ -94,9 +90,6 @@ function orderBookVolumes(order, marketSide, callback) {
         var volInfOrder=0;
         var volSupOrder = 0;
         var volEqualOrder = 0;
-		console.log("query orderBookFrame =");
-		console.log(query);
-		console.log("message length =" +message.length);
         for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00)
                 {
@@ -106,7 +99,7 @@ function orderBookVolumes(order, marketSide, callback) {
                     else if (message[i].params.price > order.price) volSupOrder+=parseFloat(message[i].params.size);
                 }
         }
-		console.log("totalVolume =" +totalVolume+"volInfOrder"+volInfOrder+"volEqualOrder"+volEqualOrder+"volSupOrder"+volSupOrder);
+		//console.log("totalVolume =" +totalVolume+"volInfOrder"+volInfOrder+"volEqualOrder"+volEqualOrder+"volSupOrder"+volSupOrder);
         callback({
             "total" : totalVolume,
             "inf" : volInfOrder,

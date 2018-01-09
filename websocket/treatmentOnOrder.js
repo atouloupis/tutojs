@@ -7,15 +7,15 @@ module.exports.activeOrders = getActiveOrders;
 
 function cancelOrder(id) {
     var query = {
-        "method": "cancelOrder",
-        "params": {
-            "clientOrderId": id
+        method: "cancelOrder",
+        params: {
+            clientOrderId: id
         },
-        "id": 123
+        id: 123
     };
 		console.log("cancel order");
 	console.log(query);
-    //wsConnection.ws.send(query);
+    wsConnection.ws.send(JSON.stringify(query));
 }
 
 function placeNewOrder(symbol,side,type,price,quantity) {

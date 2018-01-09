@@ -11,7 +11,7 @@ var schedule = require('node-schedule');
 var mongoDb = require('./mongoDb');
 var api = require('./getRestFull');
 
-var symbol = 'BCHETH';
+var symbol = 'SNCETH';
 
 exports.io = io;
 app.get('/', function (req, res) {
@@ -110,6 +110,7 @@ function webSocketCall(){
         };
 
         ws.onmessage = function (evt) {
+
             treatment.splitFrame(evt.data);
 			if (JSON.parse(evt.data).method=="snapshotOrderbook")
 			{ 

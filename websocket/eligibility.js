@@ -75,7 +75,7 @@ function buy (ticker,callback) {
 		for (var i = 0; i < tradingBalance.length; i++) {
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
-			console.log(balanceAvailable);
+			console.log("balance available : "+balanceAvailable);
 			}
         }
 
@@ -125,16 +125,16 @@ askLowestPrice=getTop (askarr,"min");
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;
                         quantityIncrement = message[i].quantityIncrement;
-						console.log("symbol"+message[i].id);
-						console.log("ticksize"+tickSize);
-						console.log("quantityIncrement"+quantityIncrement);
+						//console.log("symbol"+message[i].id);
+						//console.log("ticksize"+tickSize);
+						//console.log("quantityIncrement"+quantityIncrement);
                     }
                 }
      
             //si le volume échangé est bon  + la diff entre bid et ask > 5% +  diff entre ask et bid > 10 tick size
-			console.log ("orderDiffPerc"+orderDiffPerc);
-			console.log ("orderDiff"+orderDiff);
-			console.log ("possibleToTrade"+possibleToTrade);
+			//console.log ("orderDiffPerc"+orderDiffPerc);
+			//console.log ("orderDiff"+orderDiff);
+			//console.log ("possibleToTrade"+possibleToTrade);
             if (possibleToTrade && orderDiffPerc > 1 && orderDiff > (10*tickSize)) {
                 //poser l'ordre d'achat
                 treatmentOnOrder.placeOrder(ticker.symbol, "buy", "limit", bidHighestPrice + tickSize, quantityIncrement);
@@ -158,13 +158,13 @@ function averageTradeVolume(symbol,callback)
 	var somme = 0;
 	getReports.getLastTrades (symbol,50,function(lastTrades){
 	//calcul moyenne temps de trade en vente
-	console.log("lastTrades.length"+lastTrades.length);
+	//console.log("lastTrades.length"+lastTrades.length);
 	for (var i=0; i<lastTrades.length-1;i++)
 		{
 		somme += Date.parse(lastTrades[i].timestamp)-Date.parse(lastTrades[i+1].timestamp);
 		}
 	var moyenne =  somme/lastTrades.length;// moyenne dates de trade
-	console.log ("moyenne"+moyenne);
+	//console.log ("moyenne"+moyenne);
 	//Si entre la date d'aujourd'hui et le dernier trade < 10 min et la moyenne des trades < 5 min.
 	if (Date.parse(date)-Date.parse(lastTrades[0].timestamp)<600000 && moyenne < 300000)callback(true);
 	else callback(false);
