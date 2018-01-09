@@ -108,6 +108,7 @@ console.log("api Get symbol");
 
 function webSocketCall(){
 console.log("call websocket");
+console.log(ws);
     ws.onopen = function () {
 
         console.log("CONNECTED");
