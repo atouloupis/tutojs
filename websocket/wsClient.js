@@ -85,32 +85,10 @@ console.log("api Get symbol");
 				 console.log("mongo delete");
 					 mongoDb.insertCollection(collectionName, symbol, function () {
 					 console.log("mongo insert");
-					 webSocketCall();
-                     });
-                 });
-            });
-			var l = schedule.scheduleJob('* * */12 * * *', function(){
-				            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
-							if (err) throw err;
-                mongoDb.deleteRecords(collectionName, {}, function () {
-                    mongoDb.insertCollection(collectionName, symbol, function () {
-                    })
-                });
-            });
-		});	
-
-
-});	
-	
-	
-});
-
-
-function webSocketCall(){
-console.log("call websocket");
-ws.onerror = function (evt) {
-        console.log(evt)};
-    ws.onopen = function () {
+					 
+					 
+					 
+					 ws.onopen = function () {
 
         console.log("CONNECTED");
 
@@ -139,5 +117,40 @@ ws.onerror = function (evt) {
 		sendRequest(rqstSnapshotTrades);
 		});	
     };
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 webSocketCall();
+                     });
+                 });
+            });
+			var l = schedule.scheduleJob('* * */12 * * *', function(){
+				            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
+							if (err) throw err;
+                mongoDb.deleteRecords(collectionName, {}, function () {
+                    mongoDb.insertCollection(collectionName, symbol, function () {
+                    })
+                });
+            });
+		});	
+
+
+});	
+	
+	
+});
+
+
+function webSocketCall(){
+console.log("call websocket");
+
+    
 
 }
