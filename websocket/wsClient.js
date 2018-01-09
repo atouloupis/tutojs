@@ -118,7 +118,7 @@ function webSocketCall(){
 			sendRequest(rqstReport);
 			}
 			else if (JSON.parse(evt.data).method== "activeOrders" | JSON.parse(evt.data).method == "report") sendRequest(rqstSnapshotTrades);
-			else if (JSON.parse(evt.data).method=="updateOrderbook" |JSON.parse(evt.data).method == "snapshotOrderbook")sendRequest(rqstTicker);
+			else if (JSON.parse(evt.data).method=="snapshotTrades" |JSON.parse(evt.data).method == "updateTrades")sendRequest(rqstTicker);
 			else {}
         };
 
