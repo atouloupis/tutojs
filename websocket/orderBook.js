@@ -16,14 +16,11 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 //D�couper la trame pour respecter format
                 //D�coupe de ask et enregistrement
                 //Appel de la fonction d'ajout des ASK à partir d'un snapshot
-                snapshotAddAsk(orderBookFrame.ask, function(log) {
+                snapshotAddAsk(orderBookFrame, function() {
                     //D�coupe de bid et enregistrement
-                    //Appel de la fonction d'ajout des BID à partir d'un snapshot
-                    snapshotAddBid(orderBookFrame.bid, function() {
-                        sendToWeb();
-                        callbackMain("FINISH1");
-                    });
-                });
+					sendToWeb();
+                    callbackMain("FINISH1");
+					});
             });
         } else {
             // R�cup�rer donn�es dans Mongo
@@ -36,41 +33,29 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
         }
     });
 
-    function count(line) {
-        mongoDb.count(collectionName, function(count) {
-            console.log(count + "ligne : " + line);
-        });
-    }
-
-    function snapshotAddAsk(orderBookAskArray, callback) {
-        if (orderBookAskArray.length < 1) callback("snapshotFinish1");
+    function snapshotAddAsk(orderBookFrame.ask,snapshotAddBid.bid, callback) {
+        if (orderBookFrame.ask.length < 1 || orderBookFrame.bid.length <1) callback("snapshotFinish1");
         var objAdd = [];
-        for (var i = 0; i < orderBookAskArray.length; i++) {
-            objAdd.push({
+		
+        for (var i = 0; i < orderBookFrame.ask.length; i++) {
+			objAdd.push({
                 symbol: symbol,
                 way: "ask",
-                params: orderBookAskArray[i]
+                params: orderBookFrame.ask[i]
             });
         }
+		for (var i = 0; i < orderBookFrame.bid.length; i++) {
+            objAdd.push({
+                symbol: symbol,
+                way: "bid",
+                params: orderBookFrame.bid[i]
+            });
+        }
+		
         mongoDb.insertCollection(collectionName, objAdd, function() {
             callback("snapshotFinish2");
         });
 
-    }
-
-    function snapshotAddBid(orderBookBidArray, callback) {
-        if (orderBookBidArray.length < 1) callback();
-        var objAdd = [];
-        for (var i = 0; i < orderBookBidArray.length; i++) {
-            objAdd.push({
-                symbol: symbol,
-                way: "bid",
-                params: orderBookBidArray[i]
-            });
-        }
-        mongoDb.insertCollection(collectionName, objAdd, function() {
-            callback();
-        });
     }
 
     function insertOrReplace(orderBookFrame, callback) {
