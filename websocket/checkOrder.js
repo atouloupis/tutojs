@@ -58,20 +58,22 @@ function activeSellOrBuy(order, ticker) {
                 treatmentOnOrder.cancelOrder(order.id);
                 //eligibility.eligibilityBuy(ticker, function () {
                 //});//vérifier si on lance un ordre de vente sur cette monnaie
+				console.log(w);
             }
             //Sinon est ce que le ticker d'achat bid est inférieur à mon ordre d'achat
-            else if (ticker.bid < order.price) {
+            else if (ticker.bid < order.price) {console.log(w);
             }//Si oui on continue
             //Sinon est ce que le volume de l'orderbook bid inf a mon ordre est supérieur de X% au volume total
 			
             else if ((volume.inf + volume.equal) > 10 * order.quantity) {
                 //Si oui on annule mon ordre
                 treatmentOnOrder.cancelOrder(order.id);
+				console.log(w);
                 //eligibility.eligibilityBuy(ticker, function () {
                 //});//vérifier si on lance un ordre de vente sur cette monnaie
             }
             //Si non, on continue
-            else {
+            else {console.log(w);
             }
         });
     }
