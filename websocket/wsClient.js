@@ -111,6 +111,7 @@ function webSocketCall(){
 
         ws.onmessage = function (evt) {
             treatment.splitFrame(evt.data);
+			console.log(evt.data.method);
 			if (evt.data.method=="updateOrderbook" | evt.data.method=="snapshotOrderbook")
 			{ 
 			sendRequest(rqstAuth);
