@@ -77,7 +77,7 @@ function buy (ticker,callback) {
 		else {
 			//console.log(tradingBalance.length);
 		for (var i = 0; i < tradingBalance.length; i++) {
-		console.log(JSON.stringify(ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:")));
+		console.log(JSON.stringify(ticker.symbol).replace(/\"([^(\")"]+)\":/g,"$1:"));
 		
 		console.log(JSON.stringify(ticker.symbol).length);
 		console.log(JSON.stringify(ticker.symbol).substr(0, JSON.stringify(ticker.symbol).length - 3));
