@@ -55,7 +55,7 @@ console.log("askLowestPrice"+askLowestPrice);
 			console.log(message[i].tickSize);
 				tickSize = message[i].tickSize;
 			}
-		});
+		
 	console.log("ticksize"+tickSize);
 	
 	//si le ticker ask.price est > trade buy, on vent au prix du marché
@@ -75,6 +75,7 @@ console.log("askLowestPrice"+askLowestPrice);
 		console.log("price"+price);
 		console.log(w);
 		}
+});
 });
 });
 	});
