@@ -28,6 +28,8 @@ function getLastBuyTrade (symbol,callback)
 var collectionName="activeOrders";
 var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
+console.log("allorders");
+console.log(allOrders);
 	for (i=0;i<allOrders.length;i++)
 		{
 		if (allOrders[i].status == "filled" & allOrders[i].side == "buy") 
