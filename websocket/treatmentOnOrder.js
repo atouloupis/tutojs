@@ -15,7 +15,7 @@ function cancelOrder(id) {
     };
 		console.log("cancel order");
 	console.log(query);
-    wsConnection.ws.send(JSON.stringify(query));
+    //wsConnection.ws.send(JSON.stringify(query));
 }
 
 function placeNewOrder(symbol,side,type,price,quantity) {

@@ -14,7 +14,7 @@ function hasAnOrder(tickerFrame) {
     }
     else {
 	eligibility.eligibilityBuy(tickerFrame.params,function(){});
-	//console.log("activeOrder undefined");
+	console.log("activeOrder undefined");
 	} //vérifier si on lance un ordre d'achat sur cette monnaie
     });
 }
@@ -24,8 +24,8 @@ function activeSellOrBuy(order, ticker) {
         var diff = orderThanMarket(order, ticker, "bid");
         orderBookVolumes(order, "ask", function (volume) {
 		console.log("orderBookVolumes");
-		//console.log(order);
-		//console.log(volume);
+		console.log(order);
+		console.log(volume);
             //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 5% alors vendre au prix
             if (diff < -1) {
                 treatmentOnOrder.cancelOrder(order.clientOrderId);
