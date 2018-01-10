@@ -85,17 +85,17 @@ function buy (ticker,callback) {
 			console.log("balance available : "+balanceAvailable);
 			
 			}
-			console.log(w);
+			
         }
 
 
     if (balanceAvailable != 0) {
 	console.log ("balance available");
         sell(ticker, function () {
-            callback();
+            callback();console.log(w);
         });
     }
-    else {
+    else {console.log(w);
         //récupérer order achat le plus elevé et order vente le plus faible
         var collectionName = "orderBookFrame";
         var query = {"symbol": ticker.symbol};
