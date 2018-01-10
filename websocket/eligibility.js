@@ -41,7 +41,7 @@ var balanceAvailable=0;
                     askarr.push(parseFloat(message[i].params.price));
                 }
             }
-console.log(askarr);
+
 askLowestPrice=getTop (askarr,"min");
 console.log("askLowestPrice"+askLowestPrice);
 
