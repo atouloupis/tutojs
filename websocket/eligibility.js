@@ -7,6 +7,7 @@ var treatmentOnOrder=require('./treatmentOnOrder');
 
 function sell (ticker,callback)
 {
+	console.log("sell");
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
     api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
@@ -58,7 +59,8 @@ var askLowestPrice=100000000;
     //poser un ordre sur le prix du ticker ask moins 1 unité avec toute la quantité dispo
 	else 
 		{
-		treatmentOnOrder.placeOrder(ticker.symbol,"sell","limit",askLowestPrice-tickSize,balanceAvailable);
+		var price = parseFloat(askLowestPrice)-parseFloat(tickSize);
+		treatmentOnOrder.placeOrder(ticker.symbol,"sell","limit",price,balanceAvailable);
 		callback();
 
 		}
@@ -66,12 +68,14 @@ var askLowestPrice=100000000;
 }
 
 function buy (ticker,callback) {
+	console.log("buy");
     var balanceAvailable = 0;
     var ethAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
 		if (err)console.log(err);
 		else {
+			console.log(tradingBalance);
 		for (var i = 0; i < tradingBalance.length; i++) {
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
@@ -137,7 +141,8 @@ askLowestPrice=getTop (askarr,"min");
 			//console.log ("possibleToTrade"+possibleToTrade);
             if (possibleToTrade && orderDiffPerc > 1 && orderDiff > (10*tickSize)) {
                 //poser l'ordre d'achat
-                treatmentOnOrder.placeOrder(ticker.symbol, "buy", "limit", bidHighestPrice + tickSize, quantityIncrement);
+				var price=parseFloat( bidHighestPrice) + parseFloat(tickSize);
+                treatmentOnOrder.placeOrder(ticker.symbol, "buy", "limit", price, quantityIncrement);
                 callback();
             }
             else {

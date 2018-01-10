@@ -17,7 +17,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 //D�coupe de ask et enregistrement
                 //Appel de la fonction d'ajout des ASK à partir d'un snapshot
                 snapshotAddAsk(orderBookFrame, function(log) {
-                    console.log(log);
+                    //console.log(log);
                     //D�coupe de bid et enregistrement
 					sendToWeb();
                     callbackMain("FINISH1");
