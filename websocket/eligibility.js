@@ -75,8 +75,10 @@ function buy (ticker,callback) {
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
 		if (err)console.log(err);
 		else {
-			console.log(tradingBalance);
+			console.log(tradingBalance.length);
 		for (var i = 0; i < tradingBalance.length; i++) {
+		console.log(toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3));
+		console.log(tradingBalance[i].currency);
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
 			console.log("balance available : "+balanceAvailable);
