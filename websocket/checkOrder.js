@@ -25,15 +25,17 @@ function activeSellOrBuy(order, ticker) {
         orderBookVolumes(order, "ask", function (volume) {
 		console.log("orderBookVolumes");
 		console.log(order);
-		console.log(volume);
+		console.log("volume"+volume);
+		console.log("diff"+diff)
             //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 5% alors vendre au prix
             if (diff < -1) {
                 treatmentOnOrder.cancelOrder(order.clientOrderId);
                 treatmentOnOrder.placeOrder(order.symbol, "sell", "market", "", order.quantity);
+				console.log(w);
             }
             else if (ticker.ask > order.price) {
                 //stopScript, on continue;
-
+console.log(w);
                 //sinon est ce que le volume de l'orderbook ask inf+orderbook égal a mon ordre est supérieur de 10 fois la quantité de mon ordre
             } else if ((volume.inf + volume.equal) > 10 * order.quantity) {
                 //Si oui on annule l'ordre et on appelle l'eligibilité
@@ -41,7 +43,9 @@ function activeSellOrBuy(order, ticker) {
                 //eligibility.eligibilitySell(ticker, function () {
                 //}); //vérifier si on lance un ordre de vente sur cette monnaie
                 //Si non, on continue
+				console.log(w);
             } else {
+			console.log(w);
             }
         });
     }
