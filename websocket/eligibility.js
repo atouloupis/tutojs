@@ -12,34 +12,40 @@ var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
     api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
 	if (err) throw err;
+	console.log(err);
+	console.log(result);
 	});
 
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
 	getReports.getLastBuyTrade(ticker.symbol,function(lastBuyTrade){
 	if (err) throw err;
+	console.log("lastBuyTrade"+lastBuyTrade);
 	});
 	
 // il faut vérifier combien il y a sur le compte pour cette monnaie
 	api.getHitBTC("/api/2/trading/balance","get",function(err,tradingBalance){
 	if (err) throw err;
 	for (var i=0;i<tradingBalance.length;i++) {
-		if (tradingBalance.currency == ticker.symbol.substr(0,ticker.symbol.length-3))balanceAvailable=tradingBalance.available;
+		if (tradingBalance[i].currency == ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").substr(0, ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").length - 3))
+		{
+		balanceAvailable = tradingBalance[i].available;
 		}
 	});
+	console.log(balanceAvailable);
  
-//Récupérer le prix du orderbook ask le plus faible
-var collectionName = "orderBookFrame";
-var query = {"symbol" : ticker.symbol,"way" : "ask"};
-var askLowestPrice=100000000;
-	mongoDb.findRecords(collectionName, query,{_id: -1}, function(message) {
-		for (var i = 0; i<message.length;i++)
-			{
-				if (message[i].params.size!=0.00 && message[i].params.price<askLowestPrice) 
-				{
-					askLowestPrice=message[i].params.price;
-				}
-			}				
-	});
+        //Récupérer le prix du orderbook ask le plus faible
+        var collectionName = "orderBookFrame";
+        var query = {"symbol": ticker.symbol, "way" : "ask"};
+        var askLowestPrice;
+        var askarr = [];
+        mongoDb.findRecords(collectionName, query,{_id:-1}, function (message) {
+			for (var i = 0; i < message.length; i++) {
+                if (message[i].params.size != 0.00) {
+                    askarr.push(parseFloat(message[i].params.price));
+                }
+            }
+askLowestPrice=getTop (askarr,"min");
+console.log("askLowestPrice"+askLowestPrice);
 
  //recupérer l'unité prix minimum
 	var collectionName = "symbol";
@@ -49,12 +55,15 @@ var askLowestPrice=100000000;
 				if (message[i].id = ticker.symbol) var tickSize = message[i].tickSize;
 			}
 		});
-		
+	console.log("ticksize"+tickSize);
+	
 	//si le ticker ask.price est > trade buy, on vent au prix du marché
 	if (askLowestPrice > lastBuyTrade) 
 		{ 
 		treatmentOnOrder.placeOrder(ticker.symbol,"sell","market","",balanceAvailable);
 		callback();
+		console.log("sell everything at market price");
+		console.log(w);
 		}
     //poser un ordre sur le prix du ticker ask moins 1 unité avec toute la quantité dispo
 	else 
@@ -62,7 +71,8 @@ var askLowestPrice=100000000;
 		var price = parseFloat(askLowestPrice)-parseFloat(tickSize);
 		treatmentOnOrder.placeOrder(ticker.symbol,"sell","limit",price,balanceAvailable);
 		callback();
-
+		console.log("price"+price);
+		console.log(w);
 		}
 
 }
@@ -77,13 +87,8 @@ function buy (ticker,callback) {
 		else {
 			//console.log(tradingBalance.length);
 		for (var i = 0; i < tradingBalance.length; i++) {
-
-		console.log(ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").substr(0, ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").length - 3));
-		console.log(tradingBalance[i].currency);
             if (tradingBalance[i].currency == ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").substr(0, ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").length - 3)) 
-			{ balanceAvailable = tradingBalance[i].available;
-			console.log("balance available : "+balanceAvailable);
-			
+			{ balanceAvailable = tradingBalance[i].available;	
 			}
 			
         }
@@ -92,10 +97,10 @@ function buy (ticker,callback) {
     if (balanceAvailable != 0) {
 	console.log ("balance available");
         sell(ticker, function () {
-            callback();console.log(w);
+            callback();
         });
     }
-    else {console.log(w);
+    else {
         //récupérer order achat le plus elevé et order vente le plus faible
         var collectionName = "orderBookFrame";
         var query = {"symbol": ticker.symbol};
