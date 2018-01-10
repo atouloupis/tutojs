@@ -11,7 +11,7 @@ function sell (ticker,callback)
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
     api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
-	if (err) throw err;
+	if (err) console.log("delete error"+ JSON.stringify(err));
 
 
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
