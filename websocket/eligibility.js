@@ -77,12 +77,9 @@ function buy (ticker,callback) {
 		else {
 			//console.log(tradingBalance.length);
 		for (var i = 0; i < tradingBalance.length; i++) {
-		console.log(JSON.stringify(ticker.symbol));
-		var json = ticker.symbol;
-		var string =json.replace(/\"([^(\")"]+)\":/g,"$1:");
-		console.log(string);
-		console.log(JSON.stringify(ticker.symbol).length);
-		console.log(JSON.stringify(ticker.symbol).substr(0, JSON.stringify(ticker.symbol).length - 3));
+		console.log(ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:"));
+		console.log(ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").length);
+		console.log(ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").substr(0, ticker.symbol.replace(/\"([^(\")"]+)\":/g,"$1:").length - 3));
 		//console.log(tradingBalance[i].currency);
             if (JSON.stringify(tradingBalance[i].currency) == JSON.stringify(ticker.symbol).substr(0, JSON.stringify(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
