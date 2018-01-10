@@ -51,15 +51,13 @@ console.log("askLowestPrice"+askLowestPrice);
 		mongoDb.findRecords(collectionName, {id:ticker.symbol},{_id: -1}, function(message) {
 		for (var i = 0; i<message.length;i++)
 			{
-			console.log("tiksize");
-			console.log(message[i].tickSize);
 				tickSize = message[i].tickSize;
 			}
 		
 	console.log("ticksize"+tickSize);
 	
-	//si le ticker ask.price est > trade buy, on vent au prix du marché
-	if (askLowestPrice > lastBuyTrade.price) 
+	//si le ticker ask.price est < trade buy, on vent au prix du marché
+	if (askLowestPrice < lastBuyTrade.price) 
 		{ 
 		treatmentOnOrder.placeOrder(ticker.symbol,"sell","market","",balanceAvailable);
 		callback();
