@@ -32,6 +32,8 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrder
 		{
 		if (allOrders[i].status == "filled" & allOrders[i].side == "buy") 
 			{
+			console.log("all order ID");
+			console.log(allOrders[i]);
 			callback (allOrders[i]);
 			break;
 			}

@@ -12,15 +12,13 @@ var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
     api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
 	if (err) throw err;
-	console.log(err);
-	console.log(result);
-	});
+
 
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
 	getReports.getLastBuyTrade(ticker.symbol,function(lastBuyTrade){
-	if (err) throw err;
+	
 	console.log("lastBuyTrade"+lastBuyTrade);
-	});
+
 	
 // il faut vérifier combien il y a sur le compte pour cette monnaie
 	api.getHitBTC("/api/2/trading/balance","get",function(err,tradingBalance){
@@ -77,6 +75,8 @@ console.log("askLowestPrice"+askLowestPrice);
 		}
 });
 });
+	});
+	});
 }
 
 function buy (ticker,callback) {
