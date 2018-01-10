@@ -2,6 +2,7 @@ module.exports.getActiveOrders = getActiveOrders;
 module.exports.getLastBuyTrade = getLastBuyTrade;
 module.exports.getLastTrades = getLastTrades;
 var mongoDb = require('./mongoDb');
+var api = require('./getRestFull');
 
 function getActiveOrders (symbol,callback)
 {
@@ -25,14 +26,13 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrder
 
 function getLastBuyTrade (symbol,callback)
 {
-var collectionName="tradeHistory";
 var i=0;
-mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
-console.log("allorders");
+api.getHitBTC("/api/2/history/trades","get",function (err,allOrders) {
+console.log("alltrades");
 console.log(allOrders);
 	for (i=0;i<allOrders.length;i++)
 		{
-		if (allOrders[i].status == "filled" & allOrders[i].side == "buy") 
+		if (allOrders[i].status == "filled" && allOrders[i].side == "buy" && allOrders[i].symbol==symbol) 
 			{
 			console.log("all order ID");
 			console.log(allOrders[i]);
@@ -41,7 +41,7 @@ console.log(allOrders);
 			}
 		}
 	if (i==allOrders.length)callback();
-	});
+});
 }
 
 function getLastTrades (symbol,number,callback)

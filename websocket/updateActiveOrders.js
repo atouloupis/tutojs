@@ -4,8 +4,6 @@ var get = require('./getRestFull')
 
 function newActiveOrders(frame) {
     var date = new Date;
-	console.log("activeOrders BDD create in updateActiveOrders");
-	console.log(frame);
     var collectionName = "activeOrders";
     mongoDb.createCollection(collectionName, function () {
 
