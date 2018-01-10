@@ -82,6 +82,7 @@ function buy (ticker,callback) {
             if (tradingBalance[i].currency == toString(ticker.symbol).substr(0, toString(ticker.symbol).length - 3)) 
 			{ balanceAvailable = tradingBalance[i].available;
 			console.log("balance available : "+balanceAvailable);
+			console.log(w);
 			}
         }
 
