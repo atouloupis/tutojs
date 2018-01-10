@@ -17,7 +17,7 @@ var balanceAvailable=0;
 //Récupérer le dernier trade history d'achat. A savoir combien on l'a acheté
 	getReports.getLastBuyTrade(ticker.symbol,function(lastBuyTrade){
 	
-	console.log("lastBuyTrade"+lastBuyTrade);
+	console.log("lastBuyTrade"+lastBuyTrade.price);
 
 	
 // il faut vérifier combien il y a sur le compte pour cette monnaie
@@ -57,7 +57,7 @@ console.log("askLowestPrice"+askLowestPrice);
 	console.log("ticksize"+tickSize);
 	
 	//si le ticker ask.price est > trade buy, on vent au prix du marché
-	if (askLowestPrice > lastBuyTrade) 
+	if (askLowestPrice > lastBuyTrade.price) 
 		{ 
 		treatmentOnOrder.placeOrder(ticker.symbol,"sell","market","",balanceAvailable);
 		callback();

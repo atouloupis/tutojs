@@ -28,14 +28,12 @@ function getLastBuyTrade (symbol,callback)
 {
 var i=0;
 api.getHitBTC("/api/2/history/trades","get",function (err,allOrders) {
-console.log("alltrades");
-console.log(allOrders);
 	for (i=0;i<allOrders.length;i++)
 		{
 		if (allOrders[i].side == "buy" && allOrders[i].symbol==symbol) 
 			{
-			console.log("all order ID");
-			console.log(allOrders[i]);
+			// console.log("all order ID");
+			// console.log(allOrders[i]);
 			callback (allOrders[i]);
 			break;
 			}
