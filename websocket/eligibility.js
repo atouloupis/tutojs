@@ -30,6 +30,7 @@ var balanceAvailable=0;
 		{
 		balanceAvailable = tradingBalance[i].available;
 		}
+		}
 	});
 	console.log(balanceAvailable);
  
