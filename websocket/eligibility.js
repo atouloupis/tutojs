@@ -29,8 +29,6 @@ var balanceAvailable=0;
 		balanceAvailable = tradingBalance[i].available;
 		}
 		}
-	
-	console.log(balanceAvailable);
  
         //Récupérer le prix du orderbook ask le plus faible
         var collectionName = "orderBookFrame";
@@ -43,15 +41,17 @@ var balanceAvailable=0;
                     askarr.push(parseFloat(message[i].params.price));
                 }
             }
+console.log(askarr);
 askLowestPrice=getTop (askarr,"min");
 console.log("askLowestPrice"+askLowestPrice);
 
  //recupérer l'unité prix minimum
 	var collectionName = "symbol";
+	var tickSize;
 		mongoDb.findRecords(collectionName, "",{_id: -1}, function(message) {
 		for (var i = 0; i<message.length;i++)
 			{
-				if (message[i].id = ticker.symbol) var tickSize = message[i].tickSize;
+				if (message[i].id = ticker.symbol) tickSize = message[i].tickSize;
 			}
 		});
 	console.log("ticksize"+tickSize);
