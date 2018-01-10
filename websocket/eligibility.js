@@ -48,10 +48,12 @@ console.log("askLowestPrice"+askLowestPrice);
  //recupérer l'unité prix minimum
 	var collectionName = "symbol";
 	var tickSize;
-		mongoDb.findRecords(collectionName, "",{_id: -1}, function(message) {
+		mongoDb.findRecords(collectionName, {id:ticker.symbol},{_id: -1}, function(message) {
 		for (var i = 0; i<message.length;i++)
 			{
-				if (message[i].id = ticker.symbol) tickSize = message[i].tickSize;
+			console.log("tiksize");
+			console.log(message[i].tickSize);
+				tickSize = message[i].tickSize;
 			}
 		});
 	console.log("ticksize"+tickSize);
