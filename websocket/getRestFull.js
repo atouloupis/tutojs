@@ -10,7 +10,7 @@ function getHitBTC(path,method,callback) {
             'Accept': 'application/json',
 			'Authorization' : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
 			
-        },
+        }
     };
     var req = https.request(options, function (res) {
         res.setEncoding('utf8');

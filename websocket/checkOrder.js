@@ -6,12 +6,11 @@ var mongoDb = require('./mongoDb');
 
 
 function hasAnOrder(tickerFrame) {
-
-	get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
-	console.log(activeOrder);
+    get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
+console.log(activeOrder);
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params);
-			console.log("activeOrder status undefined");
+			console.log("activeOrder status not undefined");
     }
     else {
 	eligibility.eligibilityBuy(tickerFrame.params,function(){});
@@ -24,29 +23,32 @@ function activeSellOrBuy(order, ticker) {
     if (order.side == "sell") {
         var diff = orderThanMarket(order, ticker, "bid");
         orderBookVolumes(order, "ask", function (volume) {
-		console.log("orderBookVolumes");
-		console.log(order);
-		console.log("volume"+volume);
-		console.log("diff"+diff)
-            //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 5% alors vendre au prix
+		//console.log("orderBookVolumes");
+		//console.log(order);
+		//console.log("volume");
+		//console.log(volume);
+		//console.log("diff"+diff)
+            //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 1% alors vendre au prix
             if (diff < -1) {
                 treatmentOnOrder.cancelOrder(order.clientOrderId);
                 treatmentOnOrder.placeOrder(order.symbol, "sell", "market", "", order.quantity);
-				console.log(w);
             }
+            //console.log("ticker ask")
+            //console.log(ticker.ask)
+            //console.log("order price")
             else if (ticker.ask > order.price) {
                 //stopScript, on continue;
-console.log(w);
+                //console.log(order.price)
                 //sinon est ce que le volume de l'orderbook ask inf+orderbook égal a mon ordre est supérieur de 10 fois la quantité de mon ordre
             } else if ((volume.inf + volume.equal) > 10 * order.quantity) {
                 //Si oui on annule l'ordre et on appelle l'eligibilité
                 treatmentOnOrder.cancelOrder(order.clientOrderId);
-                //eligibility.eligibilitySell(ticker, function () {
-                //}); //vérifier si on lance un ordre de vente sur cette monnaie
+                //console.log("order quantity")
+                //console.log( order.quantity)
+                eligibility.eligibilitySell(ticker, function () {
+                }); //vérifier si on lance un ordre de vente sur cette monnaie
                 //Si non, on continue
-				console.log(w);
             } else {
-			console.log(w);
             }
         });
     }

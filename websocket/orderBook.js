@@ -65,17 +65,19 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
             var newEntryBid = { $set:{symbol: symbol,way: "bid",params: {price: orderBookFrame.bid[0].price,size: orderBookFrame.bid[0].size}}};
             mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
+                callback();
             });
         }
 
-        if (typeof orderBookFrame.ask[0] != "undefined") {
+        else if (typeof orderBookFrame.ask[0] != "undefined") {
             var queryAsk = {symbol: symbol,way: "ask","params.price": orderBookFrame.ask[0].price};
             var newEntryAsk = {$set:{symbol: symbol,way: "ask",params: {price: orderBookFrame.ask[0].price,size: orderBookFrame.ask[0].size}}};
             mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
+                callback();
             });
 
         }
-        callback();
+        else {callback();}
     }
 
     function sendToWeb() {

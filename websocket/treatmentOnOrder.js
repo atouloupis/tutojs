@@ -15,64 +15,81 @@ function cancelOrder(id) {
     };
 		console.log("cancel order");
 	console.log(query);
-    //wsConnection.ws.send(JSON.stringify(query));
+    wsConnection.ws.send(JSON.stringify(query));
 }
 
 function placeNewOrder(symbol,side,type,price,quantity) {
+    if (type=="limit"){
     var query = {
-        "method": "newOrder",
-        "params": {
-            "clientOrderId": generateUUID(),//Required parameter. Uniqueness must be guaranteed within a single trading day, including all active orders.
-            "symbol": symbol,
-            "side": side,//sell or buy
-            "type": type, //Optional. Default - limit. One of: limit, market, stopLimit, stopMarket
-            "price": price,
-            "quantity": quantity
+        method: "newOrder",
+        params: {
+            clientOrderId: generateUUID(),//Required parameter. Uniqueness must be guaranteed within a single trading day, including all active orders.
+            symbol: symbol,
+            side: side,//sell or buy
+            type: type, //Optional. Default - limit. One of: limit, market, stopLimit, stopMarket
+            price: "",
+            quantity: quantity
         },
-        "id": 123
-    };
+        id: 456
+    };}
+    else {
+        var query = {
+            method: "newOrder",
+            params: {
+                clientOrderId: generateUUID(),//Required parameter. Uniqueness must be guaranteed within a single trading day, including all active orders.
+                symbol: symbol,
+                side: side,//sell or buy
+                type: type, //Optional. Default - limit. One of: limit, market, stopLimit, stopMarket
+                timeInForce:"FOK",
+                quantity: quantity
+            },
+            id: 456
+        };
+
+    }
+
 	console.log("new order place");
 	console.log(query);
-    //wsConnection.ws.send(query);
+    wsConnection.ws.send(JSON.stringify(query));
 }
 
 function cancelReplaceOrder(clientId,requestId,quantity,price) {
     var query = {
-        "method": "cancelReplaceOrder",
-        "params": {
-            "clientOrderId": clientId,//Replaced order
-            "requestClientId": requestId,
-            "quantity": quantity,
-            "price": price
+        method: "cancelReplaceOrder",
+        params: {
+            clientOrderId: clientId,//Replaced order
+            requestClientId: requestId,
+            quantity: quantity,
+            price: price
         },
-        "id": 123
+        id: 123
     };
-    //wsConnection.ws.send(query);
+    wsConnection.ws.send(query);
 		console.log("cancel or replace order");
-	console.log(query);
+	console.log(JSON.stringify(query));
 }
 
 function getTradingBalance() {
     var query = {
-        "method": "getTradingBalance",
-        "params": {},
-        "id": "tradingBalance"
+        method: "getTradingBalance",
+        params: {},
+        id: "tradingBalance"
     };
     wsConnection.ws.send(query);
 			console.log("getTradingBalance");
-	console.log(query);
+	console.log(JSON.stringify(query));
 	
 }
 
 function getActiveOrders() {
     var query = { 
-	"method": "getOrders", 
-	"params": {}, 
-	"id": "activeOrders" 
+	method: "getOrders",
+	params: {},
+	id: "activeOrders"
 	};
 			console.log("getActiveOrders");
 	console.log(query);
-    wsConnection.ws.send(query);
+    wsConnection.ws.send(JSON.stringify(query));
 }
 
 function generateUUID () { // Public Domain/MIT

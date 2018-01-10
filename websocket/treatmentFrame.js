@@ -36,4 +36,7 @@ function splitFrame(jsonFrame) {
             transfer.checkCoinWithdraw(tradingBalanceResult, function () {
             });
         }
+    if (jsonFrame.id == "456") {
+console.log(jsonFrame);
+    }
 }
