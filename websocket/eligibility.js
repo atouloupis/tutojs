@@ -31,7 +31,7 @@ var balanceAvailable=0;
 		balanceAvailable = tradingBalance[i].available;
 		}
 		}
-	});
+	
 	console.log(balanceAvailable);
  
         //Récupérer le prix du orderbook ask le plus faible
@@ -75,7 +75,8 @@ console.log("askLowestPrice"+askLowestPrice);
 		console.log("price"+price);
 		console.log(w);
 		}
-
+});
+});
 }
 
 function buy (ticker,callback) {
