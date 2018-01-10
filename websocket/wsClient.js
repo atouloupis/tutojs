@@ -87,11 +87,13 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 			var l = schedule.scheduleJob('* * */12 * * *', function(){
 				            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
 							if (err) console.log (err);
+							else{
                 mongoDb.deleteRecords(collectionName, {}, function () {
                     mongoDb.insertCollection(collectionName, symbol, function () {
-                    })
+                    });
                 });
-            });
+            }
+			});
 		});	
 		
 	 webSocketCall();	
