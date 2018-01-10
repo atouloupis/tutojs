@@ -25,7 +25,7 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrder
 
 function getLastBuyTrade (symbol,callback)
 {
-var collectionName="activeOrders";
+var collectionName="tradeHistory";
 var i=0;
 mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
 console.log("allorders");
