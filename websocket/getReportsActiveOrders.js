@@ -32,7 +32,7 @@ console.log("alltrades");
 console.log(allOrders);
 	for (i=0;i<allOrders.length;i++)
 		{
-		if (allOrders[i].status == "filled" && allOrders[i].side == "buy" && allOrders[i].symbol==symbol) 
+		if (allOrders[i].side == "buy" && allOrders[i].symbol==symbol) 
 			{
 			console.log("all order ID");
 			console.log(allOrders[i]);
