@@ -27,7 +27,7 @@ function placeNewOrder(symbol,side,type,price,quantity) {
             symbol: symbol,
             side: side,//sell or buy
             type: type, //Optional. Default - limit. One of: limit, market, stopLimit, stopMarket
-            price: "",
+            price: price,
             quantity: quantity
         },
         id: 456
@@ -50,7 +50,7 @@ function placeNewOrder(symbol,side,type,price,quantity) {
 
 	console.log("new order place");
 	console.log(query);
-    wsConnection.ws.send(JSON.stringify(query));
+    //wsConnection.ws.send(JSON.stringify(query));
 }
 
 function cancelReplaceOrder(clientId,requestId,quantity,price) {
