@@ -13,6 +13,7 @@ var objAdd =[{id:00}];
 for (var i=0;i<10000;i++)
 {
 objAdd.push({id:i});
+console.log(objAdd);
 mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
 var updateQuery = {id:i};
 var newValues ={$set: {params : { "size" : 1}}};
