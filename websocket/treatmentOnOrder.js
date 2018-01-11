@@ -13,8 +13,8 @@ function cancelOrder(id) {
         },
         id: 123
     };
-		console.log("cancel order");
-	console.log(query);
+		// console.log("cancel order");
+	// console.log(query);
     wsConnection.ws.send(JSON.stringify(query));
 }
 
@@ -48,8 +48,8 @@ function placeNewOrder(symbol,side,type,price,quantity) {
 
     }
 
-	console.log("new order place");
-	console.log(query);
+	// console.log("new order place");
+	// console.log(query);
     wsConnection.ws.send(JSON.stringify(query));
 }
 
@@ -75,8 +75,8 @@ function getTradingBalance() {
         params: {},
         id: "tradingBalance"
     };
-    wsConnection.ws.send(query);
-			console.log("getTradingBalance");
+    // wsConnection.ws.send(query);
+			// console.log("getTradingBalance");
 	console.log(JSON.stringify(query));
 	
 }
@@ -87,8 +87,8 @@ function getActiveOrders() {
 	params: {},
 	id: "activeOrders"
 	};
-			console.log("getActiveOrders");
-	console.log(query);
+			// console.log("getActiveOrders");
+	// console.log(query);
     wsConnection.ws.send(JSON.stringify(query));
 }
 

@@ -7,7 +7,7 @@ var treatmentOnOrder=require('./treatmentOnOrder');
 
 function sell (ticker,callback)
 {
-	console.log("sell");
+	// console.log("sell");
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
     api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
@@ -61,7 +61,7 @@ askLowestPrice=getTop (askarr,"min");
 		{ 
 		treatmentOnOrder.placeOrder(ticker.symbol,"sell","market","",balanceAvailable);
 		callback();
-		console.log("sell everything at market price");
+		// console.log("sell everything at market price");
 		}
     //poser un ordre sur le prix du ticker ask moins 1 unité avec toute la quantité dispo
 	else 
@@ -69,7 +69,7 @@ askLowestPrice=getTop (askarr,"min");
 		var price = parseFloat(askLowestPrice)-parseFloat(tickSize);
 		treatmentOnOrder.placeOrder(ticker.symbol,"sell","limit",price,balanceAvailable);
 		callback();
-		console.log("price"+price);
+		// console.log("price"+price);
 		}
 });
 });
@@ -79,7 +79,7 @@ askLowestPrice=getTop (askarr,"min");
 }
 
 function buy (ticker,callback) {
-	console.log("buy");
+	// console.log("buy");
     var balanceAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
@@ -93,7 +93,7 @@ function buy (ticker,callback) {
         }
 
     if (balanceAvailable != 0) {
-	console.log ("balance available");
+	// console.log ("balance available");
         sell(ticker, function () {
             callback();
         });
@@ -128,7 +128,7 @@ askLowestPrice=getTop (askarr,"min");
         var tickSize = 0;
         var quantityIncrement = 0;
         averageTradeVolume(ticker.symbol, function (possibleToTrade) {
-console.log(possibleToTrade)
+// console.log(possibleToTrade)
             // récupérer le tick minimum et la quantité minimum
             var collectionName = "symbol";
 			var query={id : ticker.symbol};
@@ -138,16 +138,16 @@ console.log(possibleToTrade)
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;
                         quantityIncrement = message[i].quantityIncrement;
-						console.log("symbol"+message[i].id);
-						console.log("ticksize"+tickSize);
-						console.log("quantityIncrement"+quantityIncrement);
+						// console.log("symbol"+message[i].id);
+						// console.log("ticksize"+tickSize);
+						// console.log("quantityIncrement"+quantityIncrement);
                     }
                 }
      
             //si le volume échangé est bon  + la diff entre bid et ask > 2% +  diff entre ask et bid > 10 tick size
-			console.log ("orderDiffPerc"+orderDiffPerc);
-			console.log ("orderDiff"+orderDiff);
-			console.log ("possibleToTrade"+possibleToTrade);
+			// console.log ("orderDiffPerc"+orderDiffPerc);
+			// console.log ("orderDiff"+orderDiff);
+			// console.log ("possibleToTrade"+possibleToTrade);
             if (possibleToTrade && orderDiffPerc > 2 && orderDiff > (10*tickSize)) {
                 //poser l'ordre d'achat
 				var price=parseFloat( bidHighestPrice) + parseFloat(tickSize);
@@ -172,13 +172,13 @@ function averageTradeVolume(symbol,callback)
 	var somme = 0;
 	getReports.getLastTrades (symbol,50,function(lastTrades){
 	//calcul moyenne temps de trade en vente
-	console.log("lastTrades.length"+lastTrades.length);
+	// console.log("lastTrades.length"+lastTrades.length);
 	for (var i=0; i<lastTrades.length-1;i++)
 		{
 		somme += Date.parse(lastTrades[i].timestamp)-Date.parse(lastTrades[i+1].timestamp);
 		}
 	var moyenne =  somme/lastTrades.length;// moyenne dates de trade
-	console.log ("moyenne"+moyenne);
+	// console.log ("moyenne"+moyenne);
 	//Si entre la date d'aujourd'hui et le dernier trade < 10 min et la moyenne des trades < 5 min.
 	if (Date.parse(date)-Date.parse(lastTrades[0].timestamp)<600000 && moyenne < 300000)callback(true);
 	else callback(false);

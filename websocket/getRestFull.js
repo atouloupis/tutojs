@@ -24,8 +24,8 @@ function getHitBTC(path,method,callback) {
 			
                 var json = JSON.parse(buffer);
             } catch (err) {
-			console.log(buffer);
-			console.log(options);
+			// console.log(buffer);
+			// console.log(options);
                 return callback(err);
             }
             callback(false, json);

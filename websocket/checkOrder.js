@@ -7,10 +7,10 @@ var mongoDb = require('./mongoDb');
 
 function hasAnOrder(tickerFrame) {
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
-console.log(activeOrder);
+//console.log(activeOrder);
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params);
-			console.log("activeOrder status not undefined");
+			// console.log("activeOrder status not undefined");
     }
     else {
 	eligibility.eligibilityBuy(tickerFrame.params,function(){});
