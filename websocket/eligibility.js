@@ -117,6 +117,9 @@ function buy (ticker,callback) {
             }
 bidHighestPrice=getTop (bidarr,"max");
 askLowestPrice=getTop (askarr,"min");
+console.log("bid High"+bidHighestPrice);
+console.log("askLowestPrice"+askLowestPrice);
+
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
         var orderDiff=askLowestPrice-bidHighestPrice;
