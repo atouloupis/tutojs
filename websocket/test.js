@@ -12,7 +12,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 
 for (var i=0;i<10000;i++)
 {
-var objAdd= toArray([{id : i},{id : "test"},{id : "test"},{id : "test"},{id : "test"},{id : "test"}]);
+var objAdd= JSON.parse([{id : i},{id : "test"},{id : "test"},{id : "test"},{id : "test"},{id : "test"}]);
 mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
 var updateQuery = {id:i};
 var newValues ={$set: {params : { "size" : 1}}};
