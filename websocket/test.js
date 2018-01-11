@@ -13,23 +13,23 @@ var objAdd =[];
 
 		for (var i = 0; i < 10000; i++) {
             objAdd.push({
-                symbol: "ETHBTC",
-                way: "bid",
-                params: i
+                id: i,
+                title: "test",
+                params: "new params"
             });
         }
 		
-for (var i=0;i<10000;i++)
+for (var i=0;i<100;i++)
 {
-console.log(objAdd);
+//console.log(objAdd);
 mongoDb.insertCollection(collectionName,objAdd,function(){});
 var updateQuery = {id:i};
 var newValues ={$set: {params : { "size" : 1}}};
 mongoDb.updateCollection(collectionName,updateQuery, newValues,function(){});
 mongoDb.findRecords(collectionName,"",function(message){
-console.log(message);});
+//console.log(message);});
 }
-if (i=10000){
+if (i=100){
 console.log("terminé");
 var date1 = new Date;
 console.log("time =" + (date1-date0))
