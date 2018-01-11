@@ -1,8 +1,24 @@
-// var mongoDb = require ('./mongoDb');
-// var dbName = "orderBook";
-// var mongoClient = require('mongodb').MongoClient;
-// var urlOrderBook = "mongodb://localhost:27017/orderBook";
-
+var mongoDb = require ('./mongoDb');
+var dbName = "orderBook";
+var mongoClient = require('mongodb').MongoClient;
+var urlOrderBook = "mongodb://localhost:27017/orderBook";
+var collectionName = "test";
+var date0= new Date;
+for (var i=0;i<10000;i++)
+{
+var objAdd= [{id : i},{id : "test"},{id : "test"},{id : "test"},{id : "test"},{id : "test"}]
+mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
+var updateQuery = {id:i};
+var newValues ={$set: {params : { "size" : 1}}});
+mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});
+mongoDb.findRecords(dbName,collectionName,"",function(message){
+console.log(message);});
+}
+if (i=10000){
+console.log("terminé");
+var date1 = new Date;
+console.log("time =" + (date1-date0))
+}
 //mongoDb.deleteRecords(dbName,collectionName,JSON.parse('{ "symbol" : "BTGETH" }'),function(){});
 // var objAdd=JSON.parse('{ "symbol" : "BTGETH", "way" : "ask", "params" : {"size":10, "price" : 123456} }')
 //mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
@@ -83,13 +99,10 @@ function getHitBTC(path,method,callback) {
 			'Authorization' : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
 		}    
     };
-console.log(options);
     https.request(options, function (res) {
         res.setEncoding('utf8');
-        console.log("test");
 		res.on('data', function (chunk) {
             callback(chunk);
-			console.log(chunk);
         });
     }).end();
 }
