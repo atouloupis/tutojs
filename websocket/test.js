@@ -4,6 +4,12 @@ var mongoClient = require('mongodb').MongoClient;
 var urlOrderBook = "mongodb://localhost:27017/orderBook";
 var collectionName = "test";
 var date0= new Date;
+
+mongoClient.connect(urlOrderBook, function (err, db) {
+    if (err) throw err;
+    var dbOrderBook = db.db("orderBook");
+
+
 for (var i=0;i<10000;i++)
 {
 var objAdd= [{id : i},{id : "test"},{id : "test"},{id : "test"},{id : "test"},{id : "test"}]
@@ -19,6 +25,8 @@ console.log("terminé");
 var date1 = new Date;
 console.log("time =" + (date1-date0))
 }
+
+});
 //mongoDb.deleteRecords(dbName,collectionName,JSON.parse('{ "symbol" : "BTGETH" }'),function(){});
 // var objAdd=JSON.parse('{ "symbol" : "BTGETH", "way" : "ask", "params" : {"size":10, "price" : 123456} }')
 //mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
@@ -87,23 +95,23 @@ console.log("time =" + (date1-date0))
 	
 	// });
 
- var https = require('https');
+ // var https = require('https');
 
-function getHitBTC(path,method,callback) {
-    var options = {
-        host: "api.hitbtc.com",
-        path: "/api/2/trading/balance",
-        method: "get",
-	    headers: {
-            'Accept': 'application/json',
-			'Authorization' : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
-		}    
-    };
-    https.request(options, function (res) {
-        res.setEncoding('utf8');
-		res.on('data', function (chunk) {
-            callback(chunk);
-        });
-    }).end();
-}
-getHitBTC(1,2,function(chunk){});
+// function getHitBTC(path,method,callback) {
+    // var options = {
+        // host: "api.hitbtc.com",
+        // path: "/api/2/trading/balance",
+        // method: "get",
+	    // headers: {
+            // 'Accept': 'application/json',
+			// 'Authorization' : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
+		// }    
+    // };
+    // https.request(options, function (res) {
+        // res.setEncoding('utf8');
+		// res.on('data', function (chunk) {
+            // callback(chunk);
+        // });
+    // }).end();
+// }
+// getHitBTC(1,2,function(chunk){});
