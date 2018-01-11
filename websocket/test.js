@@ -9,7 +9,7 @@ for (var i=0;i<10000;i++)
 var objAdd= [{id : i},{id : "test"},{id : "test"},{id : "test"},{id : "test"},{id : "test"}]
 mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
 var updateQuery = {id:i};
-var newValues ={$set: {params : { "size" : 1}}});
+var newValues ={$set: {params : { "size" : 1}}};
 mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});
 mongoDb.findRecords(dbName,collectionName,"",function(message){
 console.log(message);});
