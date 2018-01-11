@@ -8,7 +8,7 @@ var date0= new Date;
 mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
-
+	exports.dbase = dbOrderBook;
 
 for (var i=0;i<10000;i++)
 {

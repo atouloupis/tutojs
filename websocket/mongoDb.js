@@ -5,7 +5,8 @@ module.exports.findRecords = find;
 module.exports.updateCollection = update;
 module.exports.count = count;
 
-var connectDbaseSource = require('./wsClient.js');
+// var connectDbaseSource = require('./wsClient.js');
+var connectDbaseSource = require('./test.js');
 
 function createMongoCollection(collectionName, callback) {
     var k = 0;
