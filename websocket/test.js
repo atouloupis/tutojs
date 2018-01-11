@@ -5,6 +5,8 @@ var urlOrderBook = "mongodb://localhost:27017/orderBook";
 var collectionName = "test";
 var date0= new Date;
 
+
+
 mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
@@ -26,7 +28,7 @@ mongoDb.insertCollection(collectionName,objAdd,function(){});
 var updateQuery = {id:i};
 var newValues ={$set: {params : { "size" : 1}}};
 mongoDb.updateCollection(collectionName,updateQuery, newValues,function(){});
-mongoDb.findRecords(collectionName,"",function(message){
+mongoDb.findRecords(collectionName,"",{_id:-1},function(message){
 //console.log(message);
 });
  }
