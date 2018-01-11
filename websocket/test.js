@@ -9,10 +9,10 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
 	exports.dbase = dbOrderBook;
-var objAdd =[{"id":0}];
+var objAdd =['{"id":0}'];
 for (var i=0;i<10000;i++)
 {
-objAdd.push({"id":i});
+objAdd.push('{"id":'+i'}');
 console.log(objAdd);
 mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
 var updateQuery = {id:i};
