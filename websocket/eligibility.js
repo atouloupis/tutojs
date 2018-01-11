@@ -117,8 +117,8 @@ function buy (ticker,callback) {
             }
 bidHighestPrice=getTop (bidarr,"max");
 askLowestPrice=getTop (askarr,"min");
-console.log("bid High"+bidHighestPrice);
-console.log("askLowestPrice"+askLowestPrice);
+// console.log("bid High"+bidHighestPrice);
+// console.log("askLowestPrice"+askLowestPrice);
 
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
@@ -133,7 +133,7 @@ console.log(possibleToTrade)
             var collectionName = "symbol";
 			var query={id : ticker.symbol};
             mongoDb.findRecords(collectionName, query,{_id: -1}, function (message) {
-                console.log(message)
+                // console.log(message)
                 for (var i = 0; i < message.length; i++) {
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;
@@ -170,7 +170,7 @@ function averageTradeVolume(symbol,callback)
 	var date = new Date;
     //récupérer les 50 derniers trades en vente
 	var somme = 0;
-	getReports.getLastTrades (symbol,10,function(lastTrades){
+	getReports.getLastTrades (symbol,50,function(lastTrades){
 	//calcul moyenne temps de trade en vente
 	console.log("lastTrades.length"+lastTrades.length);
 	for (var i=0; i<lastTrades.length-1;i++)
