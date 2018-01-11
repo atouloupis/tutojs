@@ -80,7 +80,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 					if (err) throw err;
                  mongoDb.deleteRecords(collectionName, {}, function () {
 					 mongoDb.insertCollection(collectionName, symbol, function () {
-
 				       });
                  });
             });

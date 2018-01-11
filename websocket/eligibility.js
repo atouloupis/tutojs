@@ -144,7 +144,7 @@ console.log(possibleToTrade)
                     }
                 }
      
-            //si le volume échangé est bon  + la diff entre bid et ask > 5% +  diff entre ask et bid > 10 tick size
+            //si le volume échangé est bon  + la diff entre bid et ask > 2% +  diff entre ask et bid > 10 tick size
 			console.log ("orderDiffPerc"+orderDiffPerc);
 			console.log ("orderDiff"+orderDiff);
 			console.log ("possibleToTrade"+possibleToTrade);
