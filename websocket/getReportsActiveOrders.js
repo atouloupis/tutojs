@@ -49,7 +49,7 @@ function getLastTrades (symbol,number,callback)
 {
 var lastTrades=[];
 var collectionName = "tradeHistory";
-mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allTrades){
+mongoDb.findRecords(collectionName,{"symbol":symbol},{timestamp: -1},function(allTrades){
 console.log(allTrades);
 	if (number>allTrades.length)callback(lastTrades);
 	else{
