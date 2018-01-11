@@ -50,7 +50,7 @@ function placeNewOrder(symbol,side,type,price,quantity) {
 
 	console.log("new order place");
 	console.log(query);
-    //wsConnection.ws.send(JSON.stringify(query));
+    wsConnection.ws.send(JSON.stringify(query));
 }
 
 function cancelReplaceOrder(clientId,requestId,quantity,price) {
