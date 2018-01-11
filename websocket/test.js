@@ -9,7 +9,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
     var dbOrderBook = db.db("orderBook");
 	exports.dbase = dbOrderBook;
-var objAdd =[{id:00}];
+var objAdd =[{"id":0}];
 for (var i=0;i<10000;i++)
 {
 objAdd.push({"id":i});
