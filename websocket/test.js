@@ -22,11 +22,11 @@ var objAdd =[];
 for (var i=0;i<10000;i++)
 {
 console.log(objAdd);
-mongoDb.insertCollection(dbName,collectionName,objAdd,function(){});
+mongoDb.insertCollection(collectionName,objAdd,function(){});
 var updateQuery = {id:i};
 var newValues ={$set: {params : { "size" : 1}}};
-mongoDb.updateCollection(dbName,collectionName,updateQuery, newValues,function(){});
-mongoDb.findRecords(dbName,collectionName,"",function(message){
+mongoDb.updateCollection(collectionName,updateQuery, newValues,function(){});
+mongoDb.findRecords(collectionName,"",function(message){
 console.log(message);});
 }
 if (i=10000){
