@@ -5,8 +5,6 @@ var collectionName = "test";
 
 var date0 = new Date;
 
-
-
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
 	var date2 = new Date;
@@ -38,11 +36,11 @@ mongoClient.connect(url, function(err, db) {
 
         find(connectDbaseSource,collectionName, "", function(message) {console.log(i)});
     }
-    if (i = 100) {
+    if (i = 10) {
         console.log("terminé");
         var date1 = new Date;
         console.log("time =" + (date1 - date0));
-
+db.close();
     }
 });
 
