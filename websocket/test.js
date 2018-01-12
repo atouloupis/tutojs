@@ -13,7 +13,7 @@ mongoClient.connect(url, function(err, db) {
 	myObj.push({id:j});
 	}
 
-	connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
+	connectDbaseSource.collection(collectionName).insertMany(myObj, function(err, res) {
         if (err) throw err;
 		console.log("Number of documents ="+ res.length)
 		var date1 = new Date;
