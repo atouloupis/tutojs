@@ -6,13 +6,16 @@ var mongoDb = require('./mongoDb');
 
 
 function hasAnOrder(tickerFrame) {
+console.log(6);
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
 //console.log(activeOrder);
+console.log(7);
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params);
 			// console.log("activeOrder status not undefined");
     }
     else {
+	console.log(8);
 	eligibility.eligibilityBuy(tickerFrame.params,function(){});
 	// console.log("activeOrder undefined");
 	} //vérifier si on lance un ordre d'achat sur cette monnaie
