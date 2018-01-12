@@ -9,7 +9,7 @@ mongoClient.connect(url, function(err, db) {
 	var date2 = new Date;
     var connectDbaseSource = db.db("heavy");
 
-    for (var j = 0; j < 1; j++) {
+    for (var j = 0; j < 10; j++) {
 	    connectDbaseSource.collection(collectionName).find("").toArray(function(err, result) {
         if (err) throw err;
 		console.log("Number of documents ="+ result.length)
