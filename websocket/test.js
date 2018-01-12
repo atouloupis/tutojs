@@ -19,7 +19,7 @@ mongoClient.connect(url, function(err, db) {
         });
     }
 
-    for (var j = 0; i < 10; i++) {
+    for (var j = 0; j < 10; j++) {
         // insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {var date3 = new Date;});
         // var updateQuery = {
             // id: i
@@ -36,7 +36,7 @@ mongoClient.connect(url, function(err, db) {
 
         find(connectDbaseSource,collectionName, "", function(message) {console.log(i)});
     }
-    if (j = 10) {
+    if (j == 10) {
         console.log("terminé");
         var date1 = new Date;
         console.log("time =" + (date1 - date0));
