@@ -17,6 +17,7 @@ console.log(7);
     else {
 	console.log(8);
 	eligibility.eligibilityBuy(tickerFrame.params,function(){});
+	console.log(11);
 	// console.log("activeOrder undefined");
 	} //vérifier si on lance un ordre d'achat sur cette monnaie
     });

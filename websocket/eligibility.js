@@ -83,6 +83,7 @@ function buy (ticker,callback) {
     var balanceAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
+	console.log(13);
         if (err)console.log(err);
     else {
 		for (var i = 0; i < tradingBalance.length; i++) {
@@ -107,6 +108,7 @@ function buy (ticker,callback) {
         var bidarr = [];
         var askarr = [];
         mongoDb.findRecords(collectionName, query,{_id:-1}, function (message) {
+		console.log(14);
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
                     bidarr.push(parseFloat(message[i].params.price));
@@ -133,6 +135,7 @@ askLowestPrice=getTop (askarr,"min");
             var collectionName = "symbol";
 			var query={id : ticker.symbol};
             mongoDb.findRecords(collectionName, query,{_id: -1}, function (message) {
+			console.log(15);
                 // console.log(message)
                 for (var i = 0; i < message.length; i++) {
                     if (message[i].id = ticker.symbol) {
