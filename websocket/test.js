@@ -10,7 +10,6 @@ var date0 = new Date;
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var connectDbaseSource = db.db("heavy");
-console.log(connectDbaseSource);
     var objAdd = [];
 
     for (var i = 0; i < 10000; i++) {
@@ -35,7 +34,7 @@ console.log(connectDbaseSource);
             }
         };
         update(connectDbaseSource,collectionName, updateQuery, newValues, function() {});
-        find(connectDbaseSource,collectionName, "", function(message) {});
+        find(connectDbaseSource,collectionName, {id:0}, function(message) {});
     }
     if (i = 100) {
         console.log("terminé");
