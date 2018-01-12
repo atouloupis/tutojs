@@ -14,11 +14,8 @@ mongoClient.connect(url, function(err, db) {
         if (err) throw err;
 		console.log("Number of documents ="+ result.length)
 		var date1 = new Date;
-		console.log(date1);
-		console.log(date2);
 		var time = date1-date2;
-		console.log(time);
-		console.log("time ="+date1-date2+" ms");
+		console.log("time ="+time+" ms");
     });
     }
 });
