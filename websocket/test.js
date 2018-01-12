@@ -54,7 +54,7 @@ function insertMongoCollection(connectDbaseSource,collectionName, myObj, callbac
 }
 
 function find(connectDbaseSource,collectionName, query, callback) {
-    connectDbaseSource.dbase.collection(collectionName).find(query).toArray(function(err, result) {
+    connectDbaseSource.collection(collectionName).find(query).toArray(function(err, result) {
         if (err) throw err;
         callback(result);
     });
@@ -62,7 +62,7 @@ function find(connectDbaseSource,collectionName, query, callback) {
 
 function update(connectDbaseSource,collectionName, query, newValues, callback) {
 
-    connectDbaseSource.dbase.collection(collectionName).updateOne(query, newValues, {
+    connectDbaseSource.collection(collectionName).updateOne(query, newValues, {
         upsert: true
     }, function(err, res) {
         if (err) throw err;
