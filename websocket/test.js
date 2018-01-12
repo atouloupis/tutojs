@@ -22,7 +22,7 @@ mongoClient.connect(url, function(err, db) {
     }
 
     for (var i = 0; i < 100; i++) {
-        insertCollection(collectionName, objAdd, function() {});
+        insertMongoCollection(collectionName, objAdd, function() {});
         var updateQuery = {
             id: i
         };
@@ -33,8 +33,8 @@ mongoClient.connect(url, function(err, db) {
                 }
             }
         };
-        updateCollection(collectionName, updateQuery, newValues, function() {});
-        findRecords(collectionName, "", function(message) {});
+        update(collectionName, updateQuery, newValues, function() {});
+        find(collectionName, "", function(message) {});
     }
     if (i = 100) {
         console.log("terminé");
