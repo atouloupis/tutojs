@@ -10,7 +10,7 @@ var date0 = new Date;
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var connectDbaseSource = db.db("heavy");
-exports.connectDbaseSource = connectDbaseSource;
+
     var objAdd = [];
 
     for (var i = 0; i < 10000; i++) {
@@ -22,7 +22,7 @@ exports.connectDbaseSource = connectDbaseSource;
     }
 
     for (var i = 0; i < 100; i++) {
-        insertMongoCollection(collectionName, objAdd, function() {});
+        insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {});
         var updateQuery = {
             id: i
         };
@@ -33,8 +33,8 @@ exports.connectDbaseSource = connectDbaseSource;
                 }
             }
         };
-        update(collectionName, updateQuery, newValues, function() {});
-        find(collectionName, "", function(message) {});
+        update(connectDbaseSource,collectionName, updateQuery, newValues, function() {});
+        find(connectDbaseSource,collectionName, "", function(message) {});
     }
     if (i = 100) {
         console.log("terminé");
@@ -45,21 +45,21 @@ exports.connectDbaseSource = connectDbaseSource;
 
 
 
-function insertMongoCollection(collectionName, myObj, callback) {
+function insertMongoCollection(connectDbaseSource,collectionName, myObj, callback) {
     connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
         if (err) throw err;
         callback();
     });
 }
 
-function find(collectionName, query, callback) {
+function find(connectDbaseSource,collectionName, query, callback) {
     connectDbaseSource.dbase.collection(collectionName).find(query).toArray(function(err, result) {
         if (err) throw err;
         callback(result);
     });
 }
 
-function update(collectionName, query, newValues, callback) {
+function update(connectDbaseSource,collectionName, query, newValues, callback) {
 
     connectDbaseSource.dbase.collection(collectionName).updateOne(query, newValues, {
         upsert: true
