@@ -22,7 +22,9 @@ mongoClient.connect(url, function(err, db) {
 
     for (var i = 0; i < 100; i++) {
         insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {});
+}
 
+for (var i = 0; i < 100; i++) {
         var updateQuery = {
             id: i
         };
@@ -34,6 +36,8 @@ mongoClient.connect(url, function(err, db) {
             }
         };
         update(connectDbaseSource,collectionName, updateQuery, newValues, function() {});
+}
+for (var i = 0; i < 100; i++) {
         find(connectDbaseSource,collectionName, {id:0}, function(message) {});
     }
     if (i = 100) {
