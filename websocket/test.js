@@ -10,7 +10,7 @@ mongoClient.connect(url, function(err, db) {
     var connectDbaseSource = db.db("heavy");
 	var myObj=[];
     for (var j = 0; j < 960000; j++) {
-	myObj=myObj.push({id:j});
+	myObj.push({id:j});
 	}
 
 	connectDbaseSource.dbase.collection(collectionName).insertMany(myObj, function(err, res) {
