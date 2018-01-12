@@ -34,7 +34,10 @@ mongoClient.connect(url, function(err, db) {
         // update(connectDbaseSource,collectionName, updateQuery, newValues, function() {var date4 = new Date;});
 
 
-        find(connectDbaseSource,collectionName, "", function(message) {console.log(i)});
+        find(connectDbaseSource,collectionName, "", function(message) {
+		console.log(message.length)
+		console.log("time ="+new Date-date2+" ms");
+		});
     }
     if (j == 10) {
         console.log("terminé");
