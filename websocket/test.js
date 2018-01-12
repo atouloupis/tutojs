@@ -21,7 +21,7 @@ mongoClient.connect(url, function(err, db) {
         });
     }
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 10; i++) {
         // insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {var date3 = new Date;});
         // var updateQuery = {
             // id: i
