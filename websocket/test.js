@@ -11,7 +11,7 @@ mongoClient.connect(url, function(err, db) {
     var connectDbaseSource = db.db("heavy");
 
     for (var j = 0; j < 10; j++) {
-	    connectDbaseSource.collection(collectionName).find(query).toArray(function(err, result) {
+	    connectDbaseSource.collection(collectionName).find("").toArray(function(err, result) {
         if (err) throw err;
 		console.log("Number of documents ="+ message.length)
 		var date1 = new Date;
