@@ -42,9 +42,7 @@ mongoClient.connect(url, function(err, db) {
         console.log("terminé");
         var date1 = new Date;
         console.log("time =" + (date1 - date0));
-		console.log("time1 =" + (date1 - date2));
-		console.log("time2 =" + (date1 - date3));
-		console.log("time3 =" + (date1 - date4));
+
     }
 });
 
