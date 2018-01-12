@@ -20,7 +20,7 @@ mongoClient.connect(url, function(err, db) {
 		var time = date1-date2;
 		console.log("time ="+time+" ms");
 
-}
+});
 // for (var j = 0; j < 960000; j++) {
 	    // connectDbaseSource.collection(collectionName).find("").toArray(function(err, result) {
         // if (err) throw err;
