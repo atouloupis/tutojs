@@ -10,7 +10,7 @@ var date0 = new Date;
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var connectDbaseSource = db.db("heavy");
-
+exports.connectDbaseSource = connectDbaseSource;
     var objAdd = [];
 
     for (var i = 0; i < 10000; i++) {
