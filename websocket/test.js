@@ -3,7 +3,6 @@ var mongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/heavy";
 var collectionName = "test";
 
-var date0 = new Date;
 
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -15,6 +14,8 @@ mongoClient.connect(url, function(err, db) {
         if (err) throw err;
 		console.log("Number of documents ="+ result.length)
 		var date1 = new Date;
+		console.log(date1);
+		console.log(date2);
 		console.log("time ="+date1-date2+" ms");
     });
     }
