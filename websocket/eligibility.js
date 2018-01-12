@@ -82,6 +82,7 @@ function buy (ticker,callback) {
 	// console.log("buy");
     var balanceAvailable = 0;
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
+	console.log(12);
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
 	console.log(13);
         if (err)console.log(err);
