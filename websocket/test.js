@@ -9,6 +9,7 @@ var date0 = new Date;
 
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
+	var date2 = new Date;
     var connectDbaseSource = db.db("heavy");
     var objAdd = [];
 
@@ -21,7 +22,7 @@ mongoClient.connect(url, function(err, db) {
     }
 
     for (var i = 0; i < 100; i++) {
-        insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {});
+        insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {var date3 = new Date;});
 }
 
 for (var i = 0; i < 100; i++) {
@@ -35,7 +36,7 @@ for (var i = 0; i < 100; i++) {
                 }
             }
         };
-        update(connectDbaseSource,collectionName, updateQuery, newValues, function() {});
+        update(connectDbaseSource,collectionName, updateQuery, newValues, function() {var date4 = new Date;});
 }
 for (var i = 0; i < 100; i++) {
         find(connectDbaseSource,collectionName, {id:0}, function(message) {});
@@ -43,7 +44,10 @@ for (var i = 0; i < 100; i++) {
     if (i = 100) {
         console.log("terminé");
         var date1 = new Date;
-        console.log("time =" + (date1 - date0))
+        console.log("time =" + (date1 - date0));
+		console.log("time1 =" + (date1 - date2));
+		console.log("time2 =" + (date1 - date3));
+		console.log("time3 =" + (date1 - date4));
     }
 });
 
