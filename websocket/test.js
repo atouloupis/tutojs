@@ -22,21 +22,21 @@ mongoClient.connect(url, function(err, db) {
     }
 
     for (var i = 0; i < 100; i++) {
-        insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {var date3 = new Date;});
-        var updateQuery = {
-            id: i
-        };
-        var newValues = {
-            $set: {
-                params: {
-                    "size": 1
-                }
-            }
-        };
-        update(connectDbaseSource,collectionName, updateQuery, newValues, function() {var date4 = new Date;});
+        // insertMongoCollection(connectDbaseSource,collectionName, objAdd, function() {var date3 = new Date;});
+        // var updateQuery = {
+            // id: i
+        // };
+        // var newValues = {
+            // $set: {
+                // params: {
+                    // "size": 1
+                // }
+            // }
+        // };
+        // update(connectDbaseSource,collectionName, updateQuery, newValues, function() {var date4 = new Date;});
 
 
-        find(connectDbaseSource,collectionName, {id:0}, function(message) {});
+        find(connectDbaseSource,collectionName, "", function(message) {console.log(i)});
     }
     if (i = 100) {
         console.log("terminé");
