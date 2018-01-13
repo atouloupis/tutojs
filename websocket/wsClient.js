@@ -75,7 +75,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
     var dbOrderBook = db.db("orderBook");
     exports.dbase = dbOrderBook;
 		var collectionName = "symbol";
-    mongoDb.createCollection(collectionName, function () {
 		            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
 					if (err) throw err;
                  mongoDb.deleteRecords(collectionName, {}, function () {
@@ -95,10 +94,7 @@ mongoClient.connect(urlOrderBook, function (err, db) {
 			});
 		});	
 		
-	 webSocketCall();	
-});	
-	
-	
+	 webSocketCall();
 });
 
 
@@ -126,13 +122,9 @@ function webSocketCall(){
             ws.send(JSON.stringify(message));
         }
 		sendRequest(rqstOrderBook);
-
 		//update orderbook every 10 sec
 		var j = schedule.scheduleJob('*/20 * * * * *', function(){
 		sendRequest(rqstOrderBook);
 		});
-
     };
-    
-
 }

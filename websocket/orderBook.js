@@ -6,10 +6,7 @@ module.exports.updateOrderBook = updateOrderBook;
 function updateOrderBook(orderBookFrame, method, callbackMain) {
     var collectionName = "orderBookFrame";
     var symbol = orderBookFrame.symbol;
-    // Cr�er la collection
-
-    mongoDb.createCollection(collectionName, function() {
-        //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
+     //Si methode = snapshotOrderbook, supprime et remplace toutes les valeurs pour ce symbol
         if (method == "snapshotOrderbook") {
             deleteQuery = JSON.parse('{ "symbol" : "' + symbol + '" }');
             mongoDb.deleteRecords(collectionName, deleteQuery, function() {
@@ -32,7 +29,6 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 callbackMain("FINISH2");
             });
         }
-    });
 
     function snapshotAddAsk(orderBookFrame, callback) {
         if (orderBookFrame.ask.length < 1 || orderBookFrame.bid.length <1) callback("snapshotFinish1");

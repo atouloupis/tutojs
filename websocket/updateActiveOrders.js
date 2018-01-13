@@ -5,8 +5,6 @@ var get = require('./getRestFull')
 function newActiveOrders(frame) {
     var date = new Date;
     var collectionName = "activeOrders";
-    mongoDb.createCollection(collectionName, function () {
-
         if (date.getSeconds() == 1) {
             get.getHitBTC("/api/2/order", "GET", function (err, activeOrder) {
                 if (err) throw err;
@@ -24,7 +22,4 @@ function newActiveOrders(frame) {
         }
         if (frame.length == 0) mongoDb.deleteRecords(collectionName, {}, function () {
         });
-
-    });
-
 }

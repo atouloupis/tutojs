@@ -3,8 +3,6 @@ var mongoDb = require('./mongoDb');
 
 function newTradeHistory(frame) {
     var collectionName = "tradeHistory";
-    mongoDb.createCollection(collectionName, function () {
-
         for (var i = 0; i < frame.data.length; i++) {
 		var id=frame.data[i].id;
 		var price=frame.data[i].price;
@@ -16,5 +14,4 @@ function newTradeHistory(frame) {
             mongoDb.updateCollection(collectionName, queryUpdate, {$set:queryUpdate}, function () {
             });
         }
-    });
 }
