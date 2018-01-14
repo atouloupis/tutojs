@@ -9,7 +9,7 @@ function getActiveOrders (symbol,callback)
 var collectionName="activeOrders";
 console.log(9);
 mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
-console.log(10);
+    console.log("allOrders");
     for (var i=0;i<allOrders.length;i++)
 		{
 		if (allOrders[i].status == "new" || allOrders[i].status == "partiallyFilled")
@@ -58,7 +58,6 @@ mongoDb.findRecords(collectionName,{"symbol":symbol},{timestamp: -1},function(al
 			{
 			lastTrades.push(allTrades[i]);
 			}
-
 		}
         if (i==number)callback(lastTrades);
         if (number==0)callback(lastTrades);

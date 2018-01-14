@@ -81,7 +81,18 @@ askLowestPrice=getTop (askarr,"min");
 function buy (ticker,callback) {
 	// console.log("buy");
     var balanceAvailable = 0;
+
+    var collectionName="activeOrderBook";
+    var query = "{symbol:"+ticker.symbol+"}";
     //est ce qu'il y a déjà une certaine quantité en stock. Si oui, got to sell
+    mongoDb.findRecords(collectionName, query,{_id:-1}, function (message) {
+        if (message.length > 1)
+        {
+            for (var i=0;i<message.length;i++)treatmentOnOrder.cancelOrder(message.clientOrderId);
+
+        }
+    });
+
 	console.log(12);
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
 	console.log(13);

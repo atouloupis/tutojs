@@ -12,6 +12,7 @@ function newTradeHistory(frame) {
 		var symbol=frame.symbol;
             var queryUpdate = {id:id, price:price, quantity:quantity, side:side, timestamp:timestamp, symbol:symbol};
             mongoDb.updateCollection(collectionName, queryUpdate, {$set:queryUpdate}, function () {
+                mongoDb.createIndex(collectionName,"{symbol:1,timestamp:-1}",function(){});
             });
         }
 }

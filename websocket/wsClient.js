@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var jsonfile = require('jsonfile');
+var keyfile = './key.json';
 var mongoClient = require('mongodb').MongoClient;
 var urlOrderBook = "mongodb://localhost:27017/orderBook";
 var treatment = require('./treatmentFrame');
@@ -10,7 +12,6 @@ var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
 var mongoDb = require('./mongoDb');
 var api = require('./getRestFull');
-
 var symbol = 'ADXETH';
 
 exports.io = io;
@@ -36,14 +37,7 @@ var rqstTicker1 = {
     },
     "id": 123
 };
-var rqstAuth = {
-    "method": "login",
-    "params": {
-        "algo": "BASIC",
-        "pKey": "c400a7328769d4b0582a80365b2d8f98",
-        "sKey": "1b3fde82887787cccf3c56a264a1ee5e"
-    }
-};
+
 var rqstReport = {
     "method": "subscribeReports",
     "params": {}
@@ -72,33 +66,59 @@ exports.ws = ws;
 
 mongoClient.connect(urlOrderBook, function (err, db) {
     if (err) throw err;
-    var dbOrderBook = db.db("orderBook");
-    exports.dbase = dbOrderBook;
-		var collectionName = "symbol";
-		            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
-					if (err) throw err;
-                 mongoDb.deleteRecords(collectionName, {}, function () {
-					 mongoDb.insertCollection(collectionName, symbol, function () {
-				       });
-                 });
-            });
-			var l = schedule.scheduleJob('* * */12 * * *', function(){
-				            api.getHitBTC("/api/2/public/symbol","GET", function (err,symbol) {
-							if (err) console.log (err);
-							else{
-                mongoDb.deleteRecords(collectionName, {}, function () {
-                    mongoDb.insertCollection(collectionName, symbol, function () {
+    exports.dbase = db.db("orderBook");
+
+    mongoDb.createCollection("symbol", function () {
+        mongoDb.createCollection("activeOrders", function () {
+            mongoDb.createCollection("orderBookFrame", function () {
+                mongoDb.createCollection("tradeHistory", function () {
+                    mongoDb.dropCollection("activeOrders", function () {});
+                    mongoDb.dropCollection("orderBookFrame", function () {});
+                    mongoDb.dropCollection("tradeHistory", function () {});
+        var collectionName = "symbol";
+        api.getHitBTC("/api/2/public/symbol", "GET", function (err, symbol) {
+            if (err) throw err;
+            console.log("wsClient1");
+            mongoDb.dropCollection(collectionName, function () {
+;
+                mongoDb.insertCollection(collectionName, symbol, function () {
+
+                    mongoDb.createIndex(collectionName, "{id:1}", function () {
                     });
                 });
-            }
-			});
-		});	
-		
-	 webSocketCall();
+            });
+        });
+        schedule.scheduleJob('*/5 * * * *', function () {
+            api.getHitBTC("/api/2/public/symbol", "GET", function (err, symbol) {
+                if (err) console.log(err);
+                else {
+                    console.log("wsClient2");
+                    mongoDb.dropCollection(collectionName, function () {
+                        mongoDb.insertCollection(collectionName, symbol, function () {
+                        });
+                    });
+                }
+            });
+        });
+        jsonfile.readFile(keyfile, function (err, obj) {
+            var rqstAuth = {
+                "method": "login",
+                "params": {
+                    "algo": "BASIC",
+                    "pKey": obj.hitbtc.pKey,
+                    "sKey": obj.hitbtc.sKey
+                }
+            };
+            webSocketCall(rqstAuth);
+        });
+    });
+});
+});
+});
 });
 
 
-function webSocketCall(){
+function webSocketCall(rqstAuth){
 					 ws.onopen = function () {
 
         console.log("CONNECTED");

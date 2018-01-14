@@ -8,7 +8,8 @@ var mongoDb = require('./mongoDb');
 function hasAnOrder(tickerFrame) {
 console.log(6);
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
-//console.log(activeOrder);
+        console.log("activeorder");
+console.log(activeOrder);
 console.log(7);
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params);
@@ -27,10 +28,10 @@ function activeSellOrBuy(order, ticker) {
     if (order.side == "sell") {
         var diff = orderThanMarket(order, ticker, "bid");
         orderBookVolumes(order, "ask", function (volume) {
-		//console.log("orderBookVolumes");
-		//console.log(order);
-		//console.log("volume");
-		//console.log(volume);
+		console.log("orderBookVolumes");
+		console.log(order);
+		console.log("volume");
+		console.log(volume);
 		//console.log("diff"+diff)
             //Si la diff entre notre ordre de vente et le ticker d'achat bid est inf 1% alors vendre au prix
             if (diff < -1) {

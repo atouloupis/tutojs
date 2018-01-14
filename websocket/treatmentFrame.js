@@ -24,7 +24,7 @@ function splitFrame(jsonFrame) {
         if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
             var reportsParams = jsonFrame.params;
             if (reportsParams != "undefined") {
-console.log(3);
+                console.log(3);
                 updtOrders.newActiveOrders(reportsParams);
             }
         }

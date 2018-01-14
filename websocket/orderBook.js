@@ -16,7 +16,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
                 snapshotAddAsk(orderBookFrame, function(log) {
                     //console.log(log);
                     //D�coupe de bid et enregistrement
-					sendToWeb();
+					//sendToWeb();
                     callbackMain("FINISH1");
 					});
             });
@@ -25,7 +25,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
             /////////////////////////////Pour les Bid/ask ////////////////
             insertOrReplace(orderBookFrame, function() {
-                sendToWeb();
+               // sendToWeb();
                 callbackMain("FINISH2");
             });
         }
@@ -49,6 +49,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             });
         }
         mongoDb.insertCollection(collectionName, objAdd, function() {
+            mongoDb.createIndex(collectionName,"{symbol:1,way:-1}",function(){});
             callback("snapshotFinish2");
         });
 
@@ -61,6 +62,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
 
             var newEntryBid = { $set:{symbol: symbol,way: "bid",params: {price: orderBookFrame.bid[0].price,size: orderBookFrame.bid[0].size}}};
             mongoDb.updateCollection(collectionName, queryBid, newEntryBid, function() {
+                mongoDb.createIndex(collectionName,"{symbol:1,way:-1}",function(){});
                 callback();
             });
         }
@@ -69,6 +71,7 @@ function updateOrderBook(orderBookFrame, method, callbackMain) {
             var queryAsk = {symbol: symbol,way: "ask","params.price": orderBookFrame.ask[0].price};
             var newEntryAsk = {$set:{symbol: symbol,way: "ask",params: {price: orderBookFrame.ask[0].price,size: orderBookFrame.ask[0].size}}};
             mongoDb.updateCollection(collectionName, queryAsk, newEntryAsk, function() {
+                mongoDb.createIndex(collectionName,"{symbol:1,way:-1}",function(){});
                 callback();
             });
 
