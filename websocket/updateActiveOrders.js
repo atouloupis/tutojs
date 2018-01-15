@@ -3,7 +3,7 @@ var mongoDb = require('./mongoDb');
 var get = require('./getRestFull')
 var date1 = new Date;
 
-function newActiveOrders(frame) {
+function newActiveOrders(frame,callback) {
     var date = new Date;
     var collectionName = "activeOrders";
         if (date-date1>60000) {
@@ -26,7 +26,9 @@ function newActiveOrders(frame) {
             var queryUpdate = {"clientOrderId": frame[i].clientOrderId};
             var newValue = frame[i];
             mongoDb.updateCollection(collectionName, queryUpdate, {$set: newValue}, function () {
-                mongoDb.createIndex(collectionName,"{symbol:1,clientOrderId:1}",function(){});
+                mongoDb.createIndex(collectionName,"{symbol:1,clientOrderId:1}",function(){
+				callback();
+				});
             });
         }
         if (frame.length==undefined)
@@ -34,7 +36,9 @@ function newActiveOrders(frame) {
             var queryUpdate = {"clientOrderId": frame.clientOrderId};
             var newValue = frame;
             mongoDb.updateCollection(collectionName, queryUpdate, {$set: newValue}, function () {
-                mongoDb.createIndex(collectionName,"{symbol:1,clientOrderId:1}",function(){});
+                mongoDb.createIndex(collectionName,"{symbol:1,clientOrderId:1}",function(){
+				callback();
+				});
             });
         }
 }
