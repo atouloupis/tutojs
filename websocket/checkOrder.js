@@ -7,9 +7,13 @@ var symbolDate = new Object();
 
 function hasAnOrder(tickerFrame) {
 var symbol=tickerFrame.params.symbol;
-console.log(symbol);
+var date=new Date;
+console.log(date-symbolDate[symbol]);
+if (date-symbolDate[symbol]>5000 || symbolDate[symbol]==undefined)
+	{
+	console.log(date-symbolDate[symbol]);
 symbolDate[symbol] = new Date;
-console.log (symbolDate);
+
 
 console.log(6);
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
@@ -27,6 +31,7 @@ console.log(7);
 	// console.log("activeOrder undefined");
 	} //vérifier si on lance un ordre d'achat sur cette monnaie
     });
+	}
 }
 
 function activeSellOrBuy(order, ticker) {
