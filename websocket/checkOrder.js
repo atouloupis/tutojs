@@ -6,9 +6,9 @@ var mongoDb = require('./mongoDb');
 var symbolDate = new Object();
 
 function hasAnOrder(tickerFrame) {
-
-symbolDate.tickerFrame.params.symbol = new Date;
-console.log (symbolDate.tickerFrame.params.symbol);
+var symbol=tickerFrame.params.symbol;
+symbolDate.symbol = new Date;
+console.log (symbolDate.symbol);
 
 console.log(6);
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
