@@ -101,7 +101,6 @@ mongoClient.connect(urlOrderBook, function (err, db) {
             });
         });
         jsonfile.readFile(keyfile, function (err, obj) {
-		console.log(obj);
             var rqstAuth = {
                 "method": "login",
                 "params": {

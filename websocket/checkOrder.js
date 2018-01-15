@@ -3,9 +3,13 @@ var treatmentOnOrder=require('./treatmentOnOrder');
 var get=require('./getReportsActiveOrders');
 var eligibility = require('./eligibility');
 var mongoDb = require('./mongoDb');
-
+var symbolDate = new Object();
 
 function hasAnOrder(tickerFrame) {
+
+symbolDate.tickerFrame.params.symbol = new Date;
+console.log (symbolDate.tickerFrame.params.symbol);
+
 console.log(6);
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
         console.log("activeorder");
