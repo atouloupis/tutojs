@@ -1,11 +1,13 @@
 module.exports.newActiveOrders = newActiveOrders;
 var mongoDb = require('./mongoDb');
 var get = require('./getRestFull')
+var date1 = new Date;
 
 function newActiveOrders(frame) {
     var date = new Date;
     var collectionName = "activeOrders";
-        if (date.getSeconds() == 1) {
+        if (date-date1>60000) {
+		date1=new Date;
             get.getHitBTC("/api/2/order", "GET", function (err, activeOrder) {
                 if (err) throw err;
                     if (frame.length != 0) {
@@ -21,7 +23,6 @@ function newActiveOrders(frame) {
         }
 
         for (var i = 0; i < frame.length; i++) {
-            console.log("AHHHHHHHH")
             var queryUpdate = {"clientOrderId": frame[i].clientOrderId};
             var newValue = frame[i];
             mongoDb.updateCollection(collectionName, queryUpdate, {$set: newValue}, function () {

@@ -8,7 +8,6 @@ var symbolDate = new Object();
 function hasAnOrder(tickerFrame) {
 var symbol=tickerFrame.params.symbol;
 var date=new Date;
-console.log(symbolDate[symbol]);
 if (date-symbolDate[symbol]>5000 || symbolDate[symbol]==undefined)
 	{
 	console.log("TIME LEFT");
@@ -33,6 +32,7 @@ console.log(7);
 	} //vérifier si on lance un ordre d'achat sur cette monnaie
     });
 	}
+	else {}
 }
 
 function activeSellOrBuy(order, ticker) {
@@ -68,7 +68,7 @@ function activeSellOrBuy(order, ticker) {
             }
         });
     }
-    if (order.side == "buy") {
+   else if (order.side == "buy") {
         var diff = orderThanMarket(order, ticker, "ask");
         orderBookVolumes(order, "bid", function (volume) {
             //SI diff entre notre ordre d'achat et le ticker de vente ask  inf 1% alors annuler l'ordre
@@ -94,13 +94,15 @@ function activeSellOrBuy(order, ticker) {
             }
         });
     }
+	else{}
 }
 
 //Actual order compared to the market, higher or lower than a specified X%age.
 //orderSide = buy or sell, marketSide= ask or bid, gapSide = positive or negative
 function orderThanMarket(order, ticker, marketSide) {
     if (marketSide == "bid") var diff = ((ticker.bid / order.price) - 1) * 100;
-    if (marketSide == "ask") var diff = ((ticker.ask / order.price) - 1) * 100;
+   else if (marketSide == "ask") var diff = ((ticker.ask / order.price) - 1) * 100;
+   else {}
 	//console.log("diff ask =" + ticker.ask+"/"+order.price);
     return diff;
 }
@@ -120,7 +122,9 @@ function orderBookVolumes(order, marketSide, callback) {
                     if (message[i].params.price < order.price) volInfOrder+=parseFloat(message[i].params.size);
                         else if (message[i].params.price == order.price) volEqualOrder+=parseFloat(message[i].params.size);
                     else if (message[i].params.price > order.price) volSupOrder+=parseFloat(message[i].params.size);
+					else{}
                 }
+				else{}
         }
 		//console.log("totalVolume =" +totalVolume+"volInfOrder"+volInfOrder+"volEqualOrder"+volEqualOrder+"volSupOrder"+volSupOrder);
         callback({
