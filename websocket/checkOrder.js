@@ -7,7 +7,8 @@ var symbolDate = new Object();
 
 function hasAnOrder(tickerFrame) {
 var symbol=tickerFrame.params.symbol;
-symbolDate.symbol = new Date;
+console.log(symbol);
+symbolDate[symbol] = new Date;
 console.log (symbolDate);
 
 console.log(6);
