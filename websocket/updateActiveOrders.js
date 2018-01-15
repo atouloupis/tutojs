@@ -10,7 +10,7 @@ function newActiveOrders(frame,callback) {
 		date1=new Date;
             get.getHitBTC("/api/2/order", "GET", function (err, activeOrder) {
                 if (err) throw err;
-                    if (frame.length != 0) {
+                    if (activeOrder.length != 0) {
                         console.log("newOrder")
                         mongoDb.dropCollection(collectionName, function () {
                             mongoDb.insertCollection(collectionName, activeOrder, function () {
