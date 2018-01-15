@@ -10,24 +10,18 @@ var symbol=tickerFrame.params.symbol;
 var date=new Date;
 if (date-symbolDate[symbol]>5000 || symbolDate[symbol]==undefined)
 	{
-	console.log("TIME LEFT");
-	console.log(date-symbolDate[symbol]);
 symbolDate[symbol] = new Date;
 
 
-console.log(6);
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
         console.log("activeorder");
 console.log(activeOrder);
-console.log(7);
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params);
 			// console.log("activeOrder status not undefined");
     }
     else {
-	console.log(8);
 	eligibility.eligibilityBuy(tickerFrame.params,function(){});
-	console.log(11);
 	// console.log("activeOrder undefined");
 	} //vérifier si on lance un ordre d'achat sur cette monnaie
     });

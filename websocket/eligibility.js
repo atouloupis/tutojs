@@ -7,7 +7,6 @@ var treatmentOnOrder=require('./treatmentOnOrder');
 
 function sell (ticker,callback)
 {
-	// console.log("sell");
 var balanceAvailable=0;
 //annuler tous les ordres pour ce symbol
     api.getHitBTC("/api/2/order?symbol="+ticker.symbol,"delete",function (err,result) {
@@ -79,7 +78,6 @@ askLowestPrice=getTop (askarr,"min");
 }
 
 function buy (ticker,callback) {
-	// console.log("buy");
     var balanceAvailable = 0;
 
     var collectionName="activeOrderBook";
@@ -93,9 +91,7 @@ function buy (ticker,callback) {
         }
     });
 
-	console.log(12);
     api.getHitBTC("/api/2/trading/balance", "get", function (err, tradingBalance) {
-	console.log(13);
         if (err)console.log(err);
     else {
 		for (var i = 0; i < tradingBalance.length; i++) {
@@ -120,7 +116,6 @@ function buy (ticker,callback) {
         var bidarr = [];
         var askarr = [];
         mongoDb.findRecords(collectionName, query,{_id:-1}, function (message) {
-		console.log(14);
 			for (var i = 0; i < message.length; i++) {
                 if (message[i].params.size != 0.00 && message[i].way == "bid") {
                     bidarr.push(parseFloat(message[i].params.price));
@@ -147,7 +142,6 @@ askLowestPrice=getTop (askarr,"min");
             var collectionName = "symbol";
 			var query={id : ticker.symbol};
             mongoDb.findRecords(collectionName, query,{_id: -1}, function (message) {
-			console.log(15);
                 // console.log(message)
                 for (var i = 0; i < message.length; i++) {
                     if (message[i].id = ticker.symbol) {
