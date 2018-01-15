@@ -11,6 +11,7 @@ var date=new Date;
 console.log(symbolDate[symbol]);
 if (date-symbolDate[symbol]>5000 || symbolDate[symbol]==undefined)
 	{
+	console.log("TIME LEFT");
 	console.log(date-symbolDate[symbol]);
 symbolDate[symbol] = new Date;
 
