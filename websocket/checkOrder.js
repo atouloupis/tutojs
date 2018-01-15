@@ -8,7 +8,7 @@ var symbolDate = new Object();
 function hasAnOrder(tickerFrame) {
 var symbol=tickerFrame.params.symbol;
 var date=new Date;
-console.log(date-symbolDate[symbol]);
+console.log(symbolDate[symbol]);
 if (date-symbolDate[symbol]>5000 || symbolDate[symbol]==undefined)
 	{
 	console.log(date-symbolDate[symbol]);
