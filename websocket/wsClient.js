@@ -12,7 +12,7 @@ var port = process.env.PORT || 3000;
 var schedule = require('node-schedule');
 var mongoDb = require('./mongoDb');
 var api = require('./getRestFull');
-var symbol = 'ADXETH';
+var symbol = 'VIBETH';
 
 exports.io = io;
 app.get('/', function (req, res) {

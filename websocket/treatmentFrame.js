@@ -11,9 +11,9 @@ function splitFrame(jsonFrame) {
         jsonFrame = JSON.parse(jsonFrame);
 
         if (jsonFrame.method == "ticker") {
-		console.time("hasAnOrder");
+		// console.time("hasAnOrder");
             checkOrder.hasAnOrder(jsonFrame,function(){
-			console.timeEnd("hasAnOrder");
+			// console.timeEnd("hasAnOrder");
 			});
         }
         if (jsonFrame.method == "snapshotTrades" | jsonFrame.method == "updateTrades") {
@@ -25,17 +25,17 @@ function splitFrame(jsonFrame) {
         if (jsonFrame.method == "activeOrders" | jsonFrame.method == "report") {
             var reportsParams = jsonFrame.params;
             if (reportsParams != "undefined") {
-			console.time("newActiveOrders");
+			// console.time("newActiveOrders");
                 updtOrders.newActiveOrders(reportsParams,function(){
-				console.timeEnd("newActiveOrders");
+				// console.timeEnd("newActiveOrders");
 				});
             }
         }
         if (jsonFrame.method == "updateOrderbook" | jsonFrame.method == "snapshotOrderbook") {
             var orderBookParams = jsonFrame.params;
-			console.time("updateOrderbook");
+			// console.time("updateOrderbook");
             orderBook.updateOrderBook(orderBookParams, jsonFrame.method, function (termine) {
-			console.timeEnd("updateOrderbook");
+			// console.timeEnd("updateOrderbook");
             });
 			
         }
