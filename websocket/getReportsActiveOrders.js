@@ -7,9 +7,7 @@ var api = require('./getRestFull');
 function getActiveOrders (symbol,callback)
 {
 var collectionName="activeOrders";
-console.log(9);
 mongoDb.findRecords(collectionName,{"symbol":symbol},{_id: -1},function(allOrders){
-    console.log("allOrders");
     for (var i=0;i<allOrders.length;i++)
 		{
 		if (allOrders[i].status == "new" || allOrders[i].status == "partiallyFilled")

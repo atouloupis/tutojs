@@ -12,8 +12,6 @@ if (date-symbolDate[symbol]>5000 || symbolDate[symbol]==undefined)
 	{
 	symbolDate[symbol] = new Date;
     get.getActiveOrders(tickerFrame.params.symbol,function(activeOrder){
-        console.log("activeorder");
-		console.log(activeOrder);
 	    if (activeOrder != undefined) {
             activeSellOrBuy(activeOrder, tickerFrame.params,function(){
 			callback();
@@ -72,8 +70,8 @@ function activeSellOrBuy(order, ticker,callback) {
         var diff = orderThanMarket(order, ticker, "ask");
         orderBookVolumes(order, "bid", function (volume) {
             //SI diff entre notre ordre d'achat et le ticker de vente ask  inf 1% alors annuler l'ordre
-			//console.log ("tick bid"+ticker.bid+"order price"+order.price);
-			//console.log("volume inf ="+volume.inf+" volume equal ="+volume.equal+" order quantity ="+order.quantity);
+			console.log ("tick bid"+ticker.bid+"order price"+order.price);
+			console.log("volume inf ="+volume.inf+" volume equal ="+volume.equal+" order quantity ="+order.quantity);
             if (diff < 1) {
                 treatmentOnOrder.cancelOrder(order.clientOrderId);
                 eligibility.eligibilityBuy(ticker, function () {

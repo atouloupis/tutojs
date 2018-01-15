@@ -102,7 +102,7 @@ function buy (ticker,callback) {
         }
 
     if (balanceAvailable != 0) {
-	// console.log ("balance available");
+	console.log ("balance available");
         sell(ticker, function () {
             callback();
         });
@@ -126,8 +126,8 @@ function buy (ticker,callback) {
             }
 bidHighestPrice=getTop (bidarr,"max");
 askLowestPrice=getTop (askarr,"min");
-// console.log("bid High"+bidHighestPrice);
-// console.log("askLowestPrice"+askLowestPrice);
+console.log("bid High"+bidHighestPrice);
+console.log("askLowestPrice"+askLowestPrice);
 
         //quelle est la différence entre order achat et order vente
         var orderDiffPerc = ((askLowestPrice / bidHighestPrice) - 1) * 100;
@@ -137,7 +137,7 @@ askLowestPrice=getTop (askarr,"min");
         var tickSize = 0;
         var quantityIncrement = 0;
         averageTradeVolume(ticker.symbol, function (possibleToTrade) {
-// console.log(possibleToTrade)
+console.log(possibleToTrade)
             // récupérer le tick minimum et la quantité minimum
             var collectionName = "symbol";
 			var query={id : ticker.symbol};
@@ -147,16 +147,16 @@ askLowestPrice=getTop (askarr,"min");
                     if (message[i].id = ticker.symbol) {
                         tickSize = message[i].tickSize;
                         quantityIncrement = message[i].quantityIncrement;
-						// console.log("symbol"+message[i].id);
-						// console.log("ticksize"+tickSize);
-						// console.log("quantityIncrement"+quantityIncrement);
+						console.log("symbol"+message[i].id);
+						console.log("ticksize"+tickSize);
+						console.log("quantityIncrement"+quantityIncrement);
                     }
                 }
      
             //si le volume échangé est bon  + la diff entre bid et ask > 2% +  diff entre ask et bid > 10 tick size
-			// console.log ("orderDiffPerc"+orderDiffPerc);
-			// console.log ("orderDiff"+orderDiff);
-			// console.log ("possibleToTrade"+possibleToTrade);
+			console.log ("orderDiffPerc"+orderDiffPerc);
+			console.log ("orderDiff"+orderDiff);
+			console.log ("possibleToTrade"+possibleToTrade);
             if (possibleToTrade && orderDiffPerc > 2 && orderDiff > (10*tickSize)) {
                 //poser l'ordre d'achat
 				var price=parseFloat( bidHighestPrice) + parseFloat(tickSize);
