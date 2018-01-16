@@ -2,16 +2,22 @@ module.exports.getHitBTC=getHitBTC;
 var https = require('https');
 
 function getHitBTC(path,method,callback) {
-    var options = {
+    
+	jsonfile.readFile(keyfile, function (err, obj) {
+if (err) throw err;
+
+
+	var options = {
         host: "api.hitbtc.com",
         path: path,
         method: method,
 	    headers: {
             'Accept': 'application/json',
-			'Authorization' : 'Basic ' + new Buffer('c400a7328769d4b0582a80365b2d8f98:1b3fde82887787cccf3c56a264a1ee5e').toString('base64')
+			'Authorization' : 'Basic ' + new Buffer(obj.hitbtc.pKey+':'+obj.hitbtc.sKey).toString('base64')
 			
         }
     };
+	};
     var req = https.request(options, function (res) {
         res.setEncoding('utf8');
         var buffer = '';
@@ -46,5 +52,3 @@ function getHitBTC(path,method,callback) {
     req.end();
 
 }
-
-
